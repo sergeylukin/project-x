@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@astro-nx-depla/common": ["libs/common/src/index.js"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
