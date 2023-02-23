@@ -5,3 +5,5 @@ npx nx g @nxtensions/astro:app website
 npx astro add tailwind
 
 - move astro.config.mjs and tailwind.config.cjs to apps/website
+
+npx nx g @nxtensions/astro:lib common
