@@ -38,6 +38,7 @@ export default defineConfig({
     NetlifyCMS({
       adminPath: '/wp-admin',
       config: {
+        media_folder: 'apps/website/src/assets/images',
         backend: {
           name: 'git-gateway',
           branch: 'main',
@@ -49,7 +50,7 @@ export default defineConfig({
             label: 'Posts',
             label_singular: 'Post',
             label: 'Blog Posts',
-            folder: 'src/content/post',
+            folder: 'apps/website/src/content/post',
             create: true,
             delete: true,
             fields: [
