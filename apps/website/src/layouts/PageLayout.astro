@@ -1,11 +1,11 @@
 ---
-import Layout from './BaseLayout.astro';
+import Layout from '~/layouts/BaseLayout.astro';
 import { Footer, Header } from '@astro-nx-depla/shared/ui';
-import Announcement from '../components/widgets/Announcement.astro';
+import Announcement from '~/components/widgets/Announcement.astro';
 
-import { headerData, footerData } from '../data';
+import { headerData, footerData } from '~/data';
 
-import { MetaSEO } from '../types';
+import { MetaSEO } from '~/types';
 
 export interface Props {
   meta?: MetaSEO;
