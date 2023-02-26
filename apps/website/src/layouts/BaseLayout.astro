@@ -1,0 +1,25 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  socialImage?: string;
+  socialImageAlt?: string;
+}
+
+const { title: pageTitle, description, socialImage, socialImageAlt } = Astro.props;
+const { canonicalURL } = Astro.request;
+const siteName = 'Deploy.day';
+const title = `${pageTitle} | ${siteName}`;
+---
+
+<html lang="en" class="scroll-smooth">
+  <head><title>{title}</title></head>
+  <body class="antialiased text-page bg-light dark:text-slate-300 tracking-tight dark:bg-dark">
+    <slot />
+    <style is:global>
+      img {
+        content-visibility: auto;
+      }
+    </style>
+  </body>
+</html>
