@@ -7,9 +7,9 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import image from '@astrojs/image';
 import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
-import NetlifyCMS from 'astro-netlify-cms';
 import { readingTimeRemarkPlugin } from '../../libs/shared/utils/src/lib/frontmatter';
 import { SITE } from '../../libs/website/config/src';
 
@@ -35,32 +35,7 @@ export default defineConfig({
 
   outDir: '../../dist/apps/website',
   integrations: [
-    NetlifyCMS({
-      adminPath: '/wp-admin',
-      config: {
-        media_folder: 'apps/website/src/assets/images',
-        backend: {
-          name: 'git-gateway',
-          branch: 'main',
-        },
-        collections: [
-          // Define a blog post collection
-          {
-            name: 'posts',
-            label: 'Posts',
-            label_singular: 'Post',
-            label: 'Blog Posts',
-            folder: 'apps/website/src/content/post',
-            create: true,
-            delete: true,
-            fields: [
-              { name: 'title', widget: 'string', label: 'Post Title' },
-              { name: 'body', widget: 'markdown', label: 'Post Body' },
-            ],
-          },
-        ],
-      },
-    }),
+    react(),
     tailwind({
       config: {
         applyBaseStyles: false,
