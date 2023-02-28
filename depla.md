@@ -10,3 +10,6 @@ npx nx g @nxtensions/astro:lib common
 npx nx g @nxtensions/astro:lib config --directory=website --importPath=@astro-nx-depla/website/config
 npx nx g @nxtensions/astro:lib ui --directory=shared --importPath=@astro-nx-depla/shared/ui
 npx astro add sitemap image mdx partytown
+
+npm install @nrwl/nx-plugin@latest
+nx g @nrwl/nx-plugin:plugin nx
