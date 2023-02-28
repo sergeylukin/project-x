@@ -13,3 +13,5 @@ npx astro add sitemap image mdx partytown
 
 npm install @nrwl/nx-plugin@latest
 nx g @nrwl/nx-plugin:plugin nx
+
+nx generate @nrwl/nx-plugin:executor dev-astro-with-netlify-cms --project=nx
