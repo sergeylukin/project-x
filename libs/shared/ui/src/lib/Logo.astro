@@ -3,6 +3,7 @@ import { Image } from '@astrojs/image/components';
 const logo = import('../assets/images/logo.png');
 ---
 
-<span class="self-center ml-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white">
-  <Image src={logo} alt="🚀 Deploy.day" width={226} height={88} />
+<span class="self-center ml-2 text-2xl md:text-3xl font-bold font-handwritten text-gray-900 whitespace-nowrap dark:text-white">
+  {/* <Image src={logo} alt=" Deploy.day" width={226} height={88} /> */}
+  <span class="dark:text-white text-slate-700">Deploy</span><span class="text-accent">day.</span>
 </span>
