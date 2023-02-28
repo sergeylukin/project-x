@@ -9,9 +9,19 @@
       "executor": "@nxtensions/astro:build",
       "options": {}
     },
+    "serve": {
+      "executor": "@nxtensions/astro:dev"
+    },
+    "netlify-cms-proxy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx netlify-cms-proxy-server"
+        ]
+      }
+    },
     "dev": {
-      "executor": "@nxtensions/astro:dev",
-      "options": {}
+      "executor": "@astro-nx-depla/nx:dev-astro-with-netlify-cms"
     },
     "preview": {
       "dependsOn": [

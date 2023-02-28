@@ -7,14 +7,10 @@ export default async function multipleExecutor(
   context: ExecutorContext
 ): Promise<{ success: boolean }> {
   const result = await Promise.race([
-    await runExecutor(
-      { project: 'website', target: 'serve' },
-      { watch: true },
-      context
-    ),
+    await runExecutor({ project: 'website', target: 'serve' }, {}, context),
     await runExecutor(
       { project: 'website', target: 'netlify-cms-proxy' },
-      { watch: true },
+      {},
       context
     ),
   ]);
