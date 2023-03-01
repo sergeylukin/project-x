@@ -34,6 +34,9 @@
       "@astro-nx-depla/website/data-access/url": [
         "libs/website/data-access/url/src/index.ts"
       ],
+      "@astro-nx-depla/website/menu-data": [
+        "libs/website/menu-data/src/index.ts"
+      ],
       "@astro-nx-depla/website/types": ["libs/website/types/src/index.ts"]
     }
   },
