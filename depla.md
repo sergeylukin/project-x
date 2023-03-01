@@ -36,3 +36,9 @@ nx g @nrwl/workspace:lib astro-remark-plugin-predict-reading-time \
 
 npx nx g @nrwl/workspace:lib image --directory=website/data-access \
 --importPath=@astro-nx-depla/website/data-access/image
+
+npx nx g @nxtensions/astro:lib layout --directory=shared \
+ --importPath=@astro-nx-depla/shared/layout
+npx nx g @nrwl/workspace:lib menu-data --directory=website \
+--importPath=@astro-nx-depla/website/menu-data
+
