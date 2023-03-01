@@ -21,3 +21,6 @@ npx nx g @nrwl/js:library config-provider --directory=shared/util \
 
 npx nx g @nrwl/js:library post --directory=website/data-access \
 --importPath=@astro-nx-depla/website/data-access/post
+
+npx nx g @nrwl/js:library types --directory=website \
+--importPath=@astro-nx-depla/website/types
