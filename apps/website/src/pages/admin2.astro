@@ -1,11 +1,5 @@
 ---
-import { BaseLayout as Layout } from '@astro-nx-depla/shared/layout';
+import { Cms } from '~/components/cms.jsx'
 ---
-<Layout>
-  <div data-netlify-identity-menu></div>
-  <div data-netlify-identity-button>Login with Netlify Identity</div>
-  <div id="netlify-modal"></div>
-</Layout>
 
-<script
-  src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+<Cms client:only />
