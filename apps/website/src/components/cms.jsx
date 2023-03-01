@@ -1,6 +1,6 @@
 import React from 'react';
 import CMS from 'netlify-cms-app';
-import NetlifyIdentity from 'netlify-identity-widget';
+import netlifyIdentity from 'netlify-identity-widget';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import * as acorn from 'acorn';
 import { fromMarkdown } from 'mdast-util-from-markdown';
