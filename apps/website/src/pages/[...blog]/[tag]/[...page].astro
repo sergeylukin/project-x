@@ -1,15 +1,22 @@
 ---
-import { SITE, BLOG } from '@astro-nx-depla/website/config';
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 import Pagination from '~/components/blog/Pagination.astro';
 
-import { TAG_BASE, fetchPosts } from '@astro-nx-depla/shared/utils';
+import { TAG_BASE } from '@astro-nx-depla/shared/utils';
+import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
 import Headline from '~/components/blog/Headline.astro';
 
+const SITE = CONFIG.get('app')
+const TAG = CONFIG.get('entities.post.taxonomies.tag')
+
 export async function getStaticPaths({ paginate }) {
-  if (BLOG?.disabled || BLOG?.tag?.disabled) return [];
+  const BLOG = CONFIG.get('entities.post')
+  const TAG = CONFIG.get('entities.post.taxonomies.tag')
+
+  if (BLOG?.disabled || TAG?.disabled) return [];
 
   const posts = await fetchPosts();
   const tags = new Set();
@@ -22,7 +29,7 @@ export async function getStaticPaths({ paginate }) {
       posts.filter((post) => Array.isArray(post.tags) && post.tags.find((elem) => elem.toLowerCase() === tag)),
       {
         params: { tag: tag, blog: TAG_BASE || undefined },
-        pageSize: BLOG.postsPerPage,
+        pageSize: BLOG.itemsPerPage,
         props: { tag },
       }
     )
@@ -34,8 +41,8 @@ const { page, tag } = Astro.props;
 const currentPage = page.currentPage ?? 1;
 const meta = {
   title: `Posts by tag '${tag}'${currentPage > 1 ? ` — Page ${currentPage} ` : ''}`,
-  description: SITE.description,
-  noindex: BLOG?.tag?.noindex,
+  description: SITE?.description,
+  noindex: TAG?.noindex,
 };
 ---
 

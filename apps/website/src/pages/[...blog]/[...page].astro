@@ -1,18 +1,23 @@
 ---
-import { SITE, BLOG } from '@astro-nx-depla/website/config';
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
 
-import { BLOG_BASE, fetchPosts } from '@astro-nx-depla/shared/utils';
+import { BLOG_BASE } from '@astro-nx-depla/shared/utils';
+import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
+
+const SITE = CONFIG.get('app')
+const BLOG = CONFIG.get('entities.post')
 
 export async function getStaticPaths({ paginate }) {
+  const BLOG = CONFIG.get('entities.post')
   if (BLOG?.disabled || BLOG?.list?.disabled) return [];
   return paginate(await fetchPosts(), {
     params: { blog: BLOG_BASE || undefined },
-    pageSize: BLOG.postsPerPage,
+    pageSize: BLOG.itemsPerPage,
   });
 }
 
@@ -21,7 +26,7 @@ const currentPage = page.currentPage ?? 1;
 
 const meta = {
   title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
-  description: SITE.description,
+  description: SITE?.description,
   noindex: BLOG?.list?.noindex || currentPage > 1,
   ogType: 'blog',
 };

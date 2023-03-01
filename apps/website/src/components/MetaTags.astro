@@ -3,12 +3,14 @@ import { AstroSeo } from '@astrolib/seo';
 import { GoogleAnalytics } from '@astrolib/analytics';
 import { getImage } from '@astrojs/image';
 
-import { SITE } from '@astro-nx-depla/website/config';
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 import { MetaSEO } from '~/types';
 import { getCanonical, getAsset, getRelativeUrlByFilePath  } from '@astro-nx-depla/shared/utils';
 
 import CustomStyles from '~/components/CustomStyles.astro';
 import SplitbeeAnalytics from './SplitbeeAnalytics.astro';
+
+const SITE = CONFIG.get('app')
 
 export interface Props extends MetaSEO {
   dontUseTitleTemplate?: boolean;

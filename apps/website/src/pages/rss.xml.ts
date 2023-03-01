@@ -1,10 +1,11 @@
 import rss from '@astrojs/rss';
 
-import { SITE, BLOG } from '@astro-nx-depla/website/config';
-import { getPermalink, fetchPosts } from '@astro-nx-depla/shared/utils';
+import { getPermalink } from '@astro-nx-depla/shared/utils';
+import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
 export const get = async () => {
-  if (BLOG.disabled) {
+  if (CONFIG.get('app.entities.post').disabled) {
     return new Response(null, {
       status: 404,
       statusText: 'Not found',
@@ -14,8 +15,8 @@ export const get = async () => {
   const posts = await fetchPosts();
 
   return rss({
-    title: `${SITE.name}’s Blog`,
-    description: SITE.description,
+    title: `${CONFIG.get('app').name}’s Blog`,
+    description: CONFIG.get('app').description,
     site: import.meta.env.SITE,
 
     items: posts.map((post) => ({

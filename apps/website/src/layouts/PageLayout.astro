@@ -2,24 +2,32 @@
 import Layout from '~/layouts/BaseLayout.astro';
 import { Footer, Header } from '@astro-nx-depla/shared/ui';
 import Announcement from '~/components/widgets/Announcement.astro';
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider'
 
 import { headerData, footerData } from '~/data';
 
 import { MetaSEO } from '~/types';
 
+const SITE = CONFIG.get('app')
+
 export interface Props {
   meta?: MetaSEO;
+  showToggleTheme?: boolean;
 }
 
-const { meta } = Astro.props;
+const {
+  meta = {},
+  showToggleTheme = !(SITE?.defaultTheme && SITE.defaultTheme.endsWith(':only')),
+} = Astro.props;
 ---
 
-<Layout {meta}>
+<Layout {...meta}>
   <slot name="announcement">
     <Announcement />
   </slot>
   <slot name="header">
-    <Header {...headerData} isSticky showRssFeed showToggleTheme />
+    <Header {...headerData} isSticky showRssFeed
+      showToggleTheme={showToggleTheme} />
   </slot>
   <main>
     <slot />

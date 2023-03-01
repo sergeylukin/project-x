@@ -1,12 +1,10 @@
 {
-  "extends": ["../../../../.eslintrc.json"],
+  "extends": ["../../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {
-          "@typescript-eslint/ban-ts-comment": "warn"
-      }
+      "rules": {}
     },
     {
       "files": ["*.ts", "*.tsx"],

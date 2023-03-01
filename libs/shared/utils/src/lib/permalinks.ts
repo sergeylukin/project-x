@@ -9,16 +9,20 @@ import {
 
 import { trim } from '@astro-nx-depla/shared/util/formatting';
 
+const SITE = CONFIG.get('app') as IAppConfig;
+const BLOG = CONFIG.get('entities.post') as IEntity;
+const CATEGORY = CONFIG.get(
+  'entities.post.taxonomies.category'
+) as IEntityRoute;
+
 export const trimSlash = (s: string) => trim(trim(s, '/'));
 const createPath = (...params: string[]) => {
   const paths = params
     .map((el) => trimSlash(el))
     .filter((el) => !!el)
     .join('/');
-  return '/' + paths + (SITE.trailingSlash && paths ? '/' : '');
+  return '/' + paths + (SITE?.trailingSlash && paths ? '/' : '');
 };
-
-const BASE_PATHNAME = SITE.basePathname;
 
 export const cleanSlug = (text = '') =>
   trimSlash(text)
@@ -27,16 +31,16 @@ export const cleanSlug = (text = '') =>
     .join('/');
 
 export const POST_PERMALINK_PATTERN = trimSlash(
-  BLOG?.post?.permalink || '/%slug%'
+  BLOG?.item?.permalink || '/%slug%'
 );
 
 export const BLOG_BASE = cleanSlug(BLOG?.list?.pathname);
-export const CATEGORY_BASE = cleanSlug(BLOG?.category?.pathname || 'category');
-export const TAG_BASE = cleanSlug(BLOG?.tag?.pathname) || 'tag';
+export const CATEGORY_BASE = cleanSlug(CATEGORY?.pathname || 'category');
+export const TAG_BASE = cleanSlug(CATEGORY?.pathname) || 'tag';
 
 /** */
 export const getCanonical = (path = ''): string | URL =>
-  new URL(path, SITE.origin);
+  new URL(path, SITE?.origin);
 
 /** */
 export const getPermalink = (slug = '', type = 'page'): string => {
@@ -73,11 +77,12 @@ export const getBlogPermalink = (): string => getPermalink(BLOG_BASE);
 /** */
 export const getAsset = (path: string): string =>
   '/' +
-  [BASE_PATHNAME, path]
+  [SITE?.basePathname, path]
     .map((el) => trimSlash(el))
     .filter((el) => !!el)
     .join('/');
 
 /** */
 const definitivePermalink = (permalink: string): string =>
-  createPath(BASE_PATHNAME, permalink);
+  // @ts-ignore
+  createPath(CONFIG.get('app.basePathname'), permalink);

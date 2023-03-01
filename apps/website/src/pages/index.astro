@@ -1,5 +1,5 @@
 ---
-import { SITE } from '@astro-nx-depla/website/config';
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
@@ -12,6 +12,8 @@ import LatestPosts from '~/components/blog/LatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const SITE = CONFIG.get('app')
 
 const meta = {
   title: SITE.title,

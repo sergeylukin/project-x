@@ -4,31 +4,6 @@
   "sourceRoot": "libs/website/data-access/post/src",
   "projectType": "library",
   "targets": {
-    "build": {
-      "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/website/data-access/post",
-        "main": "libs/website/data-access/post/src/index.ts",
-        "tsConfig": "libs/website/data-access/post/tsconfig.lib.json",
-        "assets": ["libs/website/data-access/post/*.md"]
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/website/data-access/post/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/vite:test",
-      "outputs": ["coverage/libs/website/data-access/post"],
-      "options": {
-        "passWithNoTests": true,
-        "reportsDirectory": "../../../../coverage/libs/website/data-access/post"
-      }
-    }
   },
   "tags": []
 }

@@ -16,6 +16,42 @@ const SITE = CONFIG['app'];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const loadConfig = () => {
+  return {
+    name: '@depl/astrojs-load-config-plugin',
+    hooks: {
+      'astro:config:setup': async ({ updateConfig, injectScript }) => {
+        const CONFIG_LOAD_JS = `
+          import { CONFIG as ORIGINAL_CONFIG } from '@astro-nx-depla/website/config';
+          import { CONFIG as CONFIG_PROVIDER } from '@astro-nx-depla/shared/util/config-provider';
+          CONFIG_PROVIDER.set(ORIGINAL_CONFIG);
+        `;
+        injectScript('page-ssr', CONFIG_LOAD_JS);
+        updateConfig({
+          vite: {
+            plugins: [
+              {
+                transform: (content, id) => {
+                  if (/src\/pages\/.+\.ts$/.test(id)) {
+                    content = `
+                      ${CONFIG_LOAD_JS}
+                      ${content}
+                    `;
+                    return {
+                      code: content,
+                      map: null,
+                    };
+                  }
+                },
+              },
+            ],
+          },
+        });
+      },
+    },
+  };
+};
+
 const whenExternalScripts = (items = []) =>
   SITE.googleAnalyticsId
     ? Array.isArray(items)
@@ -36,6 +72,7 @@ export default defineConfig({
 
   outDir: '../../dist/apps/website',
   integrations: [
+    loadConfig(),
     react(),
     tailwind({
       config: {

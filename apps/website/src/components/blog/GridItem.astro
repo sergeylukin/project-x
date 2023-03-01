@@ -1,10 +1,12 @@
 ---
 import { Picture } from '@astrojs/image/components';
 
-import { BLOG } from '@astro-nx-depla/website/config';
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 import type { Post } from '~/types';
 
 import { getPermalink, findImage } from '@astro-nx-depla/shared/utils';
+
+const BLOG = CONFIG.get('entities.post')
 
 export interface Props {
   post: Post;

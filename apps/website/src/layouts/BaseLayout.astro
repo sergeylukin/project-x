@@ -2,16 +2,16 @@
 import '~/assets/styles/base.css';
 import MetaTags from '~/components/MetaTags.astro';
 import BasicScripts from '~/components/BasicScripts.astro';
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
 import { MetaSEO } from '~/types';
-import { SITE } from '@astro-nx-depla/website/config';
 
 export interface Props {
   meta?: MetaSEO;
 }
 
 const { meta = {} } = Astro.props;
-const { language = 'en', textDirection = 'ltr' } = SITE;
+const { language = 'en', textDirection = 'ltr' } = CONFIG.get('app')
 ---
 
 <!DOCTYPE html>
