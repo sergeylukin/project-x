@@ -33,3 +33,6 @@ nx g @nrwl/workspace:lib formatting --directory=shared/util \
 
 nx g @nrwl/workspace:lib astro-remark-plugin-predict-reading-time \
 --directory=shared/util --importPath=@astro-nx-depla/util/predict-reading-time
+
+npx nx g @nrwl/workspace:lib image --directory=website/data-access \
+--importPath=@astro-nx-depla/website/data-access/image
