@@ -70,6 +70,7 @@ const MdxPreview = ({ value }) => {
 
 export const Cms = () => {
   useEffect(() => {
+    window.CMS_MANUAL_INIT = true;
     CMS.registerWidget('mdx', MdxControl, MdxPreview);
 
     CMS.init();
