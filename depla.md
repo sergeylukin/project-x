@@ -15,3 +15,6 @@ npm install @nrwl/nx-plugin@latest
 nx g @nrwl/nx-plugin:plugin nx
 
 nx generate @nrwl/nx-plugin:executor dev-astro-with-netlify-cms --project=nx
+
+npx nx g @nrwl/js:library config-provider --directory=shared/util \
+--importPath=@astro-nx-depla/shared/util/config-provider
