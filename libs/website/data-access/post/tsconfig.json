@@ -10,7 +10,7 @@
     "noFallthroughCasesInSwitch": true,
     "types": ["vitest"]
   },
-  "files": [],
+  "files": ["../../../../apps/website/.astro/types.d.ts"],
   "include": [],
   "references": [
     {

@@ -24,3 +24,6 @@ npx nx g @nrwl/js:library post --directory=website/data-access \
 
 npx nx g @nrwl/js:library types --directory=website \
 --importPath=@astro-nx-depla/website/types
+
+modify libs/website/\* tsconfig.json to have this:
+"files": ["../../../../apps/website/.astro/types.d.ts"]
