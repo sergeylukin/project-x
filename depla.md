@@ -27,3 +27,6 @@ npx nx g @nrwl/js:library types --directory=website \
 
 modify libs/website/\* tsconfig.json to have this:
 "files": ["../../../../apps/website/.astro/types.d.ts"]
+
+nx g @nrwl/workspace:lib formatting --directory=shared/util \
+--importPath=@astro-nx-depla/util/formatting
