@@ -24,7 +24,8 @@
       "@astro-nx-depla/website/config": ["libs/website/config/src/index.js"],
       "@astro-nx-depla/website/data-access/post": [
         "libs/website/data-access/post/src/index.ts"
-      ]
+      ],
+      "@astro-nx-depla/website/types": ["libs/website/types/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
