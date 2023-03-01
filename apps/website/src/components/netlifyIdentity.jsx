@@ -25,6 +25,7 @@ export const NetlifyIdentity = () => {
     });
 
     netlifyIdentity.open(); // open the modal
+    console.log('hooooray');
   }, []);
   return <div />;
 };
