@@ -6,7 +6,6 @@ media_folder: 'apps/website/src/assets/images' # Folder where user uploaded file
 public_folder: '~/assets/images'
 
 publish_mode: editorial_workflow
-site_url: https://cluster.cam
 
 collections: # A list of collections the CMS should be able to edit
   - name: 'post' # Used in routes, ie.: /admin/collections/:slug/edit

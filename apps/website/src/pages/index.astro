@@ -353,4 +353,18 @@ const meta = {
       waste more time! :P
     </Fragment>
   </CallToAction>
+
+  <script>import "~/components/netlifyIdentity.jsx"</script>
+
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </Layout>
