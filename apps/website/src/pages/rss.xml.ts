@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 
-import { getPermalink } from '@astro-nx-depla/shared/utils';
+import { getPermalink } from '@astro-nx-depla/website/data-access/url';
 import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 

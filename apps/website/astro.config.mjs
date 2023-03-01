@@ -10,7 +10,7 @@ import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
-import { readingTimeRemarkPlugin } from '../../libs/shared/util/predict-reading-time/src';
+import { readingTimeRemarkPlugin } from '../../libs/shared/util/astro-remark-plugin-predict-reading-time/src';
 import { CONFIG } from '../../libs/website/config/src';
 const SITE = CONFIG['app'];
 

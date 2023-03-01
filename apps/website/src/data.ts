@@ -2,7 +2,7 @@ import {
   getPermalink,
   getBlogPermalink,
   getAsset,
-} from '@astro-nx-depla/shared/utils';
+} from '@astro-nx-depla/website/data-access/url';
 
 export const headerData = {
   links: [

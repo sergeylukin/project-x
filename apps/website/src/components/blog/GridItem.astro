@@ -4,9 +4,10 @@ import { Picture } from '@astrojs/image/components';
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 import type { Post } from '~/types';
 
-import { getPermalink, findImage } from '@astro-nx-depla/shared/utils';
+import { getPermalink } from '@astro-nx-depla/website/data-access/url';
+import { findImage } from '@astro-nx-depla/website/data-access/url';
 
-const BLOG = CONFIG.get('entities.post')
+const BLOG = CONFIG.get('entities.post');
 
 export interface Props {
   post: Post;
@@ -17,7 +18,9 @@ const image = await findImage(post.image);
 ---
 
 <article class="mb-6 transition">
-  <div class="relative md:h-64 bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6">
+  <div
+    class="relative md:h-64 bg-gray-400 dark:bg-slate-700 rounded shadow-lg mb-6"
+  >
     {
       image && (
         <Picture
@@ -49,5 +52,7 @@ const image = await findImage(post.image);
       )
     }
   </h3>
-  <p class="text-muted dark:text-slate-400 text-lg">{post.excerpt || post.description}</p>
+  <p class="text-muted dark:text-slate-400 text-lg">
+    {post.excerpt || post.description}
+  </p>
 </article>

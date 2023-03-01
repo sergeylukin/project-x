@@ -20,16 +20,18 @@
       "@astro-nx-depla/shared/util/config-provider": [
         "libs/shared/util/config-provider/src/index.ts"
       ],
-      "@astro-nx-depla/shared/utils": ["libs/shared/utils/src/index.ts"],
-      "@astro-nx-depla/util/formatting": [
+      "@astro-nx-depla/shared/util/formatting": [
         "libs/shared/util/formatting/src/index.ts"
       ],
-      "@astro-nx-depla/util/predict-reading-time": [
+      "@astro-nx-depla/shared/util/predict-reading-time": [
         "libs/shared/util/astro-remark-plugin-predict-reading-time/src/index.ts"
       ],
       "@astro-nx-depla/website/config": ["libs/website/config/src/index.js"],
       "@astro-nx-depla/website/data-access/post": [
         "libs/website/data-access/post/src/index.ts"
+      ],
+      "@astro-nx-depla/website/data-access/url": [
+        "libs/website/data-access/url/src/index.ts"
       ],
       "@astro-nx-depla/website/types": ["libs/website/types/src/index.ts"]
     }

@@ -5,7 +5,7 @@ import {
   cleanSlug,
   trimSlash,
   POST_PERMALINK_PATTERN,
-} from '@astro-nx-depla/shared/utils';
+} from '@astro-nx-depla/website/data-access/url';
 
 const generatePermalink = async ({
   id,
