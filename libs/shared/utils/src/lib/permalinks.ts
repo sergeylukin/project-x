@@ -1,7 +1,13 @@
 import slugify from 'limax';
 
-import { SITE, BLOG } from '@astro-nx-depla/website/config';
-import { trim } from './utils';
+import {
+  CONFIG,
+  IAppConfig,
+  IEntity,
+  IEntityRoute,
+} from '@astro-nx-depla/shared/util/config-provider';
+
+import { trim } from '@astro-nx-depla/shared/util/formatting';
 
 export const trimSlash = (s: string) => trim(trim(s, '/'));
 const createPath = (...params: string[]) => {
