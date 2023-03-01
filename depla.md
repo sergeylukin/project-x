@@ -18,3 +18,6 @@ nx generate @nrwl/nx-plugin:executor dev-astro-with-netlify-cms --project=nx
 
 npx nx g @nrwl/js:library config-provider --directory=shared/util \
 --importPath=@astro-nx-depla/shared/util/config-provider
+
+npx nx g @nrwl/js:library post --directory=website/data-access \
+--importPath=@astro-nx-depla/website/data-access/post
