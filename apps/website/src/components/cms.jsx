@@ -1,5 +1,6 @@
 import React from 'react';
 import CMS from 'netlify-cms-app';
+import NetlifyIdentity from 'netlify-identity-widget';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import * as acorn from 'acorn';
 import { fromMarkdown } from 'mdast-util-from-markdown';
@@ -83,3 +84,17 @@ const MdxPreview = ({ value }) => {
 CMS.registerWidget('mdx', MdxControl, MdxPreview);
 //
 CMS.init();
+
+netlifyIdentity.init({
+  // container: '#netlify-modal', // defaults to document.body
+  locale: 'en', // defaults to 'en'
+});
+
+netlifyIdentity.open(); // open the modal
+
+netlifyIdentity.on('init', (user) => console.log('init', user));
+netlifyIdentity.on('login', (user) => console.log('login', user));
+netlifyIdentity.on('logout', () => console.log('Logged out'));
+netlifyIdentity.on('error', (err) => console.error('Error', err));
+netlifyIdentity.on('open', () => console.log('Widget opened'));
+netlifyIdentity.on('close', () => console.log('Widget closed'));
