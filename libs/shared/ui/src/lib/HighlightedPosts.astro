@@ -1,9 +1,8 @@
 ---
-import Grid from '~/components/blog/Grid.astro';
+import { PostsGrid as Grid } from '@astro-nx-depla/shared/ui';
 
 import { getBlogPermalink } from '@astro-nx-depla/website/data-access/url';
-import { findLatestPosts } from '@astro-nx-depla/website/data-access/post';
-
+import { findPostsByIds  } from '@astro-nx-depla/website/data-access/post';
 
 export interface Props {
   title?: string;
@@ -18,10 +17,10 @@ const {
   allPostsText = 'View all posts',
   allPostsLink = getBlogPermalink(),
   information = await Astro.slots.render('information'),
-  count = 4,
+  postIds = [],
 } = Astro.props;
 
-const posts = await findLatestPosts({ count });
+const posts = await findPostsByIds(postIds);
 ---
 
 <section class="px-4 py-16 mx-auto max-w-7xl lg:py-20">
@@ -38,7 +37,7 @@ const posts = await findLatestPosts({ count });
       {
         allPostsText && allPostsLink && (
           <a
-            class="text-muted dark:text-slate-400 hover:text-primary transition ease-in duration-200 block mb-6 lg:mb-0"
+            class="text-muted dark:text-slate-400 hover:text-primary transition ease-in duration-200 block mb-6 md:mb-0"
             href={allPostsLink}
           >
             {allPostsText} »

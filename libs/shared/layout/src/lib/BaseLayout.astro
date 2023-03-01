@@ -1,10 +1,10 @@
 ---
 import '~/assets/styles/base.css';
-import MetaTags from '~/components/MetaTags.astro';
+import { MetaTags } from '@astro-nx-depla/shared/ui';
 import BasicScripts from '~/components/BasicScripts.astro';
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
-import { MetaSEO } from '~/types';
+import { MetaSEO } from '@astro-nx-depla/website/types';
 
 export interface Props {
   meta?: MetaSEO;

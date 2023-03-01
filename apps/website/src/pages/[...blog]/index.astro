@@ -2,8 +2,7 @@
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
 import { PageLayout as Layout } from '@astro-nx-depla/shared/layout';
-import SinglePost from '~/components/blog/SinglePost.astro';
-import ToBlogLink from '~/components/blog/ToBlogLink.astro';
+import { SinglePost, ToBlogLink } from '@astro-nx-depla/shared/ui';
 
 import { getCanonical, getPermalink } from '@astro-nx-depla/website/data-access/url';
 import { findImage } from '@astro-nx-depla/website/data-access/url';

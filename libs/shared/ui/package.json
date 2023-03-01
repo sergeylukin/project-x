@@ -1,0 +1,7 @@
+{
+  "name": "@astro-nx-depla/shared/ui",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@astrolib/analytics": "^0.3.0"
+  }
+}
