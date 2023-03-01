@@ -1,10 +1,7 @@
 ---
-import { Cms } from '~/components/cms.jsx'
-import { NetlifyIdentity } from "~/components/netlifyIdentity.jsx"
 ---
 
 <Fragment is:inline>
-<NetlifyIdentity client:only />
 <script is:inline>window.CMS_MANUAL_INIT = true</script>
 <script is:inline src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
 <script is:inline>
