@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@astro-nx-depla/nx": ["libs/nx/src/index.ts"],
+      "@astro-nx-depla/shared/layout": ["libs/shared/layout/src/index.js"],
       "@astro-nx-depla/shared/ui": ["libs/shared/ui/src/index.js"],
       "@astro-nx-depla/shared/util/config-provider": [
         "libs/shared/util/config-provider/src/index.ts"
