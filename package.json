@@ -49,7 +49,12 @@
     "vite": "^4.0.1",
     "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "^4.0.2",
-    "vitest": "^0.25.8"
+    "vitest": "^0.25.8",
+    "@fontsource/alatsi": "^4.5.11",
+    "@fontsource/inter": "^4.5.15",
+    "@fontsource/shadows-into-light-two": "^4.5.9",
+    "netlify-cms-app": "^2.15.72",
+    "@astrolib/analytics": "^0.3.0"
   },
   "dependencies": {
     "@astrojs/image": "^0.15.1",
@@ -65,6 +70,18 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "tailwindcss": "^3.2.7",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@astrojs/react": "^2.0.2",
+    "@mdx-js/mdx": "^2.3.0",
+    "acorn": "^8.8.2",
+    "hast-util-raw": "^8.0.0",
+    "hast-util-sanitize": "^4.1.0",
+    "hast-util-to-jsx-runtime": "^1.2.0",
+    "mdast-util-from-markdown": "^1.3.0",
+    "mdast-util-mdx-jsx": "^2.1.2",
+    "mdast-util-to-hast": "^12.3.0",
+    "micromark-extension-mdx-jsx": "^1.0.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
