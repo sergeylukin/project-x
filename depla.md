@@ -30,3 +30,6 @@ modify libs/website/\* tsconfig.json to have this:
 
 nx g @nrwl/workspace:lib formatting --directory=shared/util \
 --importPath=@astro-nx-depla/util/formatting
+
+nx g @nrwl/workspace:lib astro-remark-plugin-predict-reading-time \
+--directory=shared/util --importPath=@astro-nx-depla/util/predict-reading-time
