@@ -21,7 +21,10 @@
         "libs/shared/util/config-provider/src/index.ts"
       ],
       "@astro-nx-depla/shared/utils": ["libs/shared/utils/src/index.js"],
-      "@astro-nx-depla/website/config": ["libs/website/config/src/index.js"]
+      "@astro-nx-depla/website/config": ["libs/website/config/src/index.js"],
+      "@astro-nx-depla/website/data-access/post": [
+        "libs/website/data-access/post/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
