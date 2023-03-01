@@ -10,8 +10,9 @@ import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
-import { readingTimeRemarkPlugin } from '../../libs/shared/utils/src/lib/frontmatter';
-import { SITE } from '../../libs/website/config/src';
+import { readingTimeRemarkPlugin } from '../../libs/shared/util/predict-reading-time/src';
+import { CONFIG } from '../../libs/website/config/src';
+const SITE = CONFIG['app'];
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
