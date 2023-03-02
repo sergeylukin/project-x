@@ -9,16 +9,53 @@
     ></script>
   </head>
   <body>
-    <!-- Add a menu:
-           Log in / Sign up - when the user is not logged in
-              Username / Log out - when the user is logged in
-                -->
-    <div data-netlify-identity-menu></div>
-
-    <!-- Add a simpler button:
-                          Simple button that will open the modal.
-                            -->
-    <div data-netlify-identity-button>Login with Netlify Identity</div>
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+      const { CMS, initCMS: init } = window;
+      console.log(CMS, init);
+      /* CMS.registerWidget('mdx', MdxControl, MdxPreview); */
+
+      /* CMS.init(); */
+      init({
+        config: {
+          backend: {
+            name: 'git-gateway',
+            branch: 'main',
+          },
+          load_config_file: false,
+          media_folder: 'apps/website/src/assets/images',
+          public_folder: '~/assets/images',
+          publish_mode: 'editorial_workflow',
+          collections: [
+            {
+              label: 'Posts',
+              name: 'post',
+              folder: 'apps/website/src/content/post',
+              create: true,
+              delete: true,
+              extension: 'mdx',
+              format: 'frontmatter',
+              fields: [
+                { name: 'title', widget: 'string', label: 'Post Title' },
+                { name: 'image', widget: 'image', label: 'Cover' },
+                { name: 'body', widget: 'markdown', label: 'Post Body' },
+                { label: 'Description', name: 'description', widget: 'text' },
+                { label: 'Tags', name: 'tags', widget: 'list' },
+                { label: 'Author', name: 'author', widget: 'string' },
+                {
+                  label: 'Author Twitter Handle',
+                  name: 'authorTwitter',
+                  widget: 'string',
+                },
+                { label: 'Publish Date', name: 'date', widget: 'datetime' },
+              ],
+            },
+          ],
+        },
+      });
+    </script>
   </body>
 </html>
