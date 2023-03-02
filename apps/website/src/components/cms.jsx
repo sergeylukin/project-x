@@ -9,6 +9,7 @@ import { mdxJsx } from 'micromark-extension-mdx-jsx';
 import { toHast } from 'mdast-util-to-hast';
 import { mdxJsxFromMarkdown } from 'mdast-util-mdx-jsx';
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
+window.CMS_MANUAL_INIT = true;
 
 const components = {
   h1: (props) => <h1 style={{ color: 'tomato' }} {...props} />,

@@ -1,6 +1,12 @@
 ---
 import { BaseLayout as Layout } from '@astro-nx-depla/shared/layout';
 ---
-<Layout />
+<Layout>
+
+    <script is:inline>
+      window.CMS_MANUAL_INIT = true;
+    </script>
+      </Layout>
 
 <script>import "~/components/cms.jsx"</script>
+

@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: 'apps/website/src/assets/images' # Folder where user uploaded files should go
+public_folder: '~/assets/images'
+
+publish_mode: editorial_workflow
+site_url: https://cluster.cam
+
+collections: # A list of collections the CMS should be able to edit
+  - name: 'post' # Used in routes, ie.: /admin/collections/:slug/edit
+    label: 'Posts'
+    label_singular: 'Post'
+    folder: 'apps/website/src/content/post'
+    create: true
+    delete: true
+    extension: 'mdx'
+    format: 'frontmatter'
+    fields: # The fields each document in this collection have
+      - { name: 'title', widget: 'string', label: 'Post Title' }
+      - { name: 'image', widget: 'image', label: 'Cover' }
+      - { name: 'body', widget: 'mdx', label: 'Post Body' }
+      - { label: 'Description', name: 'description', widget: 'text' }
+      - { label: 'Tags', name: 'tags', widget: 'list' }
+      - { label: 'Author', name: 'author', widget: 'string' }
+      - {
+          label: 'Author Twitter Handle',
+          name: 'authorTwitter',
+          widget: 'string',
+        }
+      - { label: 'Publish Date', name: 'date', widget: 'datetime' }
