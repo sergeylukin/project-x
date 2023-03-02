@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CMS from 'netlify-cms-app';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import * as acorn from 'acorn';
@@ -68,12 +68,6 @@ const MdxPreview = ({ value }) => {
   return toJsxRuntime(safeHast, { Fragment, jsx, jsxs });
 };
 
-export const Cms = () => {
-  useEffect(() => {
-    window.CMS_MANUAL_INIT = true;
-    CMS.registerWidget('mdx', MdxControl, MdxPreview);
+CMS.registerWidget('mdx', MdxControl, MdxPreview);
 
-    CMS.init();
-  }, []);
-  return <div />;
-};
+CMS.init();
