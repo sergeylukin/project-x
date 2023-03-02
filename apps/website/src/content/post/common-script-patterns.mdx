@@ -1,0 +1,26 @@
+---
+title: Common script patterns
+image: ~/assets/images/cup.jpeg
+description: Just a quick intro into script patterns in Astro framework
+tags:
+  - astro
+  - framework
+  - patterns
+author: serge
+authorTwitter: sergey_lukin
+date: 2023-03-02T01:09:32.120Z
+---
+### Handle `onclick` and other events
+
+[Section titled Handle onclick and other events](https://docs.astro.build/en/guides/client-side-scripts/#handle-onclick-and-other-events)
+
+Some UI frameworks use custom syntax for event handling like `onClick={...}` (React/Preact) or `@click="..."` (Vue). Astro follows standard HTML more closely and does not use custom syntax for events.
+
+Instead, you can use [`addEventListener`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) in a `<script>` tag to handle user interactions.
+
+There are two advantages to using a custom element here:
+
+1. Instead of searching the whole page using `document.querySelector()`, you can use `this.querySelector()`, which only searches within the current custom element instance. This makes it easier to work with only the children of one component instance at a time.
+2. Although a `<script>` only runs once, the browser will run our custom element’s `constructor()` method each time it finds `<astro-heart>` on the page. This means you can safely write code for one component at a time, even if you intend to use this component multiple times on a page.
+
+📚 You can learn more about custom elements in [web.dev’s Reusable Web Components guide](https://web.dev/custom-elements-v1/) and [MDN’s introduction to custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements).
