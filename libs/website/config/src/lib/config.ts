@@ -1,10 +1,14 @@
 import defaultImage from '../assets/images/default.png';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 export const CONFIG = {
   app: {
     name: 'AstroWind',
 
-    origin: 'http://localhost:3000',
+    env: isProd ? 'prod' : 'dev',
+
+    origin: isProd ? 'https://e301.dep.la' : 'http://localhost:3000',
     basePathname: '/',
     trailingSlash: false,
 
