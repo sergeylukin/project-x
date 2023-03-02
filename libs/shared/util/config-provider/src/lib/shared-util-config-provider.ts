@@ -1,5 +1,10 @@
+export enum IEnvironment {
+  Prod = 'PROD',
+  Dev = 'DEV',
+}
 export interface IAppConfig {
   name: string;
+  env: IEnvironment;
   origin: string;
   basePathname: string;
   trailingSlash: boolean;

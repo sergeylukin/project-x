@@ -10,9 +10,12 @@ import { toHast } from 'mdast-util-to-hast';
 import { mdxJsxFromMarkdown } from 'mdast-util-mdx-jsx';
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
 
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
+import {
+  CONFIG,
+  IEnvironment,
+} from '@astro-nx-depla/shared/util/config-provider';
 
-const isProd = CONFIG.get('app.env') === 'prod';
+const isProd = CONFIG.get('app.env') === IEnvironment.Prod;
 
 const components = {
   h1: (props) => <h1 style={{ color: 'tomato' }} {...props} />,
@@ -73,6 +76,7 @@ const MdxPreview = ({ value }) => {
 };
 
 CMS.registerWidget('mdx', MdxControl, MdxPreview);
+console.log(isProd ? 'I am in PROD' : 'I am in DEV');
 
 CMS.init({
   config: {
