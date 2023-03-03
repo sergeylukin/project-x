@@ -25,13 +25,7 @@
       }
     },
     "serve": {
-      "executor": "@nxtensions/astro:dev",
-      "dependsOn": [
-        {
-          "target": "build-astro-config",
-          "projects": "self"
-        }
-      ]
+      "executor": "@nxtensions/astro:dev"
     },
     "netlify-cms-proxy": {
       "executor": "nx:run-commands",
@@ -42,7 +36,13 @@
       }
     },
     "dev": {
-      "executor": "@astro-nx-depla/nx:dev-astro-with-netlify-cms"
+      "executor": "@astro-nx-depla/nx:dev-astro-with-netlify-cms",
+      "dependsOn": [
+        {
+          "target": "build-astro-config",
+          "projects": "self"
+        }
+      ]
     },
     "preview": {
       "dependsOn": [

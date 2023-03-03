@@ -16,12 +16,6 @@ import {
 } from '@astro-nx-depla/shared/util/config-provider';
 
 const isProd = CONFIG.get('app.env') === IEnvironment.Prod;
-console.log(
-  'THIS IS MORE IMP',
-  CONFIG,
-  IEnvironment.Prod,
-  CONFIG.get('app.env')
-);
 
 const components = {
   h1: (props) => <h1 style={{ color: 'tomato' }} {...props} />,
@@ -82,7 +76,6 @@ const MdxPreview = ({ value }) => {
 };
 
 CMS.registerWidget('mdx', MdxControl, MdxPreview);
-console.log(isProd ? 'I am in PROD' : 'I am in DEV', isProd, CONFIG.get('app'));
 
 CMS.init({
   config: {
