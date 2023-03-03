@@ -33,7 +33,7 @@ const loadConfig = () => {
             plugins: [
               {
                 transform: (content, id) => {
-                  if (/src\/pages\/.+\.ts$/.test(id)) {
+                  if (/src\/pages\/.+\.ts$/.test(id) || /.+\.jsx$/.test(id)) {
                     content = `
                       ${CONFIG_LOAD_JS}
                       ${content}
