@@ -1,5 +1,4 @@
 import defaultImage from '../assets/images/default.png';
-import { IEnvironment } from '@astro-nx-depla/shared/util/config-provider';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -7,7 +6,7 @@ export const CONFIG = {
   app: {
     name: 'AstroWind',
 
-    env: isProd ? IEnvironment.Prod : IEnvironment.Dev,
+    env: isProd ? 'prod' : 'dev',
 
     origin: isProd ? 'https://e301.dep.la' : 'http://localhost:3000',
     basePathname: '/',

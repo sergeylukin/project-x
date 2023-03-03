@@ -76,7 +76,11 @@ const MdxPreview = ({ value }) => {
 };
 
 CMS.registerWidget('mdx', MdxControl, MdxPreview);
-console.log(isProd ? 'I am in PROD' : 'I am in DEV');
+console.log(
+  isProd ? 'I am in PROD' : 'I am in DEV',
+  isProd,
+  CONFIG.get('app')
+);
 
 CMS.init({
   config: {
