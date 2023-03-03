@@ -2,6 +2,13 @@ import defaultImage from '../assets/images/default.png';
 import { IEnvironment } from '@astro-nx-depla/shared/util/config-provider';
 
 const isProd = process.env.NODE_ENV === 'production';
+console.log(
+  'HEREWEWEW TOUFO',
+  isProd,
+  process,
+  process.env,
+  process.env.NODE_ENV
+);
 
 export const CONFIG = {
   app: {
