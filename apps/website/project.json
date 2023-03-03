@@ -8,7 +8,21 @@
     "build": {
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "executor": "@nxtensions/astro:build",
-      "options": {}
+      "options": {},
+      "dependsOn": [
+        {
+          "target": "build-astro-config",
+          "projects": "self"
+        }
+      ]
+    },
+    "build-astro-config": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "node build.mjs"
+        ]
+      }
     },
     "serve": {
       "executor": "@nxtensions/astro:dev"

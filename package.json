@@ -36,6 +36,7 @@
     "astro-compress": "^1.1.35",
     "astro-netlify-cms": "^0.5.3",
     "cypress": "^12.2.0",
+    "esbuild-plugin-alias": "^0.2.1",
     "eslint": "~8.15.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
@@ -50,7 +51,6 @@
     "reading-time": "^1.5.0",
     "ts-jest": "28.0.5",
     "ts-node": "10.9.1",
-    "typescript": "~4.8.2",
     "vite": "^4.0.1",
     "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "^4.0.2",
@@ -68,6 +68,7 @@
     "@swc/helpers": "~0.4.11",
     "acorn": "^8.8.2",
     "astro-icon": "^0.8.0",
+    "esbuild": "0.17.10",
     "hast-util-raw": "^8.0.0",
     "hast-util-sanitize": "^4.1.0",
     "hast-util-to-jsx-runtime": "^1.2.0",
@@ -81,5 +82,8 @@
     "react-dom": "^17.0.2",
     "tailwindcss": "^3.2.7",
     "tslib": "^2.3.0"
+  },
+  "volta": {
+    "node": "16.16.0"
   }
 }

@@ -27,7 +27,7 @@
       "@astro-nx-depla/shared/util/predict-reading-time": [
         "libs/shared/util/astro-remark-plugin-predict-reading-time/src/index.ts"
       ],
-      "@astro-nx-depla/website/config": ["libs/website/config/src/index.js"],
+      "@astro-nx-depla/website/config": ["libs/website/config/src/index.ts"],
       "@astro-nx-depla/website/data-access/post": [
         "libs/website/data-access/post/src/index.ts"
       ],
