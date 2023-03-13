@@ -14,6 +14,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@astro-nx-depla/nx": ["libs/nx/src/index.ts"],
       "@astro-nx-depla/shared/layout": ["libs/shared/layout/src/index.js"],
