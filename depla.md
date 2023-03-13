@@ -42,3 +42,5 @@ npx nx g @nxtensions/astro:lib layout --directory=shared \
 npx nx g @nrwl/workspace:lib menu-data --directory=website \
 --importPath=@astro-nx-depla/website/menu-data
 
+nx g @nrwl/workspace:lib post --directory=website/entities
+--importPath=@astro-nx-depla/entities/post
