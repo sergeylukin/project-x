@@ -66,6 +66,7 @@
     "@astrojs/tailwind": "^3.0.1",
     "@mdx-js/mdx": "^2.3.0",
     "@nrwl/nx-plugin": "^15.7.2",
+    "@prisma/client": "^4.11.0",
     "@swc/helpers": "~0.4.11",
     "acorn": "^8.8.2",
     "astro-icon": "^0.8.0",
