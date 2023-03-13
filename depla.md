@@ -44,3 +44,5 @@ npx nx g @nrwl/workspace:lib menu-data --directory=website \
 
 nx g @nrwl/workspace:lib post --directory=website/entities
 --importPath=@astro-nx-depla/entities/post
+
+npx prisma init --datasource-provider sqlite
