@@ -15,6 +15,5 @@
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
-  },
-  "files": ["../../../../apps/website/.astro/types.d.ts"]
+  }
 }
