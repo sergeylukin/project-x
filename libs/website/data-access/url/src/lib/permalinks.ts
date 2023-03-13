@@ -14,6 +14,7 @@ const BLOG = CONFIG.get('entities.post') as IEntity;
 const CATEGORY = CONFIG.get(
   'entities.post.taxonomies.category'
 ) as IEntityRoute;
+const TAG = CONFIG.get('entities.post.taxonomies.tag') as IEntityRoute;
 
 export const trimSlash = (s: string) => trim(trim(s, '/'));
 const createPath = (...params: string[]) => {
@@ -36,7 +37,7 @@ export const POST_PERMALINK_PATTERN = trimSlash(
 
 export const BLOG_BASE = cleanSlug(BLOG?.list?.pathname);
 export const CATEGORY_BASE = cleanSlug(CATEGORY?.pathname || 'category');
-export const TAG_BASE = cleanSlug(CATEGORY?.pathname) || 'tag';
+export const TAG_BASE = cleanSlug(TAG?.pathname) || 'tag';
 
 /** */
 export const getCanonical = (path = ''): string | URL =>
