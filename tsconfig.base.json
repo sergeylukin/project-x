@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
     "paths": {
+      "@astro-nx-depla/entities/post": [
+        "libs/website/entities/post/src/index.ts"
+      ],
       "@astro-nx-depla/nx": ["libs/nx/src/index.ts"],
       "@astro-nx-depla/shared/layout": ["libs/shared/layout/src/index.js"],
       "@astro-nx-depla/shared/ui": ["libs/shared/ui/src/index.js"],
