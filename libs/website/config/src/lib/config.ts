@@ -40,7 +40,7 @@ export const CONFIG = {
       itemsPerPage: 4,
 
       item: {
-        permalink: '/%slug%', // Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+        permalink: '/%year%/%slug%', // Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
         noindex: false,
         disabled: false,
       },
