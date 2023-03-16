@@ -9,8 +9,6 @@ import type { Post } from '@astro-nx-depla/website/types';
 const PostConfig = CONFIG.get('entities.post');
 
 async function getNormalizedPost(post: CollectionEntry<'post'>): Promise<Post> {
-  // console.log('ORIGINAL');
-  // console.log(post);
   const { id, body, slug: rawSlug = '', data } = post;
   const { remarkPluginFrontmatter } = await post.render();
 
@@ -86,7 +84,6 @@ class DB extends PrismaClient {
     });
 
     const postsExist = await this.post.count();
-    console.log('HERE');
     if (!postsExist) {
       const posts = await getCollection('post');
       posts.forEach(async (post) => {
@@ -101,7 +98,6 @@ class DB extends PrismaClient {
                 name: tagName,
               },
             });
-            // console.log(tagInDb);
             if (!tagInDb) {
               const newTagInDb = await this.tag.create({
                 data: {
@@ -117,10 +113,7 @@ class DB extends PrismaClient {
         data.tags = {
           connect: tags,
         };
-        console.log('SIMULATING SEED');
-        console.log(data);
         const result = await this.post.create({ data });
-        // console.log('SEEDED DB', result);
       });
     }
   }

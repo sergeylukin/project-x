@@ -88,9 +88,6 @@ function Posts(prismaPost: PostModel) {
         //   },
         // },
       });
-      posts.map((post) => {
-        console.log(post);
-      });
       return paginate(posts, {
         params: { blog: PostConfig?.list?.pathname || undefined },
         pageSize: PostConfig.itemsPerPage,
