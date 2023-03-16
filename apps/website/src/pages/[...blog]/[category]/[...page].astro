@@ -1,52 +1,18 @@
 ---
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
-
-import { PageLayout as Layout } from '@astro-nx-depla/shared/layout';
+import { PageLayout } from '@astro-nx-depla/shared/layout';
 import { PostsList as BlogList, Headline, Pagination } from '@astro-nx-depla/shared/ui';
+import { Post } from '@astro-nx-depla/website/entities/post';
 
-import { CATEGORY_BASE } from '@astro-nx-depla/website/data-access/url';
-import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
-
-const SITE = CONFIG.get('app')
-const CATEGORY = CONFIG.get('entities.post.taxonomies.category')
-
-export async function getStaticPaths({ paginate }) {
-  const BLOG = CONFIG.get('entities.post')
-  const CATEGORY = CONFIG.get('entities.post.taxonomies.category')
-  if (BLOG?.disabled || CATEGORY?.disabled) return [];
-
-  const posts = await fetchPosts();
-  const categories = new Set();
-  posts.map((post) => {
-    typeof post.category === 'string' && categories.add(post.category.toLowerCase());
-  });
-
-  return Array.from(categories).map((category: string) =>
-    paginate(
-      posts.filter((post) => typeof post.category === 'string' && category === post.category.toLowerCase()),
-      {
-        params: { category: category, blog: CATEGORY_BASE || undefined },
-        pageSize: BLOG.itemsPerPage,
-        props: { category },
-      }
-    )
-  );
-}
+export const getStaticPaths = Post.getPostCategoryListStaticPaths
 
 const { page, category } = Astro.props;
-
-const currentPage = page.currentPage ?? 1;
-const meta = {
-  title: `Category'${category}' ${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
-  description: SITE?.description,
-  noindex: CATEGORY?.noindex,
-};
+const meta = Post.getPostCategoryMetaByPage(page, category)
 ---
 
-<Layout meta={meta}>
+<PageLayout meta={meta}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-3xl">
     <Headline><span class="capitalize">{category.replaceAll('-', ' ')}</span></Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>
-</Layout>
+</PageLayout>

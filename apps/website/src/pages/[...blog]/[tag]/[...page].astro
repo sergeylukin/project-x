@@ -1,53 +1,19 @@
 ---
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
-
-import { PageLayout as Layout } from '@astro-nx-depla/shared/layout';
+import { PageLayout } from '@astro-nx-depla/shared/layout';
 import { Headline, PostsList as BlogList, Pagination } from '@astro-nx-depla/shared/ui';
+import { Post } from '@astro-nx-depla/website/entities/post';
 
-import { TAG_BASE } from '@astro-nx-depla/website/data-access/url';
-import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
-
-const SITE = CONFIG.get('app')
-const TAG = CONFIG.get('entities.post.taxonomies.tag')
-
-export async function getStaticPaths({ paginate }) {
-  const BLOG = CONFIG.get('entities.post')
-  const TAG = CONFIG.get('entities.post.taxonomies.tag')
-
-  if (BLOG?.disabled || TAG?.disabled) return [];
-
-  const posts = await fetchPosts();
-  const tags = new Set();
-  posts.map((post) => {
-    Array.isArray(post.tags) && post.tags.map((tag) => tags.add(tag.toLowerCase()));
-  });
-
-  return Array.from(tags).map((tag: string) =>
-    paginate(
-      posts.filter((post) => Array.isArray(post.tags) && post.tags.find((elem) => elem.toLowerCase() === tag)),
-      {
-        params: { tag: tag, blog: TAG_BASE || undefined },
-        pageSize: BLOG.itemsPerPage,
-        props: { tag },
-      }
-    )
-  );
-}
+export const getStaticPaths = Post.getPostTagListStaticPaths
 
 const { page, tag } = Astro.props;
 
-const currentPage = page.currentPage ?? 1;
-const meta = {
-  title: `Posts by tag '${tag}'${currentPage > 1 ? ` — Page ${currentPage} ` : ''}`,
-  description: SITE?.description,
-  noindex: TAG?.noindex,
-};
+const meta = Post.getPostTagMetaByPage(page, tag)
 ---
 
-<Layout meta={meta}>
+<PageLayout meta={meta}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-3xl">
     <Headline>Tag: {tag}</Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>
-</Layout>
+</PageLayout>

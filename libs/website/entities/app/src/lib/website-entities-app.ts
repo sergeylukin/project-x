@@ -1,2 +1,9 @@
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
-export const App = CONFIG.get('app');
+
+const AppConfig = CONFIG.get('app');
+
+export const App = {
+  getAppPermalink() {
+    return AppConfig?.basePathname;
+  },
+};

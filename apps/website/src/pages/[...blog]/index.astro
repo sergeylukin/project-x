@@ -1,40 +1,15 @@
 ---
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
-
-import { PageLayout as Layout } from '@astro-nx-depla/shared/layout';
+import { PageLayout } from '@astro-nx-depla/shared/layout';
 import { SinglePost, ToBlogLink } from '@astro-nx-depla/shared/ui';
+import { Post } from '@astro-nx-depla/website/entities/post';
 
-import { getCanonical, getPermalink } from '@astro-nx-depla/website/data-access/url';
-import { findImage } from '@astro-nx-depla/website/data-access/url';
-import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
-
-const BLOG = CONFIG.get('entities.post');
-
-export async function getStaticPaths() {
-  const BLOG = CONFIG.get('entities.post');
-  if (BLOG?.disabled || BLOG?.item?.disabled) return [];
-  return (await fetchPosts()).map((post) => ({
-    params: {
-      blog: post.permalink,
-    },
-    props: { post },
-  }));
-}
+export const getStaticPaths = Post.getPostViewStaticPaths
 
 const { post } = Astro.props;
-const url = getCanonical(getPermalink(post.permalink, 'post'));
-
-const meta = {
-  title: post.title,
-  description: post.description,
-  canonical: post.canonical || url,
-  image: await findImage(post.image),
-  noindex: BLOG?.item?.noindex,
-  ogType: 'article',
-};
+const meta = await Post.getMetaByPost(post)
 ---
 
-<Layout {meta}>
-  <SinglePost post={{ ...post, image: meta.image }} url={url} />
+<PageLayout {meta}>
+  <SinglePost post={{ ...post, url: meta.canonical, image: meta.image }} />
   <ToBlogLink />
-</Layout>
+</PageLayout>

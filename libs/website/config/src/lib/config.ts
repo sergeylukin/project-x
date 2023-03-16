@@ -57,12 +57,14 @@ export const CONFIG = {
           pathname: 'category', // Category main path /category/some-category
           noindex: true,
           disabled: false,
+          itemsPerPage: 6,
         },
         tag: {
           name: 'tag',
           pathname: 'tag', // Tag main path /tag/some-tag
           noindex: true,
           disabled: false,
+          itemsPerPage: 2,
         },
       },
     },

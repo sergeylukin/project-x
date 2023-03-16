@@ -4,9 +4,9 @@ import { Picture } from '@astrojs/image/components';
 import { Tags as PostTags } from '@astro-nx-depla/shared/ui';
 
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
-import type { Post } from '@astro-nx-depla/website/types';
+import type { Post as IPost } from '@astro-nx-depla/website/types';
+import { Post } from '@astro-nx-depla/website/entities/post';
 
-import { getPermalink } from '@astro-nx-depla/website/data-access/url';
 import { findImage } from '@astro-nx-depla/website/data-access/url';
 import { getFormattedDate } from '@astro-nx-depla/shared/util/formatting';
 
@@ -19,7 +19,7 @@ export interface Props {
 const { post } = Astro.props;
 const image = await findImage(post.image);
 
-const link = !BLOG?.item?.disabled ? getPermalink(post.permalink, 'post') : '';
+const link = !BLOG?.item?.disabled ? post.permalink : '';
 ---
 
 <article
@@ -65,7 +65,7 @@ const link = !BLOG?.item?.disabled ? getPermalink(post.permalink, 'post') : '';
                 ·{' '}
                 <a
                   class="capitalize hover:underline"
-                  href={getPermalink(post.category, 'category')}
+                  href={Post.getPostTaxonomyPermalink('category', post.category)}
                 >
                   {post.category.replaceAll('-', ' ')}
                 </a>
@@ -81,7 +81,7 @@ const link = !BLOG?.item?.disabled ? getPermalink(post.permalink, 'post') : '';
           link ? (
             <a
               class="hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200"
-              href={link}
+              href={Post.getPostPermalink(link)}
             >
               {post.title}
             </a>

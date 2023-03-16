@@ -5,25 +5,22 @@ import { getImage } from '@astrojs/image';
 
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 import { MetaSEO } from '@astro-nx-depla/website/types';
-import {
-  getCanonical,
-  getAsset,
-  getRelativeUrlByFilePath
-} from '@astro-nx-depla/website/data-access/url';
+import { getRelativeUrlByFilePath } from '@astro-nx-depla/website/data-access/url';
+import { getCanonical } from '@astro-nx-depla/shared/util/formatting';
 
 import CustomStyles from '~/components/CustomStyles.astro';
 import { SplitbeeAnalytics } from '@astro-nx-depla/shared/ui';
 
-const SITE = CONFIG.get('app');
+const AppConfig = CONFIG.get('app');
 
 export interface Props extends MetaSEO {
   dontUseTitleTemplate?: boolean;
 }
 
-const defaultImage = SITE.defaultImage
+const defaultImage = AppConfig.defaultImage
   ? (
       await getImage({
-        src: SITE.defaultImage,
+        src: AppConfig.defaultImage,
         alt: 'Default image',
         width: 1200,
         height: 628,
@@ -32,11 +29,11 @@ const defaultImage = SITE.defaultImage
   : '';
 
 const {
-  title = SITE.name,
+  title = AppConfig.name,
   description = '',
   image: _image = defaultImage,
 
-  canonical = getCanonical(String(Astro.url.pathname)),
+  canonical = getCanonical(String(Astro.url.pathname), AppConfig.origin),
   noindex = false,
   nofollow = false,
 
@@ -60,7 +57,7 @@ const image =
 
 <AstroSeo
   title={title}
-  titleTemplate={dontUseTitleTemplate ? '%s' : `%s — ${SITE.name}`}
+  titleTemplate={dontUseTitleTemplate ? '%s' : `%s — ${AppConfig.name}`}
   description={description}
   canonical={String(canonical)}
   noindex={noindex}
@@ -91,27 +88,27 @@ const image =
 
 <!-- Google Site Verification -->
 {
-  SITE.googleSiteVerificationId && (
+  AppConfig.googleSiteVerificationId && (
     <meta
       name="google-site-verification"
-      content={SITE.googleSiteVerificationId}
+      content={AppConfig.googleSiteVerificationId}
     />
   )
 }
 
 <!-- Google Analytics -->
 {
-  SITE.googleAnalyticsId && (
-    <GoogleAnalytics id={String(SITE.googleAnalyticsId)} partytown={true} />
+  AppConfig.googleAnalyticsId && (
+    <GoogleAnalytics id={String(AppConfig.googleAnalyticsId)} partytown={true} />
   )
 }
 
 {
-  SITE.splitbeeAnalytics?.enabled && (
-    <SplitbeeAnalytics {...SITE.splitbeeAnalytics} />
+  AppConfig.splitbeeAnalytics?.enabled && (
+    <SplitbeeAnalytics {...AppConfig.splitbeeAnalytics} />
   )
 }
 
-<link rel="shortcut icon" href={getAsset('/favicon.ico')} />
-<link rel="icon" type="image/svg+xml" href={getAsset('/favicon.svg')} />
-<link rel="mask-icon" href={getAsset('/favicon.svg')} color="#8D46E7" />
+<link rel="shortcut icon" href={'/favicon.ico'} />
+<link rel="icon" type="image/svg+xml" href={'/favicon.svg'} />
+<link rel="mask-icon" href={'/favicon.svg'} color="#8D46E7" />

@@ -1,6 +1,5 @@
 ---
 import { Icon } from 'astro-icon';
-import { getHomePermalink } from '@astro-nx-depla/website/data-access/url';
 
 interface Link {
   text?: string;
@@ -39,7 +38,7 @@ const {
     <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
       <div class="col-span-12 lg:col-span-4">
         <div class="mb-2">
-          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{siteName}</a>
+          <a class="inline-block font-bold text-xl" href={'/'}>{siteName}</a>
         </div>
         <div class="text-sm text-muted">
           {

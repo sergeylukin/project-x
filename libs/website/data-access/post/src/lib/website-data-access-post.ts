@@ -1,46 +1,14 @@
+import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { Post } from '@astro-nx-depla/website/types';
 import {
   cleanSlug,
   trimSlash,
-  POST_PERMALINK_PATTERN,
-} from '@astro-nx-depla/website/data-access/url';
+  generatePermalink,
+} from '@astro-nx-depla/shared/util/formatting';
 
-const generatePermalink = async ({
-  id,
-  slug,
-  publishDate,
-  category,
-}: {
-  id: string;
-  slug: string;
-  publishDate: Date;
-  category?: string;
-}) => {
-  const year = String(publishDate.getFullYear()).padStart(4, '0');
-  const month = String(publishDate.getMonth() + 1).padStart(2, '0');
-  const day = String(publishDate.getDate()).padStart(2, '0');
-  const hour = String(publishDate.getHours()).padStart(2, '0');
-  const minute = String(publishDate.getMinutes()).padStart(2, '0');
-  const second = String(publishDate.getSeconds()).padStart(2, '0');
-
-  const permalink = POST_PERMALINK_PATTERN.replace('%slug%', slug)
-    .replace('%id%', id)
-    .replace('%category%', category || '')
-    .replace('%year%', year)
-    .replace('%month%', month)
-    .replace('%day%', day)
-    .replace('%hour%', hour)
-    .replace('%minute%', minute)
-    .replace('%second%', second);
-
-  return permalink
-    .split('/')
-    .map((el) => trimSlash(el))
-    .filter((el) => !!el)
-    .join('/');
-};
+const PostConfig = CONFIG.get('entities.post');
 
 const getNormalizedPost = async (
   post: CollectionEntry<'post'>
@@ -56,6 +24,7 @@ const getNormalizedPost = async (
     ...rest
   } = data;
 
+  const pattern = PostConfig?.item?.permalink;
   const slug = cleanSlug(rawSlug.split('/').pop());
   const publishDate = new Date(rawPublishDate);
   const category = rawCategory ? cleanSlug(rawCategory) : undefined;
@@ -75,7 +44,13 @@ const getNormalizedPost = async (
     Content: Content,
     // or 'body' in case you consume from API
 
-    permalink: await generatePermalink({ id, slug, publishDate, category }),
+    permalink: await generatePermalink({
+      pattern,
+      id,
+      slug,
+      publishDate,
+      category,
+    }),
 
     readingTime: remarkPluginFrontmatter?.readingTime,
   };
@@ -135,16 +110,4 @@ export const findPostsByIds = async (
     });
     return r;
   }, []);
-};
-
-/** */
-export const findLatestPosts = async ({
-  count,
-}: {
-  count?: number;
-}): Promise<Array<Post>> => {
-  const _count = count || 4;
-  const posts = await fetchPosts();
-
-  return posts ? posts.slice(0, _count) : [];
 };

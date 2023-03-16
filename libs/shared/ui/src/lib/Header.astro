@@ -4,8 +4,6 @@ import Logo from './Logo.astro';
 import ToggleTheme from './ToggleTheme.astro';
 import ToggleMenu from './ToggleMenu.astro';
 
-import { getHomePermalink, getAsset } from '@astro-nx-depla/website/data-access/url';
-
 interface Link {
   text?: string;
   href?: string;
@@ -49,7 +47,7 @@ const {
 >
   <div class="py-3 px-3 md:py-3.5 md:px-4 mx-auto w-full md:flex md:justify-between max-w-7xl">
     <div class:list={[{"mr-auto": position === "right"}, "flex justify-between"]}>
-      <a class="flex items-center" href={getHomePermalink()}>
+      <a class="flex items-center" href={'/'} >
         <Logo />
       </a>
       <div class="flex items-center md:hidden">
@@ -105,7 +103,7 @@ const {
             <a
               class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
               aria-label="RSS Feed"
-              href={getAsset('/rss.xml')}
+              href={'/rss.xml'}
             >
               <Icon name="tabler:rss" class="w-5 h-5" />
             </a>

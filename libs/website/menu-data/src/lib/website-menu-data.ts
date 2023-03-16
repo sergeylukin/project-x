@@ -1,9 +1,3 @@
-import {
-  getPermalink,
-  getBlogPermalink,
-  getAsset,
-} from '@astro-nx-depla/website/data-access/url';
-
 export const headerData = {
   links: [
     {
@@ -11,15 +5,15 @@ export const headerData = {
       links: [
         {
           text: 'Sass',
-          href: getPermalink('/landing/saas'),
+          href: '/landing/saas',
         },
         {
           text: 'Startup',
-          href: getPermalink('/landing/startup'),
+          href: '/landing/startup',
         },
         {
           text: 'Mobile App',
-          href: getPermalink('/landing/mobile-app'),
+          href: '/landing/mobile-app',
         },
       ],
     },
@@ -44,11 +38,11 @@ export const headerData = {
         },
         {
           text: 'Terms',
-          href: getPermalink('/terms'),
+          href: '/terms',
         },
         {
           text: 'Privacy policy',
-          href: getPermalink('/privacy'),
+          href: '/privacy',
         },
       ],
     },
@@ -58,7 +52,7 @@ export const headerData = {
     },
     {
       text: 'Blog',
-      href: getBlogPermalink(),
+      href: '/blog',
     },
   ],
   actions: [
@@ -118,14 +112,14 @@ export const footerData = {
     },
   ],
   secondaryLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
-    { text: 'Privacy Policy', href: getPermalink('/privacy') },
+    { text: 'Terms', href: '/terms' },
+    { text: 'Privacy Policy', href: '/privacy' },
   ],
   socialLinks: [
     { ariaLabel: 'Twitter', icon: 'tabler:brand-twitter', href: '#' },
     { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
-    { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
+    { ariaLabel: 'RSS', icon: 'tabler:rss', href: '/rss.xml' },
     {
       ariaLabel: 'Github',
       icon: 'tabler:brand-github',
