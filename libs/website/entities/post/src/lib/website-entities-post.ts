@@ -99,7 +99,6 @@ export function Post(prismaPost: PostModel) {
           const entry = await getEntryBySlug('post', post.slug);
           const { Content } = await entry.render();
           post.Content = Content;
-          console.log(entry);
           return {
             params: {
               blog: post.permalink,
