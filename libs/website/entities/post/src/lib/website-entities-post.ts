@@ -7,16 +7,14 @@ import {
   createPath,
   generatePermalink,
 } from '@astro-nx-depla/shared/util/formatting';
-import { db } from './db';
 import { Post as PostModel } from '@prisma/client';
-import { create } from 'domain';
 
 const AppConfig = CONFIG.get('app');
 const PostConfig = CONFIG.get('entities.post');
 const PostCategoryConfig = CONFIG.get('entities.post.taxonomies.category');
 const PostTagConfig = CONFIG.get('entities.post.taxonomies.tag');
 
-function Posts(prismaPost: PostModel) {
+export function Post(prismaPost: PostModel) {
   return Object.assign(prismaPost, {
     /**
      * Signup the first user and create a new team of one. Return the User with
@@ -217,32 +215,4 @@ function Posts(prismaPost: PostModel) {
       return meta;
     },
   });
-}
-
-export const Post = Posts(db.post);
-
-export interface IPost {
-  id: string;
-  slug: string;
-
-  publishDate: Date;
-  title: string;
-  description?: string;
-
-  image?: string;
-
-  canonical?: string | URL;
-  permalink?: string;
-
-  draft?: boolean;
-
-  excerpt?: string;
-  category?: string;
-  tags?: Array<string>;
-  author?: string;
-
-  Content: unknown;
-  content?: string;
-
-  readingTime?: number;
 }

@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 
-import { Post } from '@astro-nx-depla/website/entities/post';
+import { db } from '@astro-nx-depla/website/db';
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
 export const get = async () => {
@@ -11,7 +11,7 @@ export const get = async () => {
     });
   }
 
-  const posts = await Post.findMany();
+  const posts = await db.post.findMany();
 
   return rss({
     title: `${CONFIG.get('app').name}’s Blog`,
@@ -20,7 +20,7 @@ export const get = async () => {
 
     items: posts.map((post) => {
       return {
-        link: Post.getPostPermalink(post.permalink),
+        link: db.post.getPostPermalink(post.permalink),
         title: post.title,
         description: post.description || ' ',
         pubDate: post.publishDate,

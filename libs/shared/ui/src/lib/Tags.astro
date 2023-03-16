@@ -1,7 +1,7 @@
 ---
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
-import type { Post as IPost } from '@astro-nx-depla/website/types';
-import { Post } from '@astro-nx-depla/website/entities/post';
+import { db } from '@astro-nx-depla/website/db';
+import { IPost } from '@astro-nx-depla/website/entities/post';
 
 const TAG = CONFIG.get('entities.post.taxonomies.tag')
 
@@ -22,7 +22,7 @@ const { tags, class: className = 'text-sm' } = Astro.props;
             tag
           ) : (
             <a
-              href={Post.getPostTaxonomyPermalink('tag', tag.name)}
+              href={db.post.getPostTaxonomyPermalink('tag', tag.name)}
               class="text-muted dark:text-slate-300 hover:text-primary dark:hover:text-gray-200"
             >
               {tag.name}

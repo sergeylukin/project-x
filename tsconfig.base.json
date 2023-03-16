@@ -32,11 +32,15 @@
       "@astro-nx-depla/website/data-access/url": [
         "libs/website/data-access/url/src/index.ts"
       ],
+      "@astro-nx-depla/website/db": ["libs/website/db/src/index.ts"],
       "@astro-nx-depla/website/entities/app": [
         "libs/website/entities/app/src/index.ts"
       ],
       "@astro-nx-depla/website/entities/post": [
         "libs/website/entities/post/src/index.ts"
+      ],
+      "@astro-nx-depla/website/entities/user": [
+        "libs/website/entities/user/src/index.ts"
       ],
       "@astro-nx-depla/website/menu-data": [
         "libs/website/menu-data/src/index.ts"

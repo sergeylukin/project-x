@@ -5,10 +5,13 @@ import {
   cleanSlug,
   generatePermalink,
 } from '@astro-nx-depla/shared/util/formatting';
-import type { Post } from '@astro-nx-depla/website/types';
+import { IPost, PostSeed, Post } from '@astro-nx-depla/website/entities/post';
+import { UserSeed } from '@astro-nx-depla/website/entities/user';
 const PostConfig = CONFIG.get('entities.post');
 
-async function getNormalizedPost(post: CollectionEntry<'post'>): Promise<Post> {
+async function getNormalizedPost(
+  post: CollectionEntry<'post'>
+): Promise<IPost> {
   const { id, body, slug: rawSlug = '', data } = post;
   const { remarkPluginFrontmatter } = await post.render();
 
@@ -60,62 +63,12 @@ class DB extends PrismaClient {
   constructor() {
     super();
     this.seed();
+    this.post = Post(this.post);
   }
 
   async seed() {
-    const userExist = await this.user.count({
-      where: {
-        name: 'foo',
-      },
-    });
-
-    if (!userExist) {
-      await this.user.create({
-        data: {
-          name: 'foo',
-          email: 'foo@example.com',
-        },
-      });
-    }
-    const author = await this.user.findUnique({
-      where: {
-        email: 'foo@example.com',
-      },
-    });
-
-    const postsExist = await this.post.count();
-    if (!postsExist) {
-      const posts = await getCollection('post');
-      posts.forEach(async (post) => {
-        const data = await getNormalizedPost(post);
-        if (data.tags.length === 0) {
-          data.tags.push('default');
-        }
-        const tags = await Promise.all(
-          data.tags.map(async (tagName) => {
-            const tagInDb = await this.tag.findFirst({
-              where: {
-                name: tagName,
-              },
-            });
-            if (!tagInDb) {
-              const newTagInDb = await this.tag.create({
-                data: {
-                  name: tagName,
-                },
-              });
-              return { id: newTagInDb.id };
-            } else {
-              return { id: tagInDb.id };
-            }
-          })
-        );
-        data.tags = {
-          connect: tags,
-        };
-        const result = await this.post.create({ data });
-      });
-    }
+    UserSeed.call(this);
+    PostSeed.call(this);
   }
 }
 

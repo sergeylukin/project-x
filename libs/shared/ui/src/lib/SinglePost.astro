@@ -7,7 +7,8 @@ import { SocialShare } from '@astro-nx-depla/shared/ui';
 
 import { getFormattedDate } from '@astro-nx-depla/shared/util/formatting';
 
-import { Post, IPost } from '@astro-nx-depla/website/entities/post';
+import { db } from '@astro-nx-depla/website/db';
+import { IPost } from '@astro-nx-depla/website/entities/post';
 
 export interface Props {
   post: IPost;
@@ -29,7 +30,7 @@ const { post } = Astro.props;
                 {' '}
                 ·{' '}
                 <a class="capitalize hover:underline"
-                  href={Post.getPostTaxonomyPermalink('category', post.category)}>
+                  href={db.post.getPostTaxonomyPermalink('category', post.category)}>
                   {post.category.replaceAll('-', ' ')}
                 </a>
               </>
