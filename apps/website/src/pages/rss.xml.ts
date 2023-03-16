@@ -1,7 +1,6 @@
 import rss from '@astrojs/rss';
 
-import { getPermalink } from '@astro-nx-depla/website/data-access/url';
-import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
+import { Post } from '@astro-nx-depla/website/entities/post';
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
 export const get = async () => {
@@ -12,18 +11,20 @@ export const get = async () => {
     });
   }
 
-  const posts = await fetchPosts();
+  const posts = await Post.findMany();
 
   return rss({
     title: `${CONFIG.get('app').name}’s Blog`,
     description: CONFIG.get('app').description,
     site: import.meta.env.SITE,
 
-    items: posts.map((post) => ({
-      link: getPermalink(post.permalink, 'post'),
-      title: post.title,
-      description: post.description,
-      pubDate: post.publishDate,
-    })),
+    items: posts.map((post) => {
+      return {
+        link: Post.getPostPermalink(post.permalink),
+        title: post.title,
+        description: post.description || ' ',
+        pubDate: post.publishDate,
+      };
+    }),
   });
 };

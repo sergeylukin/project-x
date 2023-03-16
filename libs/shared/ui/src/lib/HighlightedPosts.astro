@@ -1,8 +1,7 @@
 ---
 import { PostsGrid as Grid } from '@astro-nx-depla/shared/ui';
 
-import { getBlogPermalink } from '@astro-nx-depla/website/data-access/url';
-import { findPostsByIds  } from '@astro-nx-depla/website/data-access/post';
+import { Post } from '@astro-nx-depla/website/entities/post';
 
 export interface Props {
   title?: string;
@@ -15,12 +14,12 @@ export interface Props {
 const {
   title = await Astro.slots.render('title'),
   allPostsText = 'View all posts',
-  allPostsLink = getBlogPermalink(),
+  allPostsLink = Post.getPostListPermalink(),
   information = await Astro.slots.render('information'),
   postIds = [],
 } = Astro.props;
 
-const posts = await findPostsByIds(postIds);
+const posts = await Post.findPostsByIds(postIds);
 ---
 
 <section class="px-4 py-16 mx-auto max-w-7xl lg:py-20">

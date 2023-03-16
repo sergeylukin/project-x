@@ -34,6 +34,30 @@ function Posts(prismaPost: PostModel) {
     getPostListPermalink() {
       return PostConfig?.list?.pathname;
     },
+    async findPostsBySlugs(slugs: Array<string>): Promise<Array<Post>> {
+      if (!Array.isArray(slugs)) return [];
+
+      const posts = await prismaPost.findMany();
+
+      return slugs.reduce(function (r: Array<Post>, slug: string) {
+        posts.some(function (post: Post) {
+          return slug === post.slug && r.push(post);
+        });
+        return r;
+      }, []);
+    },
+    async findPostsByIds(ids: Array<string>): Promise<Array<Post>> {
+      if (!Array.isArray(ids)) return [];
+
+      const posts = await prismaPost.findMany();
+
+      return ids.reduce(function (r: Array<Post>, id: string) {
+        posts.some(function (post: Post) {
+          return id === post.id && r.push(post);
+        });
+        return r;
+      }, []);
+    },
     async firstPost(): Promise<PostModel> {
       return prismaPost.findUnique({ where: { id: 4 } });
     },
