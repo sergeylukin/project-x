@@ -9,8 +9,10 @@ import type { Post } from '@astro-nx-depla/website/types';
 const PostConfig = CONFIG.get('entities.post');
 
 async function getNormalizedPost(post: CollectionEntry<'post'>): Promise<Post> {
-  const { id, slug: rawSlug = '', data } = post;
-  const { Content, remarkPluginFrontmatter } = await post.render();
+  // console.log('ORIGINAL');
+  // console.log(post);
+  const { id, body, slug: rawSlug = '', data } = post;
+  const { remarkPluginFrontmatter } = await post.render();
 
   const {
     tags: rawTags = [],
@@ -27,17 +29,18 @@ async function getNormalizedPost(post: CollectionEntry<'post'>): Promise<Post> {
   const tags = rawTags.map((tag: string) => cleanSlug(tag));
 
   return {
-    id: id,
+    // id: id,
     slug: slug,
 
     publishDate: publishDate,
     category: category,
     tags: tags,
-    author: author,
+    // author: author,
+    authorId: 1,
 
     ...rest,
 
-    Content: Content,
+    content: body,
     // or 'body' in case you consume from API
 
     permalink: await generatePermalink({
@@ -83,12 +86,41 @@ class DB extends PrismaClient {
     });
 
     const postsExist = await this.post.count();
+    console.log('HERE');
     if (!postsExist) {
       const posts = await getCollection('post');
       posts.forEach(async (post) => {
         const data = await getNormalizedPost(post);
+        if (data.tags.length === 0) {
+          data.tags.push('default');
+        }
+        const tags = await Promise.all(
+          data.tags.map(async (tagName) => {
+            const tagInDb = await this.tag.findFirst({
+              where: {
+                name: tagName,
+              },
+            });
+            // console.log(tagInDb);
+            if (!tagInDb) {
+              const newTagInDb = await this.tag.create({
+                data: {
+                  name: tagName,
+                },
+              });
+              return { id: newTagInDb.id };
+            } else {
+              return { id: tagInDb.id };
+            }
+          })
+        );
+        data.tags = {
+          connect: tags,
+        };
+        console.log('SIMULATING SEED');
+        console.log(data);
         const result = await this.post.create({ data });
-        console.log('SEEDED DB', result);
+        // console.log('SEEDED DB', result);
       });
     }
   }

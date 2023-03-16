@@ -22,10 +22,10 @@ const { tags, class: className = 'text-sm' } = Astro.props;
             tag
           ) : (
             <a
-              href={Post.getPostTaxonomyPermalink('tag', tag)}
+              href={Post.getPostTaxonomyPermalink('tag', tag.name)}
               class="text-muted dark:text-slate-300 hover:text-primary dark:hover:text-gray-200"
             >
-              {tag}
+              {tag.name}
             </a>
           )}
         </li>

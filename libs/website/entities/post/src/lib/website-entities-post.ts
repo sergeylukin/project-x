@@ -1,5 +1,5 @@
 import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntryBySlug } from 'astro:content';
 import { findImage } from '@astro-nx-depla/website/data-access/url';
 import {
   getCanonical,
@@ -7,7 +7,6 @@ import {
   createPath,
   generatePermalink,
 } from '@astro-nx-depla/shared/util/formatting';
-import { fetchPosts } from '@astro-nx-depla/website/data-access/post';
 import { db } from './db';
 import { Post as PostModel } from '@prisma/client';
 import { create } from 'domain';
@@ -44,25 +43,52 @@ function Posts(prismaPost: PostModel) {
       count?: number;
     }): Promise<Array<PostModel>> {
       const _count = count || 4;
-      const posts = await fetchPosts();
+      const posts = await prismaPost.findMany();
 
       return posts ? posts.slice(0, _count) : [];
     },
     async getPostListStaticPaths({ paginate }) {
       if (PostConfig?.disabled || PostConfig?.list?.disabled) return [];
-      return paginate(await fetchPosts(), {
+      const posts = await prismaPost.findMany({
+        include: {
+          tags: true,
+        },
+        // select: {
+        //   title: true,
+        //   slug: true,
+        //   content: true,
+        //   tags: {
+        //     select: {
+        //       name: true,
+        //     },
+        //   },
+        // },
+      });
+      posts.map((post) => {
+        console.log(post);
+      });
+      return paginate(posts, {
         params: { blog: PostConfig?.list?.pathname || undefined },
         pageSize: PostConfig.itemsPerPage,
       });
     },
     async getPostViewStaticPaths() {
       if (PostConfig?.disabled || PostConfig?.item?.disabled) return [];
-      return (await fetchPosts()).map((post) => ({
-        params: {
-          blog: post.permalink,
-        },
-        props: { post },
-      }));
+      const posts = await prismaPost.findMany();
+      return await Promise.all(
+        posts.map(async (post) => {
+          const entry = await getEntryBySlug('post', post.slug);
+          const { Content } = await entry.render();
+          post.Content = Content;
+          console.log(entry);
+          return {
+            params: {
+              blog: post.permalink,
+            },
+            props: { post: post },
+          };
+        })
+      );
     },
     getMetaByPage(page) {
       const currentPage = page.currentPage ?? 1;
@@ -91,7 +117,7 @@ function Posts(prismaPost: PostModel) {
     async getPostCategoryListStaticPaths({ paginate }) {
       if (PostConfig?.disabled || PostCategoryConfig?.disabled) return [];
 
-      const posts = await fetchPosts();
+      const posts = await prismaPost.findMany();
       const categories = new Set();
       posts.map((post) => {
         typeof post.category === 'string' &&
@@ -131,11 +157,15 @@ function Posts(prismaPost: PostModel) {
     async getPostTagListStaticPaths({ paginate }) {
       if (PostConfig?.disabled || PostTagConfig?.disabled) return [];
 
-      const posts = await fetchPosts();
+      const posts = await prismaPost.findMany({
+        include: {
+          tags: true,
+        },
+      });
       const tags = new Set();
       posts.map((post) => {
         Array.isArray(post.tags) &&
-          post.tags.map((tag) => tags.add(tag.toLowerCase()));
+          post.tags.map((tag) => tags.add(tag.name.toLowerCase()));
       });
 
       return Array.from(tags).map((tag: string) =>
@@ -143,7 +173,7 @@ function Posts(prismaPost: PostModel) {
           posts.filter(
             (post) =>
               Array.isArray(post.tags) &&
-              post.tags.find((elem) => elem.toLowerCase() === tag)
+              post.tags.find((elem) => elem.name.toLowerCase() === tag)
           ),
           {
             params: { tag: tag, blog: PostTagConfig.pathname || undefined },
@@ -169,3 +199,29 @@ function Posts(prismaPost: PostModel) {
 }
 
 export const Post = Posts(db.post);
+
+export interface IPost {
+  id: string;
+  slug: string;
+
+  publishDate: Date;
+  title: string;
+  description?: string;
+
+  image?: string;
+
+  canonical?: string | URL;
+  permalink?: string;
+
+  draft?: boolean;
+
+  excerpt?: string;
+  category?: string;
+  tags?: Array<string>;
+  author?: string;
+
+  Content: unknown;
+  content?: string;
+
+  readingTime?: number;
+}
