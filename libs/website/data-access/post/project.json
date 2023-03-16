@@ -1,9 +1,0 @@
-{
-  "name": "website-data-access-post",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/website/data-access/post/src",
-  "projectType": "library",
-  "targets": {
-  },
-  "tags": []
-}
