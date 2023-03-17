@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import { PostSeed, Post } from '@astro-nx-depla/website/entities/post';
 import { UserSeed } from '@astro-nx-depla/website/entities/user';
 
-class DB extends PrismaClient {
-  static #instance = new DB();
+class App extends PrismaClient {
+  static #instance = new App();
   static instance = () => this.#instance;
 
   constructor() {
@@ -18,4 +18,4 @@ class DB extends PrismaClient {
   }
 }
 
-export const db = DB.instance();
+export const app = App.instance();

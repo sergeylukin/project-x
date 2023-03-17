@@ -5,7 +5,7 @@ import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 
 import { findImage } from '@astro-nx-depla/website/data-access/url';
 import { IPost } from '@astro-nx-depla/website/entities/post';
-import { db } from '@astro-nx-depla/website/db';
+import { app } from '@astro-nx-depla/website/app';
 
 const BLOG = CONFIG.get('entities.post');
 
@@ -44,7 +44,7 @@ const image = await findImage(post.image);
         post.title
       ) : (
         <a
-          href={db.post.getPostPermalink(post.permalink)}
+          href={app.post.getPostPermalink(post.permalink)}
           class="hover:text-primary dark:hover:text-blue-700  transition ease-in duration-200"
         >
           {post.title}

@@ -1,17 +1,23 @@
 ---
 import { PageLayout } from '@astro-nx-depla/shared/layout';
-import { PostsList as BlogList, Headline, Pagination } from '@astro-nx-depla/shared/ui';
-import { db } from '@astro-nx-depla/website/db';
+import {
+  PostsList as BlogList,
+  Headline,
+  Pagination,
+} from '@astro-nx-depla/shared/ui';
+import { app } from '@astro-nx-depla/website/app';
 
-export const getStaticPaths = db.post.getPostCategoryListStaticPaths
+export const getStaticPaths = app.post.getPostCategoryListStaticPaths;
 
 const { page, category } = Astro.props;
-const meta = db.post.getPostCategoryMetaByPage(page, category)
+const meta = app.post.getPostCategoryMetaByPage(page, category);
 ---
 
 <PageLayout meta={meta}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-3xl">
-    <Headline><span class="capitalize">{category.replaceAll('-', ' ')}</span></Headline>
+    <Headline>
+      <span class="capitalize">{category.replaceAll('-', ' ')}</span>
+    </Headline>
     <BlogList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>

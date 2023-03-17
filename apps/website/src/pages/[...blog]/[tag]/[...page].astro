@@ -1,13 +1,17 @@
 ---
 import { PageLayout } from '@astro-nx-depla/shared/layout';
-import { Headline, PostsList as BlogList, Pagination } from '@astro-nx-depla/shared/ui';
-import { db } from '@astro-nx-depla/website/db';
+import {
+  Headline,
+  PostsList as BlogList,
+  Pagination,
+} from '@astro-nx-depla/shared/ui';
+import { app } from '@astro-nx-depla/website/app';
 
-export const getStaticPaths = db.post.getPostTagListStaticPaths
+export const getStaticPaths = app.post.getPostTagListStaticPaths;
 
 const { page, tag } = Astro.props;
 
-const meta = db.post.getPostTagMetaByPage(page, tag)
+const meta = app.post.getPostTagMetaByPage(page, tag);
 ---
 
 <PageLayout meta={meta}>

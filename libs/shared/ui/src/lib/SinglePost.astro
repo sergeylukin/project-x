@@ -7,7 +7,7 @@ import { SocialShare } from '@astro-nx-depla/shared/ui';
 
 import { getFormattedDate } from '@astro-nx-depla/shared/util/formatting';
 
-import { db } from '@astro-nx-depla/website/db';
+import { app } from '@astro-nx-depla/website/app';
 import { IPost } from '@astro-nx-depla/website/entities/post';
 
 export interface Props {
@@ -20,17 +20,29 @@ const { post } = Astro.props;
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
   <article>
     <header class={post.image ? '' : ''}>
-      <div class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
+      <div
+        class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center"
+      >
         <p>
-          <Icon name="tabler:clock" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
-          <time datetime={String(post.publishDate)}>{getFormattedDate(post.publishDate)}</time>
+          <Icon
+            name="tabler:clock"
+            class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400"
+          />
+          <time datetime={String(post.publishDate)}
+            >{getFormattedDate(post.publishDate)}</time
+          >
           {
             post.category && (
               <>
                 {' '}
                 ·{' '}
-                <a class="capitalize hover:underline"
-                  href={db.post.getPostTaxonomyPermalink('category', post.category)}>
+                <a
+                  class="capitalize hover:underline"
+                  href={app.post.getPostTaxonomyPermalink(
+                    'category',
+                    post.category
+                  )}
+                >
                   {post.category.replaceAll('-', ' ')}
                 </a>
               </>
@@ -87,9 +99,15 @@ const { post } = Astro.props;
         )
       }
     </div>
-    <div class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row">
+    <div
+      class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row"
+    >
       <PostTags tags={post.tags} class="mr-5" />
-      <SocialShare url={post.url} text={post.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" />
+      <SocialShare
+        url={post.url}
+        text={post.title}
+        class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600"
+      />
     </div>
   </article>
 </section>

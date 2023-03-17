@@ -1,12 +1,12 @@
 ---
 import { PageLayout } from '@astro-nx-depla/shared/layout';
 import { SinglePost, ToBlogLink } from '@astro-nx-depla/shared/ui';
-import { db } from '@astro-nx-depla/website/db';
+import { app } from '@astro-nx-depla/website/app';
 
-export const getStaticPaths = db.post.getPostViewStaticPaths
+export const getStaticPaths = app.post.getPostViewStaticPaths;
 
 const { post } = Astro.props;
-const meta = await db.post.getMetaByPost(post)
+const meta = await app.post.getMetaByPost(post);
 ---
 
 <PageLayout {meta}>

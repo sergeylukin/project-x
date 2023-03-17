@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'website-db',
+  displayName: 'website-app',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/website/db',
+  coverageDirectory: '../../../coverage/libs/website/app',
 };
