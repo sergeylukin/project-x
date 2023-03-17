@@ -19,7 +19,7 @@ export interface Props {
 const { post } = Astro.props;
 const image = await findImage(post.image);
 
-const link = !BLOG?.item?.disabled ? post.permalink : '';
+const link = !BLOG?.item?.disabled ? app.post.getPostPermalink(post.permalink) : '';
 ---
 
 <article
@@ -84,7 +84,7 @@ const link = !BLOG?.item?.disabled ? post.permalink : '';
           link ? (
             <a
               class="hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200"
-              href={app.post.getPostPermalink(link)}
+              href={link}
             >
               {post.title}
             </a>

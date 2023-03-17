@@ -30,7 +30,7 @@ export function Post(prismaPost: PostModel) {
       return createPath(AppConfig?.basePathname, link);
     },
     getPostListPermalink() {
-      return PostConfig?.list?.pathname;
+      return createPath(AppConfig?.basePathname, PostConfig?.list?.pathname);
     },
     async findPostsBySlugs(slugs: Array<string>): Promise<Array<Post>> {
       if (!Array.isArray(slugs)) return [];
