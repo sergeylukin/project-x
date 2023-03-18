@@ -9,8 +9,7 @@ import { mdxJsx } from 'micromark-extension-mdx-jsx';
 import { toHast } from 'mdast-util-to-hast';
 import { mdxJsxFromMarkdown } from 'mdast-util-mdx-jsx';
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
-
-import { app } from '@astro-nx-depla/website/app';
+import { isProd } from '@astro-nx-depla/shared/util/environment';
 
 const components = {
   h1: (props) => <h1 style={{ color: 'tomato' }} {...props} />,
@@ -74,7 +73,7 @@ CMS.registerWidget('mdx', MdxControl, MdxPreview);
 
 CMS.init({
   config: {
-    backend: app.isProd
+    backend: isProd
       ? {
           name: 'git-gateway',
           branch: 'main',
@@ -84,14 +83,14 @@ CMS.init({
           proxy_url: 'http://localhost:8081/api/v1git-gateway',
           branch: 'main',
         },
-    local_backend: app.isProd ? false : true,
+    local_backend: isProd ? false : true,
     load_config_file: false,
     media_folder: 'apps/website/src/assets/images',
     public_folder: '~/assets/images',
     publish_mode: 'editorial_workflow',
     collections: [
       {
-        label: app.isProd ? 'Posts' : 'Shmosts',
+        label: isProd ? 'Posts' : 'Shmosts',
         name: 'post',
         folder: 'apps/website/src/content/post',
         create: true,
