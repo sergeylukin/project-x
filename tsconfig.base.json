@@ -48,9 +48,6 @@
       ],
       "@astro-nx-depla/website/entities/user": [
         "libs/website/entities/user/src/index.ts"
-      ],
-      "@astro-nx-depla/website/menu-data": [
-        "libs/website/menu-data/src/index.ts"
       ]
     }
   },
