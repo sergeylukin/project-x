@@ -1,4 +1,5 @@
 import path from 'path';
+import { getImage } from '@astrojs/image';
 import { fileURLToPath } from 'url';
 
 const load = async function () {
@@ -21,6 +22,14 @@ export const fetchLocalImages = async () => {
 
 /** */
 export const findImage = async (imagePath?: string) => {
+  // const path = imagePath.replace('~/', '/src/');
+  // // const fl = import(imagePath);
+  // const src = await getImage({
+  //   src: imagePath,
+  // });
+  // console.log('####', fl);
+  // console.log(path, src);
+  // return src.src;
   if (typeof imagePath !== 'string') {
     return null;
   }
@@ -39,22 +48,4 @@ export const findImage = async (imagePath?: string) => {
   return typeof images[key] === 'function'
     ? (await images[key]())['default']
     : null;
-};
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-/** */
-export const getProjectRootDir = (): string => {
-  const mode = import.meta.env.MODE;
-
-  return mode === 'production'
-    ? path.join(__dirname, '../')
-    : path.join(__dirname, '../../');
-};
-
-const __srcFolder = path.join(getProjectRootDir(), '/src');
-
-/** */
-export const getRelativeUrlByFilePath = (filepath: string): string => {
-  return filepath.replace(__srcFolder, '');
 };
