@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'website-data-access-url',
+  displayName: 'shared-util-image',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/website/data-access/url',
+  coverageDirectory: '../../../../coverage/libs/shared/util/image',
 };

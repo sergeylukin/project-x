@@ -1,5 +1,5 @@
 import { getCollection, getEntryBySlug } from 'astro:content';
-import { findImage } from '@astro-nx-depla/website/data-access/url';
+import { findImage } from '@astro-nx-depla/shared/util/image';
 import {
   getCanonical,
   cleanSlug,

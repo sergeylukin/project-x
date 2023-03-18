@@ -1,21 +1,21 @@
 {
-  "name": "website-data-access-url",
+  "name": "shared-util-image",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/website/data-access/url/src",
+  "sourceRoot": "libs/shared/util/image/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/website/data-access/url/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/util/image/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/website/data-access/url/jest.config.ts",
+        "jestConfig": "libs/shared/util/image/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

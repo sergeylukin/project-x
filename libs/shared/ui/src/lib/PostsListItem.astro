@@ -6,10 +6,10 @@ import { Tags as PostTags } from '@astro-nx-depla/shared/ui';
 import type { IPost } from '@astro-nx-depla/website/entities/post';
 import { app } from '@astro-nx-depla/website/app';
 
-import { findImage } from '@astro-nx-depla/website/data-access/url';
+import { findImage } from '@astro-nx-depla/shared/util/image';
 import { getFormattedDate } from '@astro-nx-depla/shared/util/formatting';
 
-const BLOG = app.post.config
+const BLOG = app.post.config;
 
 export interface Props {
   post: IPost;
@@ -18,7 +18,9 @@ export interface Props {
 const { post } = Astro.props;
 const image = await findImage(post.image);
 
-const link = !BLOG?.item?.disabled ? app.post.getPostPermalink(post.permalink) : '';
+const link = !BLOG?.item?.disabled
+  ? app.post.getPostPermalink(post.permalink)
+  : '';
 ---
 
 <article
