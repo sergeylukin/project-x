@@ -1,1 +1,1 @@
-export * from './lib/website-app';
+export * from './lib/app';
