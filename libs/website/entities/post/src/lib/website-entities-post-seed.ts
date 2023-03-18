@@ -53,37 +53,35 @@ async function getNormalizedPost(
 
 export async function PostSeed() {
   const postsExist = await this.post.count();
-  if (!postsExist) {
-    const posts = await getCollection('post');
-    posts.forEach(async (post) => {
-      const user = await this.user.findFirst();
-      const data = await getNormalizedPost(post, user);
-      if (data.tags.length === 0) {
-        data.tags.push('default');
-      }
-      const tags = await Promise.all(
-        data.tags.map(async (tagName) => {
-          const tagInDb = await this.tag.findFirst({
-            where: {
+  const posts = await getCollection('post');
+  posts.forEach(async (post) => {
+    const user = await this.user.findFirst();
+    const data = await getNormalizedPost(post, user);
+    if (data.tags.length === 0) {
+      data.tags.push('default');
+    }
+    const tags = await Promise.all(
+      data.tags.map(async (tagName) => {
+        const tagInDb = await this.tag.findFirst({
+          where: {
+            name: tagName,
+          },
+        });
+        if (!tagInDb) {
+          const newTagInDb = await this.tag.create({
+            data: {
               name: tagName,
             },
           });
-          if (!tagInDb) {
-            const newTagInDb = await this.tag.create({
-              data: {
-                name: tagName,
-              },
-            });
-            return { id: newTagInDb.id };
-          } else {
-            return { id: tagInDb.id };
-          }
-        })
-      );
-      data.tags = {
-        connect: tags,
-      };
-      const result = await this.post.create({ data });
-    });
-  }
+          return { id: newTagInDb.id };
+        } else {
+          return { id: tagInDb.id };
+        }
+      })
+    );
+    data.tags = {
+      connect: tags,
+    };
+    const result = await this.post.create({ data });
+  });
 }
