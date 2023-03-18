@@ -18,7 +18,7 @@
     "paths": {
       "@astro-nx-depla/nx": ["libs/nx/src/index.ts"],
       "@astro-nx-depla/shared/container": [
-        "libs/shared/container/container/src/index.ts"
+        "libs/shared/container/src/index.ts"
       ],
       "@astro-nx-depla/shared/layout": ["libs/shared/layout/src/index.js"],
       "@astro-nx-depla/shared/types/environment": [
