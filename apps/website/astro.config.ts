@@ -12,58 +12,24 @@ import react from '@astrojs/react';
 import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
 import { readingTimeRemarkPlugin } from '@astro-nx-depla/shared/util/predict-reading-time';
-import { CONFIG } from '@astro-nx-depla/website/config';
-const SITE = CONFIG['app'];
+import { config } from '@astro-nx-depla/website/config';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const loadConfig = () => {
-  return {
-    name: '@depl/astrojs-load-config-plugin',
-    hooks: {
-      'astro:config:setup': async ({ updateConfig, injectScript }) => {
-        const CONFIG_LOAD_JS = `
-          import { CONFIG as ORIGINAL_CONFIG } from '@astro-nx-depla/website/config';
-          import { CONFIG as CONFIG_PROVIDER } from '@astro-nx-depla/shared/util/config-provider';
-          CONFIG_PROVIDER.set(ORIGINAL_CONFIG);
-        `;
-        injectScript('page-ssr', CONFIG_LOAD_JS);
-        updateConfig({
-          vite: {
-            plugins: [
-              {
-                transform: (content, id) => {
-                  if (/src\/pages\/.+\.ts$/.test(id) || /.+\.jsx$/.test(id)) {
-                    content = `
-                      ${CONFIG_LOAD_JS}
-                      ${content}
-                    `;
-                    return {
-                      code: content,
-                      map: null,
-                    };
-                  }
-                },
-              },
-            ],
-          },
-        });
-      },
-    },
-  };
-};
-
 const whenExternalScripts = (items = []) =>
-  SITE.googleAnalyticsId
+  config.googleAnalyticsId
     ? Array.isArray(items)
       ? items.map((item) => item())
       : [items()]
     : [];
 
 export default defineConfig({
-  site: SITE.origin,
-  base: SITE.basePathname,
-  trailingSlash: SITE.trailingSlash ? 'always' : 'never',
+  site:
+    process.env.NODE_ENV === 'production'
+      ? config.productionOrigin
+      : config.origin,
+  base: config.basePathname,
+  trailingSlash: config.trailingSlash ? 'always' : 'never',
 
   output: 'static',
 
@@ -73,7 +39,6 @@ export default defineConfig({
 
   outDir: '../../dist/apps/website',
   integrations: [
-    loadConfig(),
     react(),
     tailwind({
       config: {
@@ -112,9 +77,9 @@ export default defineConfig({
       },
     },
     server: {
-          fs: {
-            allow: [path.resolve(__dirname, '../../')],
-          },
+      fs: {
+        allow: [path.resolve(__dirname, '../../')],
+      },
     },
   },
 });

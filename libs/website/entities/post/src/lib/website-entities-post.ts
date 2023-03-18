@@ -1,4 +1,3 @@
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 import { getCollection, getEntryBySlug } from 'astro:content';
 import { findImage } from '@astro-nx-depla/website/data-access/url';
 import {
@@ -8,34 +7,31 @@ import {
   generatePermalink,
 } from '@astro-nx-depla/shared/util/formatting';
 import { Post as PostModel } from '@prisma/client';
+import { config } from './config';
 
-const AppConfig = CONFIG.get('app');
-const PostConfig = CONFIG.get('entities.post');
-const PostCategoryConfig = CONFIG.get('entities.post.taxonomies.category');
-const PostTagConfig = CONFIG.get('entities.post.taxonomies.tag');
+export function Post(app) {
+  const { post }: { post: PostModel } = app.db;
 
-export function Post(prismaPost: PostModel) {
-  return Object.assign(prismaPost, {
+  return Object.assign(post, {
+    config,
     /**
      * Signup the first user and create a new team of one. Return the User with
      * a full name and without a password
      */
     getPostTaxonomyPermalink(taxonomy, taxonomyValue) {
-      const pathname = CONFIG.get(
-        `entities.post.taxonomies.${taxonomy}.pathname`
-      );
+      const pathname = config.taxonomies[taxonomy]?.pathname;
       return createPath(pathname, taxonomyValue);
     },
     getPostPermalink(link) {
-      return createPath(AppConfig?.basePathname, link);
+      return createPath(app?.config?.basePathname, link);
     },
     getPostListPermalink() {
-      return createPath(AppConfig?.basePathname, PostConfig?.list?.pathname);
+      return createPath(app?.config?.basePathname, config?.list?.pathname);
     },
     async findPostsBySlugs(slugs: Array<string>): Promise<Array<Post>> {
       if (!Array.isArray(slugs)) return [];
 
-      const posts = await prismaPost.findMany();
+      const posts = await post.findMany();
 
       return slugs.reduce(function (r: Array<Post>, slug: string) {
         posts.some(function (post: Post) {
@@ -47,7 +43,7 @@ export function Post(prismaPost: PostModel) {
     async findPostsByIds(ids: Array<string>): Promise<Array<Post>> {
       if (!Array.isArray(ids)) return [];
 
-      const posts = await prismaPost.findMany();
+      const posts = await post.findMany();
 
       return ids.reduce(function (r: Array<Post>, id: string) {
         posts.some(function (post: Post) {
@@ -57,7 +53,7 @@ export function Post(prismaPost: PostModel) {
       }, []);
     },
     async firstPost(): Promise<PostModel> {
-      return prismaPost.findUnique({ where: { id: 4 } });
+      return post.findUnique({ where: { id: 4 } });
     },
     async findLatestPosts({
       count,
@@ -65,13 +61,13 @@ export function Post(prismaPost: PostModel) {
       count?: number;
     }): Promise<Array<PostModel>> {
       const _count = count || 4;
-      const posts = await prismaPost.findMany();
+      const posts = await post.findMany();
 
       return posts ? posts.slice(0, _count) : [];
     },
     async getPostListStaticPaths({ paginate }) {
-      if (PostConfig?.disabled || PostConfig?.list?.disabled) return [];
-      const posts = await prismaPost.findMany({
+      if (config?.disabled || config?.list?.disabled) return [];
+      const posts = await post.findMany({
         include: {
           tags: true,
         },
@@ -87,13 +83,13 @@ export function Post(prismaPost: PostModel) {
         // },
       });
       return paginate(posts, {
-        params: { blog: PostConfig?.list?.pathname || undefined },
-        pageSize: PostConfig.itemsPerPage,
+        params: { blog: config?.list?.pathname || undefined },
+        pageSize: config.itemsPerPage,
       });
     },
     async getPostViewStaticPaths() {
-      if (PostConfig?.disabled || PostConfig?.item?.disabled) return [];
-      const posts = await prismaPost.findMany();
+      if (config?.disabled || config?.item?.disabled) return [];
+      const posts = await post.findMany();
       return await Promise.all(
         posts.map(async (post) => {
           const entry = await getEntryBySlug('post', post.slug);
@@ -113,29 +109,29 @@ export function Post(prismaPost: PostModel) {
 
       return {
         title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
-        description: AppConfig?.description,
-        noindex: PostConfig?.list?.noindex || currentPage > 1,
+        description: app?.config?.description,
+        noindex: config?.list?.noindex || currentPage > 1,
         ogType: 'blog',
       };
     },
     async getMetaByPost(post) {
       const url = getCanonical(
-        createPath(PostConfig.pathname, post.permalink),
-        AppConfig?.origin
+        createPath(config.pathname, post.permalink),
+        app?.config?.origin
       );
       return {
         title: post.title,
         description: post.description,
         canonical: post.canonical || url,
         image: await findImage(post.image),
-        noindex: PostConfig?.item?.noindex,
+        noindex: config?.item?.noindex,
         ogType: 'article',
       };
     },
     async getPostCategoryListStaticPaths({ paginate }) {
-      if (PostConfig?.disabled || PostCategoryConfig?.disabled) return [];
+      if (config?.disabled || config.taxonomies.category?.disabled) return [];
 
-      const posts = await prismaPost.findMany();
+      const posts = await post.findMany();
       const categories = new Set();
       posts.map((post) => {
         typeof post.category === 'string' &&
@@ -152,9 +148,9 @@ export function Post(prismaPost: PostModel) {
           {
             params: {
               category: category,
-              blog: PostCategoryConfig.pathname || undefined,
+              blog: config.taxonomies.category.pathname || undefined,
             },
-            pageSize: PostCategoryConfig.itemsPerPage,
+            pageSize: config.taxonomies.category.itemsPerPage,
             props: { category },
           }
         )
@@ -166,16 +162,16 @@ export function Post(prismaPost: PostModel) {
         title: `Category'${category}' ${
           currentPage > 1 ? ` — Page ${currentPage}` : ''
         }`,
-        description: AppConfig?.description,
-        noindex: PostCategoryConfig?.noindex,
+        description: app?.config?.description,
+        noindex: config.taxonomies.category?.noindex,
       };
       return meta;
     },
 
     async getPostTagListStaticPaths({ paginate }) {
-      if (PostConfig?.disabled || PostTagConfig?.disabled) return [];
+      if (config?.disabled || config.taxonomies.tag?.disabled) return [];
 
-      const posts = await prismaPost.findMany({
+      const posts = await post.findMany({
         include: {
           tags: true,
         },
@@ -194,8 +190,11 @@ export function Post(prismaPost: PostModel) {
               post.tags.find((elem) => elem.name.toLowerCase() === tag)
           ),
           {
-            params: { tag: tag, blog: PostTagConfig.pathname || undefined },
-            pageSize: PostTagConfig.itemsPerPage,
+            params: {
+              tag: tag,
+              blog: config.taxonomies.tag.pathname || undefined,
+            },
+            pageSize: config.taxonomies.tag.itemsPerPage,
             props: { tag },
           }
         )
@@ -208,8 +207,8 @@ export function Post(prismaPost: PostModel) {
         title: `Posts by tag '${tag}'${
           currentPage > 1 ? ` — Page ${currentPage} ` : ''
         }`,
-        description: AppConfig?.description,
-        noindex: PostTagConfig?.noindex,
+        description: app?.config?.description,
+        noindex: config.taxonomies.tag?.noindex,
       };
       return meta;
     },

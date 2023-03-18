@@ -3,14 +3,13 @@ import { Icon } from 'astro-icon';
 import { Picture } from '@astrojs/image/components';
 import { Tags as PostTags } from '@astro-nx-depla/shared/ui';
 
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
 import type { IPost } from '@astro-nx-depla/website/entities/post';
 import { app } from '@astro-nx-depla/website/app';
 
 import { findImage } from '@astro-nx-depla/website/data-access/url';
 import { getFormattedDate } from '@astro-nx-depla/shared/util/formatting';
 
-const BLOG = CONFIG.get('entities.post');
+const BLOG = app.post.config
 
 export interface Props {
   post: IPost;

@@ -3,7 +3,7 @@ import { AstroSeo } from '@astrolib/seo';
 import { GoogleAnalytics } from '@astrolib/analytics';
 import { getImage } from '@astrojs/image';
 
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
+import { app } from '@astro-nx-depla/website/app';
 import { MetaSEO } from '@astro-nx-depla/website/types';
 import { getRelativeUrlByFilePath } from '@astro-nx-depla/website/data-access/url';
 import { getCanonical } from '@astro-nx-depla/shared/util/formatting';
@@ -11,16 +11,14 @@ import { getCanonical } from '@astro-nx-depla/shared/util/formatting';
 import CustomStyles from '~/components/CustomStyles.astro';
 import { SplitbeeAnalytics } from '@astro-nx-depla/shared/ui';
 
-const AppConfig = CONFIG.get('app');
-
 export interface Props extends MetaSEO {
   dontUseTitleTemplate?: boolean;
 }
 
-const defaultImage = AppConfig.defaultImage
+const defaultImage = app.config.defaultImage
   ? (
       await getImage({
-        src: AppConfig.defaultImage,
+        src: app.config.defaultImage,
         alt: 'Default image',
         width: 1200,
         height: 628,
@@ -29,11 +27,11 @@ const defaultImage = AppConfig.defaultImage
   : '';
 
 const {
-  title = AppConfig.name,
+  title = app.config.name,
   description = '',
   image: _image = defaultImage,
 
-  canonical = getCanonical(String(Astro.url.pathname), AppConfig.origin),
+  canonical = getCanonical(String(Astro.url.pathname), app.config.origin),
   noindex = false,
   nofollow = false,
 
@@ -57,7 +55,7 @@ const image =
 
 <AstroSeo
   title={title}
-  titleTemplate={dontUseTitleTemplate ? '%s' : `%s — ${AppConfig.name}`}
+  titleTemplate={dontUseTitleTemplate ? '%s' : `%s — ${app.config.name}`}
   description={description}
   canonical={String(canonical)}
   noindex={noindex}
@@ -88,24 +86,24 @@ const image =
 
 <!-- Google Site Verification -->
 {
-  AppConfig.googleSiteVerificationId && (
+  app.config.googleSiteVerificationId && (
     <meta
       name="google-site-verification"
-      content={AppConfig.googleSiteVerificationId}
+      content={app.config.googleSiteVerificationId}
     />
   )
 }
 
 <!-- Google Analytics -->
 {
-  AppConfig.googleAnalyticsId && (
-    <GoogleAnalytics id={String(AppConfig.googleAnalyticsId)} partytown={true} />
+  app.config.googleAnalyticsId && (
+    <GoogleAnalytics id={String(app.config.googleAnalyticsId)} partytown={true} />
   )
 }
 
 {
-  AppConfig.splitbeeAnalytics?.enabled && (
-    <SplitbeeAnalytics {...AppConfig.splitbeeAnalytics} />
+  app.config.splitbeeAnalytics?.enabled && (
+    <SplitbeeAnalytics {...app.config.splitbeeAnalytics} />
   )
 }
 

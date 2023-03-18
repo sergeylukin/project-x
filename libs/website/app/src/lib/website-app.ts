@@ -1,21 +1,12 @@
-import { PrismaClient } from '@prisma/client';
-import { PostSeed, Post } from '@astro-nx-depla/website/entities/post';
-import { UserSeed } from '@astro-nx-depla/website/entities/user';
+import { Container } from '@astro-nx-depla/shared/container';
+import { provider as environmentProvider } from './providers/environment';
+import { provider as configProvider } from './providers/config';
+import { provider as dbProvider } from './providers/db';
+import { provider as postProvider } from './providers/post';
 
-class App extends PrismaClient {
-  static #instance = new App();
-  static instance = () => this.#instance;
+export const app = new Container();
 
-  constructor() {
-    super();
-    this.seed();
-    this.post = Post(this.post);
-  }
-
-  async seed() {
-    UserSeed.call(this);
-    PostSeed.call(this);
-  }
-}
-
-export const app = App.instance();
+environmentProvider(app);
+configProvider(app);
+dbProvider(app);
+postProvider(app);

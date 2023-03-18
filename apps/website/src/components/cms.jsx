@@ -10,12 +10,7 @@ import { toHast } from 'mdast-util-to-hast';
 import { mdxJsxFromMarkdown } from 'mdast-util-mdx-jsx';
 import { toJsxRuntime } from 'hast-util-to-jsx-runtime';
 
-import {
-  CONFIG,
-  IEnvironment,
-} from '@astro-nx-depla/shared/util/config-provider';
-
-const isProd = CONFIG.get('app.env') === IEnvironment.Prod;
+import { app } from '@astro-nx-depla/website/app';
 
 const components = {
   h1: (props) => <h1 style={{ color: 'tomato' }} {...props} />,
@@ -79,7 +74,7 @@ CMS.registerWidget('mdx', MdxControl, MdxPreview);
 
 CMS.init({
   config: {
-    backend: isProd
+    backend: app.isProd
       ? {
           name: 'git-gateway',
           branch: 'main',
@@ -89,14 +84,14 @@ CMS.init({
           proxy_url: 'http://localhost:8081/api/v1git-gateway',
           branch: 'main',
         },
-    local_backend: isProd ? false : true,
+    local_backend: app.isProd ? false : true,
     load_config_file: false,
     media_folder: 'apps/website/src/assets/images',
     public_folder: '~/assets/images',
     publish_mode: 'editorial_workflow',
     collections: [
       {
-        label: isProd ? 'Posts' : 'Shmosts',
+        label: app.isProd ? 'Posts' : 'Shmosts',
         name: 'post',
         folder: 'apps/website/src/content/post',
         create: true,

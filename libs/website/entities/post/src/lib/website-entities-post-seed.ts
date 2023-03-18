@@ -1,12 +1,10 @@
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
+import { app } from '@astro-nx-depla/website/app';
 import { getCollection, CollectionEntry } from 'astro:content';
 import { IPost } from './website-entities-post-interface';
 import {
   cleanSlug,
   generatePermalink,
 } from '@astro-nx-depla/shared/util/formatting';
-
-const PostConfig = CONFIG.get('entities.post');
 
 async function getNormalizedPost(
   post: CollectionEntry<'post'>,
@@ -23,7 +21,7 @@ async function getNormalizedPost(
     ...rest
   } = data;
 
-  const pattern = PostConfig?.item?.permalink;
+  const pattern = app.post.config?.item?.permalink;
   const slug = cleanSlug(rawSlug.split('/').pop());
   const publishDate = new Date(rawPublishDate);
   const category = rawCategory ? cleanSlug(rawCategory) : undefined;

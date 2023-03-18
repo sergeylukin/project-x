@@ -1,8 +1,8 @@
 ---
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
+import { app } from '@astro-nx-depla/website/app';
 ---
 
-<script is:inline define:vars={{ env: CONFIG.get('app.env'), defaultTheme: CONFIG.get('app').defaultTheme }}>
+<script is:inline define:vars={{ env: app.env, defaultTheme: app.config.defaultTheme }}>
   function applyTheme(theme) {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');

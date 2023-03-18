@@ -1,13 +1,11 @@
 ---
 import Layout from './BaseLayout.astro';
 import { Footer, Header, Announcement } from '@astro-nx-depla/shared/ui';
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider'
+import { app } from '@astro-nx-depla/website/app'
 
 import { headerData, footerData } from '@astro-nx-depla/website/menu-data';
 
 import { MetaSEO } from '~/types';
-
-const SITE = CONFIG.get('app')
 
 export interface Props {
   meta?: MetaSEO;
@@ -16,7 +14,7 @@ export interface Props {
 
 const {
   meta = {},
-  showToggleTheme = !(SITE?.defaultTheme && SITE.defaultTheme.endsWith(':only')),
+  showToggleTheme = !(app.config?.defaultTheme && app.config.defaultTheme.endsWith(':only')),
 } = Astro.props;
 ---
 

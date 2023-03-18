@@ -1,7 +1,6 @@
 ---
-import { CONFIG } from '@astro-nx-depla/shared/util/config-provider';
+import { app } from '@astro-nx-depla/website/app';
 import { BaseLayout as Layout } from '@astro-nx-depla/shared/layout';
-const isProd = CONFIG.get('app.env') === 'prod'
 ---
 
 <Layout>
@@ -13,20 +12,20 @@ const isProd = CONFIG.get('app.env') === 'prod'
       window.CMS_MANUAL_INIT = true;
     </script>
     <script is:inline src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-<script is:inline define:vars={{ isProd }}>
+<script is:inline define:vars={{ app.isProd }}>
       const { CMS, initCMS: init } = window;
       console.log(CMS, init);
       /* CMS.registerWidget('mdx', MdxControl, MdxPreview); */
 
       /* CMS.init(); */
-      if (isProd) {
+      if (app.isProd) {
         console.log('Hey I am currently in production')
       }else {
         console.log('Hey I am currently NOT in production')
       }
       init({
         config: {
-          backend: (isProd ? {
+          backend: (app.isProd ? {
             name: 'git-gateway',
             branch: 'main',
           } : {
@@ -34,14 +33,14 @@ const isProd = CONFIG.get('app.env') === 'prod'
             proxy_url: 'http://localhost:8081/api/v1git-gateway',
             branch: 'main',
           }),
-          local_backend: isProd ? false : true,
+          local_backend: app.isProd ? false : true,
           load_config_file: false,
           media_folder: 'apps/website/src/assets/images',
           public_folder: '~/assets/images',
           publish_mode: 'editorial_workflow',
           collections: [
             {
-              label: isProd ? 'Posts' : 'Shmosts',
+              label: app.isProd ? 'Posts' : 'Shmosts',
               name: 'post',
               folder: 'apps/website/src/content/post',
               create: true,
