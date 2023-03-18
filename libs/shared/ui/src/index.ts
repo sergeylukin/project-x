@@ -30,3 +30,6 @@ export { default as Tags } from './lib/Tags.astro';
 export { default as ToBlogLink } from './lib/ToBlogLink.astro';
 export { default as ToggleMenu } from './lib/ToggleMenu.astro';
 export { default as ToggleTheme } from './lib/ToggleTheme.astro';
+export { default as BaseLayout } from './lib/layouts/BaseLayout.astro';
+export { default as MarkdownLayout } from './lib/layouts/MarkdownLayout.astro';
+export { default as PageLayout } from './lib/layouts/PageLayout.astro';

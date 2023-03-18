@@ -20,7 +20,6 @@
       "@astro-nx-depla/shared/container": [
         "libs/shared/container/src/index.ts"
       ],
-      "@astro-nx-depla/shared/layout": ["libs/shared/layout/src/index.js"],
       "@astro-nx-depla/shared/types/environment": [
         "libs/shared/types/environment/src/index.ts"
       ],
