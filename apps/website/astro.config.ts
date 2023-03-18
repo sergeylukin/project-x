@@ -74,6 +74,10 @@ export default defineConfig({
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
+        '@cms': path.resolve(
+          __dirname,
+          '../../libs/shared/ui/src/lib/react/cms.jsx'
+        ),
       },
     },
     server: {

@@ -33,3 +33,4 @@ export { default as ToggleTheme } from './lib/ToggleTheme.astro';
 export { default as BaseLayout } from './lib/layouts/BaseLayout.astro';
 export { default as MarkdownLayout } from './lib/layouts/MarkdownLayout.astro';
 export { default as PageLayout } from './lib/layouts/PageLayout.astro';
+export { Cms } from './lib/react/cms.jsx';

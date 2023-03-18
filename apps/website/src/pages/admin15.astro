@@ -1,6 +1,7 @@
 ---
-import { BaseLayout as Layout } from '@astro-nx-depla/shared/ui';
+import { BaseLayout as Layout} from '@astro-nx-depla/shared/ui';
+import { Cms } from '@cms';
 ---
-<Layout />
-
-<script>import "~/components/cms.jsx"</script>
+<Layout>
+  <Cms client:only="react" />
+</Layout>
