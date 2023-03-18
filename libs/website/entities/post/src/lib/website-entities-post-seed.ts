@@ -55,7 +55,7 @@ export async function PostSeed() {
   const postsExist = await this.post.count();
   if (!postsExist) {
     const posts = await getCollection('post');
-    posts.forEach(async (post) => {
+    for (const post of posts) {
       const user = await this.user.findFirst();
       const data = await getNormalizedPost(post, user);
       if (data.tags.length === 0) {
@@ -84,6 +84,6 @@ export async function PostSeed() {
         connect: tags,
       };
       const result = await this.post.create({ data });
-    });
+    }
   }
 }
