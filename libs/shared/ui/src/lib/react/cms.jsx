@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import CMS from 'netlify-cms-app';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import * as acorn from 'acorn';
 import { fromMarkdown } from 'mdast-util-from-markdown';
@@ -71,52 +70,56 @@ export const Cms = () => {
       return toJsxRuntime(safeHast, { Fragment, jsx, jsxs });
     };
 
-    CMS.registerWidget('mdx', MdxControl, MdxPreview);
+    const loadCMS = async () => {
+      const CMS = await import('netlify-cms-app');
+      CMS.registerWidget('mdx', MdxControl, MdxPreview);
 
-    CMS.init({
-      config: {
-        backend: isProd
-          ? {
-              name: 'git-gateway',
-              branch: 'main',
-            }
-          : {
-              name: 'proxy',
-              proxy_url: 'http://localhost:8081/api/v1git-gateway',
-              branch: 'main',
-            },
-        local_backend: isProd ? false : true,
-        load_config_file: false,
-        media_folder: 'apps/website/src/assets/images',
-        public_folder: '~/assets/images',
-        publish_mode: 'editorial_workflow',
-        collections: [
-          {
-            label: isProd ? 'Posts' : 'Shmosts',
-            name: 'post',
-            folder: 'apps/website/src/content/post',
-            create: true,
-            delete: true,
-            extension: 'mdx',
-            format: 'frontmatter',
-            fields: [
-              { name: 'title', widget: 'string', label: 'Post Title' },
-              { name: 'image', widget: 'image', label: 'Cover' },
-              { name: 'body', widget: 'markdown', label: 'Post Body' },
-              { label: 'Description', name: 'description', widget: 'text' },
-              { label: 'Tags', name: 'tags', widget: 'list' },
-              { label: 'Author', name: 'author', widget: 'string' },
-              {
-                label: 'Author Twitter Handle',
-                name: 'authorTwitter',
-                widget: 'string',
+      CMS.init({
+        config: {
+          backend: isProd
+            ? {
+                name: 'git-gateway',
+                branch: 'main',
+              }
+            : {
+                name: 'proxy',
+                proxy_url: 'http://localhost:8081/api/v1git-gateway',
+                branch: 'main',
               },
-              { label: 'Publish Date', name: 'date', widget: 'datetime' },
-            ],
-          },
-        ],
-      },
-    });
+          local_backend: isProd ? false : true,
+          load_config_file: false,
+          media_folder: 'apps/website/src/assets/images',
+          public_folder: '~/assets/images',
+          publish_mode: 'editorial_workflow',
+          collections: [
+            {
+              label: isProd ? 'Posts' : 'Shmosts',
+              name: 'post',
+              folder: 'apps/website/src/content/post',
+              create: true,
+              delete: true,
+              extension: 'mdx',
+              format: 'frontmatter',
+              fields: [
+                { name: 'title', widget: 'string', label: 'Post Title' },
+                { name: 'image', widget: 'image', label: 'Cover' },
+                { name: 'body', widget: 'markdown', label: 'Post Body' },
+                { label: 'Description', name: 'description', widget: 'text' },
+                { label: 'Tags', name: 'tags', widget: 'list' },
+                { label: 'Author', name: 'author', widget: 'string' },
+                {
+                  label: 'Author Twitter Handle',
+                  name: 'authorTwitter',
+                  widget: 'string',
+                },
+                { label: 'Publish Date', name: 'date', widget: 'datetime' },
+              ],
+            },
+          ],
+        },
+      });
+    };
+    loadCMS();
   }, []);
 
   return <></>;
