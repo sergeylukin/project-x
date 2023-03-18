@@ -22,7 +22,7 @@
       ],
       "@astro-nx-depla/shared/layout": ["libs/shared/layout/src/index.js"],
       "@astro-nx-depla/shared/types/environment": [
-        "libs/shared/types/environment/environment/src/index.ts"
+        "libs/shared/types/environment/src/index.ts"
       ],
       "@astro-nx-depla/shared/ui": ["libs/shared/ui/src/index.js"],
       "@astro-nx-depla/shared/util/formatting": [

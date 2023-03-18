@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-types-environment-environment',
-  preset: '../../../../../jest.preset.js',
+  displayName: 'shared-types-environment',
+  preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,6 +11,5 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory:
-    '../../../../../coverage/libs/shared/types/environment/environment',
+  coverageDirectory: '../../../../coverage/libs/shared/types/environment',
 };
