@@ -35,6 +35,12 @@ await esbuild.build({
       '@astro-nx-depla/shared/util/formatting': path.resolve(
         'libs/shared/util/formatting/src/index.ts'
       ),
+      '@astro-nx-depla/shared/util/environment': path.resolve(
+        'libs/shared/util/environment/src/index.ts'
+      ),
+      '@astro-nx-depla/shared/util/url': path.resolve(
+        'libs/shared/util/url/src/index.ts'
+      ),
       '@astro-nx-depla/shared/util/predict-reading-time': path.resolve(
         'libs/shared/util/astro-remark-plugin-predict-reading-time/src/index.ts'
       ),
