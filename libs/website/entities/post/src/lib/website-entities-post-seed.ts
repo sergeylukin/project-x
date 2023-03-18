@@ -1,10 +1,7 @@
 import { app } from '@astro-nx-depla/website/app';
 import { getCollection, CollectionEntry } from 'astro:content';
 import { IPost } from './website-entities-post-interface';
-import {
-  cleanSlug,
-  generatePermalink,
-} from '@astro-nx-depla/shared/util/formatting';
+import { cleanSlug, generatePermalink } from '@astro-nx-depla/shared/util/url';
 
 async function getNormalizedPost(
   post: CollectionEntry<'post'>,

@@ -1,7 +1,3 @@
-import path from 'path';
-import { getImage } from '@astrojs/image';
-import { fileURLToPath } from 'url';
-
 const load = async function () {
   let images: Record<string, () => Promise<unknown>> | undefined = undefined;
   try {
@@ -15,21 +11,13 @@ const load = async function () {
 let _images;
 
 /** */
-export const fetchLocalImages = async () => {
+const fetchLocalImages = async () => {
   _images = _images || load();
   return await _images;
 };
 
 /** */
 export const findImage = async (imagePath?: string) => {
-  // const path = imagePath.replace('~/', '/src/');
-  // // const fl = import(imagePath);
-  // const src = await getImage({
-  //   src: imagePath,
-  // });
-  // console.log('####', fl);
-  // console.log(path, src);
-  // return src.src;
   if (typeof imagePath !== 'string') {
     return null;
   }

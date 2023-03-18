@@ -5,7 +5,7 @@ import {
   cleanSlug,
   createPath,
   generatePermalink,
-} from '@astro-nx-depla/shared/util/formatting';
+} from '@astro-nx-depla/shared/util/url';
 import { Post as PostModel } from '@prisma/client';
 import { config } from './config';
 
