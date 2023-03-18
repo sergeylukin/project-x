@@ -11,6 +11,10 @@
       "options": {},
       "dependsOn": [
         {
+          "target": "setup-prisma",
+          "projects": "self"
+        },
+        {
           "target": "build-astro-config",
           "projects": "self"
         }
@@ -21,6 +25,14 @@
       "options": {
         "commands": [
           "node build.mjs"
+        ]
+      }
+    },
+    "setup-prisma": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx prisma generate && npx prisma migrate dev"
         ]
       }
     },
