@@ -43,9 +43,6 @@
       "@astro-nx-depla/shared/util/url": ["libs/shared/util/url/src/index.ts"],
       "@astro-nx-depla/website/app": ["libs/website/app/src/index.ts"],
       "@astro-nx-depla/website/config": ["libs/website/config/src/index.ts"],
-      "@astro-nx-depla/website/entities/app": [
-        "libs/website/entities/app/src/index.ts"
-      ],
       "@astro-nx-depla/website/entities/post": [
         "libs/website/entities/post/src/index.ts"
       ],
