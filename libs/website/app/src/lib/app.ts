@@ -10,3 +10,10 @@ environmentProvider(app);
 configProvider(app);
 dbProvider(app);
 postProvider(app);
+
+app.service('route', (c) => {
+  return (route) => {
+    console.log('hey you requested ' + route);
+    return route;
+  };
+});
