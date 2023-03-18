@@ -28,6 +28,9 @@
         "libs/shared/types/html/src/index.ts"
       ],
       "@astro-nx-depla/shared/ui": ["libs/shared/ui/src/index.js"],
+      "@astro-nx-depla/shared/util/environment": [
+        "libs/shared/utils/environment/src/index.ts"
+      ],
       "@astro-nx-depla/shared/util/formatting": [
         "libs/shared/util/formatting/src/index.ts"
       ],

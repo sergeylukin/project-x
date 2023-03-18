@@ -17,17 +17,20 @@ await esbuild.build({
     alias({
       '@astro-nx-depla/nx': path.resolve('libs/nx/src/index.ts'),
       '@astro-nx-depla/shared/container': path.resolve(
-        'libs/shared/container/container/src/index.ts'
+        'libs/shared/container/src/index.ts'
       ),
       '@astro-nx-depla/shared/layout': path.resolve(
         'libs/shared/layout/src/index.js'
       ),
       '@astro-nx-depla/shared/types/environment': path.resolve(
-        'libs/shared/types/environment/environment/src/index.ts'
+        'libs/shared/types/environment/src/index.ts'
+      ),
+      '@astro-nx-depla/shared/types/html': path.resolve(
+        'libs/shared/types/html/src/index.ts'
       ),
       '@astro-nx-depla/shared/ui': path.resolve('libs/shared/ui/src/index.js'),
-      '@astro-nx-depla/shared/util/config-provider': path.resolve(
-        'libs/shared/util/config-provider/src/index.ts'
+      '@astro-nx-depla/shared/util/environment': path.resolve(
+        'libs/shared/utils/environment/src/index.ts'
       ),
       '@astro-nx-depla/shared/util/formatting': path.resolve(
         'libs/shared/util/formatting/src/index.ts'
@@ -55,9 +58,6 @@ await esbuild.build({
       ),
       '@astro-nx-depla/website/menu-data': path.resolve(
         'libs/website/menu-data/src/index.ts'
-      ),
-      '@astro-nx-depla/website/types': path.resolve(
-        'libs/website/types/src/index.ts'
       ),
     }),
   ],

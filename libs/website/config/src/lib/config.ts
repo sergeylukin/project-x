@@ -1,10 +1,10 @@
+import { isProd } from '@astro-nx-depla/shared/util/environment';
 import defaultImage from '../assets/images/default.png';
 
 export const config = {
   name: 'AstroWind',
 
-  origin: 'http://localhost:3000',
-  productionOrigin: 'https://e301.dep.la',
+  origin: isProd ? 'https://e301.dep.la' : 'http://localhost:3000',
 
   basePathname: '/',
   trailingSlash: false,
