@@ -31,14 +31,14 @@
       "@astro-nx-depla/shared/util/environment": [
         "libs/shared/util/environment/src/index.ts"
       ],
-      "@astro-nx-depla/shared/util/formatting": [
-        "libs/shared/util/formatting/src/index.ts"
-      ],
       "@astro-nx-depla/shared/util/image": [
         "libs/shared/util/image/src/index.ts"
       ],
       "@astro-nx-depla/shared/util/predict-reading-time": [
         "libs/shared/util/astro-remark-plugin-predict-reading-time/src/index.ts"
+      ],
+      "@astro-nx-depla/shared/util/time": [
+        "libs/shared/util/time/src/index.ts"
       ],
       "@astro-nx-depla/shared/util/url": ["libs/shared/util/url/src/index.ts"],
       "@astro-nx-depla/website/app": ["libs/website/app/src/index.ts"],
