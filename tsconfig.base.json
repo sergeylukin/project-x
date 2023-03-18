@@ -24,6 +24,9 @@
       "@astro-nx-depla/shared/types/environment": [
         "libs/shared/types/environment/src/index.ts"
       ],
+      "@astro-nx-depla/shared/types/html": [
+        "libs/shared/types/html/src/index.ts"
+      ],
       "@astro-nx-depla/shared/ui": ["libs/shared/ui/src/index.js"],
       "@astro-nx-depla/shared/util/formatting": [
         "libs/shared/util/formatting/src/index.ts"
@@ -47,8 +50,7 @@
       ],
       "@astro-nx-depla/website/menu-data": [
         "libs/website/menu-data/src/index.ts"
-      ],
-      "@astro-nx-depla/website/types": ["libs/website/types/src/index.ts"]
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

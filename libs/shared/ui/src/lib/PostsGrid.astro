@@ -1,9 +1,9 @@
 ---
 import { PostsGridItem as Item } from '@astro-nx-depla/shared/ui';
-import type { Post } from '@astro-nx-depla/website/types';
+import type { IPost } from '@astro-nx-depla/website/entities/post';
 
 export interface Props {
-  posts: Array<Post>;
+  posts: Array<IPost>;
 }
 
 const { posts } = Astro.props;
