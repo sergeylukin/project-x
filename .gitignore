@@ -40,6 +40,5 @@ Thumbs.db
 
 .astro
 
-.env
 # SQLite
 dev.db
