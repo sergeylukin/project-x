@@ -78,6 +78,10 @@ export default defineConfig({
           __dirname,
           '../../libs/shared/ui/src/lib/react/cms.jsx'
         ),
+        '@layout': path.resolve(
+          __dirname,
+          '../../libs/shared/ui/src/lib/layouts/'
+        ),
       },
     },
     server: {

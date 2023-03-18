@@ -1,6 +1,6 @@
 ---
 title: 'Privacy Policy'
-layout: '../../../../libs/shared/ui/src/lib/MarkdownLayout.astro'
+layout: '@layout/MarkdownLayout.astro'
 ---
 
 _Last updated_: January 06, 2023
