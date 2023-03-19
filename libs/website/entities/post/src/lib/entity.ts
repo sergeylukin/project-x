@@ -8,12 +8,14 @@ import {
 } from '@astro-nx-depla/shared/util/url';
 import { Post as PostModel } from '@prisma/client';
 import { config } from './config';
+import { PostSeed } from './seed';
 
 export function Post(app) {
   const { post }: { post: PostModel } = app.db;
 
   return Object.assign(post, {
     config,
+    seed: () => PostSeed.call(app.db),
     /**
      * Signup the first user and create a new team of one. Return the User with
      * a full name and without a password

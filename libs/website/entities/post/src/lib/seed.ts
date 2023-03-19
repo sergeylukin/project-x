@@ -1,11 +1,11 @@
-import { app } from '@astro-nx-depla/website/app';
 import { getCollection, CollectionEntry } from 'astro:content';
-import { IPost } from './website-entities-post-interface';
+import { IPost } from './interface';
 import { cleanSlug, generatePermalink } from '@astro-nx-depla/shared/util/url';
 
 async function getNormalizedPost(
   post: CollectionEntry<'post'>,
-  user
+  user,
+  config
 ): Promise<IPost> {
   const { id, body, slug: rawSlug = '', data } = post;
   const { remarkPluginFrontmatter } = await post.render();
@@ -18,7 +18,7 @@ async function getNormalizedPost(
     ...rest
   } = data;
 
-  const pattern = app.post.config?.item?.permalink;
+  const pattern = config?.item?.permalink;
   const slug = cleanSlug(rawSlug.split('/').pop());
   const publishDate = new Date(rawPublishDate);
   const category = rawCategory ? cleanSlug(rawCategory) : undefined;
@@ -57,7 +57,7 @@ export async function PostSeed() {
     const posts = await getCollection('post');
     for (const post of posts) {
       const user = await this.user.findFirst();
-      const data = await getNormalizedPost(post, user);
+      const data = await getNormalizedPost(post, user, this.post.config);
       if (data.tags.length === 0) {
         data.tags.push('default');
       }
