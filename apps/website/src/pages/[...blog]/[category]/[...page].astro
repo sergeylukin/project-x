@@ -1,11 +1,11 @@
 ---
-import { PageLayout } from '@astro-nx-depla/shared/ui';
+import { app } from '@astro-nx-depla/website/app';
 import {
-  PostsList as BlogList,
+  PageLayout,
+  PostsList,
   Headline,
   Pagination,
 } from '@astro-nx-depla/shared/ui';
-import { app } from '@astro-nx-depla/website/app';
 
 export const getStaticPaths = app.post.getPostCategoryListStaticPaths;
 
@@ -18,7 +18,7 @@ const meta = app.post.getPostCategoryMetaByPage(page, category);
     <Headline>
       <span class="capitalize">{category.replaceAll('-', ' ')}</span>
     </Headline>
-    <BlogList posts={page.data} />
+    <PostsList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>
 </PageLayout>

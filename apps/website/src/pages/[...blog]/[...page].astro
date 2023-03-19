@@ -1,11 +1,11 @@
 ---
-import { PageLayout as Layout } from '@astro-nx-depla/shared/ui';
+import { app } from '@astro-nx-depla/website/app';
 import {
-  PostsList as BlogList,
+  PageLayout,
+  PostsList,
   Headline,
   Pagination,
 } from '@astro-nx-depla/shared/ui';
-import { app } from '@astro-nx-depla/website/app';
 
 export const getStaticPaths = app.post.getPostListStaticPaths;
 
@@ -13,14 +13,14 @@ const { page } = Astro.props;
 const meta = app.post.getMetaByPage(page);
 ---
 
-<Layout {meta}>
+<PageLayout {meta}>
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <Headline
       subtitle="A statically generated blog example with news, tutorials, resources and other interesting content related to AstroWind"
     >
       The Blog
     </Headline>
-    <BlogList posts={page.data} />
+    <PostsList posts={page.data} />
     <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
   </section>
-</Layout>
+</PageLayout>

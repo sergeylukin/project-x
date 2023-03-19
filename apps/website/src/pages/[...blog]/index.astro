@@ -1,7 +1,10 @@
 ---
-import { PageLayout } from '@astro-nx-depla/shared/ui';
-import { SinglePost, ToBlogLink } from '@astro-nx-depla/shared/ui';
 import { app } from '@astro-nx-depla/website/app';
+import {
+  PageLayout,
+  SinglePost,
+  ToBlogLink
+} from '@astro-nx-depla/shared/ui';
 
 export const getStaticPaths = app.post.getPostViewStaticPaths;
 
