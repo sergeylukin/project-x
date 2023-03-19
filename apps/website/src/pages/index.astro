@@ -12,7 +12,7 @@ import {
   LatestPosts,
   FAQs,
   Stats,
-  CallToAction
+  CallToAction,
 } from '@astro-nx-depla/shared/ui';
 
 const meta = {
@@ -26,22 +26,34 @@ const meta = {
   <!-- Hero Widget ******************* -->
 
   <Hero
-    callToAction={{ text: 'Get template', href: 'https://github.com/onwidget/astrowind', icon: 'tabler:download' }}
+    callToAction={{
+      text: 'Get template',
+      href: 'https://github.com/onwidget/astrowind',
+      icon: 'tabler:download',
+    }}
     callToAction2={{ text: 'Learn more', href: '#features' }}
-    image={{ src: import('~/assets/images/hero.png'), alt: 'AstroWind Hero Image' }}
+    image={{
+      src: import('~/assets/images/hero.png'),
+      alt: 'AstroWind Hero Image',
+    }}
   >
     <Fragment slot="title">
-      Free template for <span class="hidden lg:inline">create your website <br class="2xl:hidden"/> with</span>
-      <span class="text-accent dark:text-white highlight"> Astro 2.0</span> + Tailwind CSS
+      Free template for <span class="hidden lg:inline"
+        >create your website <br class="2xl:hidden" /> with</span
+      >
+      <span class="text-accent dark:text-white highlight"> Astro 2.0</span> + Tailwind
+      CSS
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 2.0 +
-        Tailwind CSS.</span
+        <span class="font-semibold">AstroWind</span> is a free, customizable and
+        production-ready template for Astro 2.0 + Tailwind CSS.</span
       >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span> Suitable for Startups,
-      Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs.
+      <span class="block mb-1 sm:hidden font-bold text-blue-600"
+        >AstroWind: Production-ready.</span
+      > Suitable for Startups, Small Business, Sass Websites, Professional Portfolios,
+      Marketing Websites, Landing Pages & Blogs.
     </Fragment>
   </Hero>
 
@@ -127,9 +139,13 @@ const meta = {
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Ad vix debet docendi</h3>
-      Ne dicta praesent ocurreret has, diam theophrastus at pro. Eos etiam regione ut, persius eripuit quo id. Sit te euismod
-      tacimates.
+      <h3
+        class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2"
+      >
+        Ad vix debet docendi
+      </h3>
+      Ne dicta praesent ocurreret has, diam theophrastus at pro. Eos etiam regione
+      ut, persius eripuit quo id. Sit te euismod tacimates.
     </Fragment>
   </Content>
 
@@ -314,7 +330,8 @@ const meta = {
             "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
         },
         {
-          question: 'If you could only ask one question to each person you meet, what would that question be?',
+          question:
+            'If you could only ask one question to each person you meet, what would that question be?',
           answer:
             "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
         },
@@ -343,21 +360,24 @@ const meta = {
     }}
   >
     <Fragment slot="title">
-      Astro + <br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
+      Astro + <br class="block sm:hidden" /><span class="sm:whitespace-nowrap"
+        >Tailwind CSS</span
+      >
     </Fragment>
 
     <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
+      Be very surprised by these huge fake numbers you are seeing on this page. <br
+        class="hidden md:inline"
+      />Don't waste more time! :P
     </Fragment>
   </CallToAction>
 
   <script>
     if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
+      window.netlifyIdentity.on('init', (user) => {
         if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
           });
         }
       });

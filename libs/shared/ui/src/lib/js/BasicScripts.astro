@@ -2,7 +2,10 @@
 import { app } from '@astro-nx-depla/website/app';
 ---
 
-<script is:inline define:vars={{ env: app.env, defaultTheme: app.config.defaultTheme }}>
+<script
+  is:inline
+  define:vars={{ env: app.env, defaultTheme: app.config.defaultTheme }}
+>
   function applyTheme(theme) {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -11,11 +14,15 @@ import { app } from '@astro-nx-depla/website/app';
     }
   }
 
-  if ((defaultTheme && defaultTheme.endsWith(':only')) || (!localStorage.theme && defaultTheme !== 'system')) {
+  if (
+    (defaultTheme && defaultTheme.endsWith(':only')) ||
+    (!localStorage.theme && defaultTheme !== 'system')
+  ) {
     applyTheme(defaultTheme.replace(':only', ''));
   } else if (
     localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    (!('theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
   ) {
     applyTheme('dark');
   } else {
@@ -23,7 +30,10 @@ import { app } from '@astro-nx-depla/website/app';
   }
 
   function attachEvent(selector, event, fn) {
-    const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
+    const matches =
+      typeof selector === 'string'
+        ? document.querySelectorAll(selector)
+        : selector;
     if (matches && matches.length) {
       matches.forEach((elem) => {
         elem.addEventListener(event, (e) => fn(e, elem), false);
@@ -47,7 +57,9 @@ import { app } from '@astro-nx-depla/website/app';
         return;
       }
       document.documentElement.classList.toggle('dark');
-      localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+      localStorage.theme = document.documentElement.classList.contains('dark')
+        ? 'dark'
+        : 'light';
     });
 
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
@@ -85,9 +97,15 @@ import { app } from '@astro-nx-depla/website/app';
 
     function appyHeaderStylesOnScroll() {
       const header = document.getElementById('header');
-      if (lastKnownScrollPosition > 60 && !header.classList.contains('scroll')) {
+      if (
+        lastKnownScrollPosition > 60 &&
+        !header.classList.contains('scroll')
+      ) {
         document.getElementById('header').classList.add('scroll');
-      } else if (lastKnownScrollPosition <= 60 && header.classList.contains('scroll')) {
+      } else if (
+        lastKnownScrollPosition <= 60 &&
+        header.classList.contains('scroll')
+      ) {
         document.getElementById('header').classList.remove('scroll');
       }
       ticking = false;
@@ -118,6 +136,6 @@ import { app } from '@astro-nx-depla/website/app';
   };
 
   window.DEPLOY_DAY = {
-    env
-  }
+    env,
+  };
 </script>

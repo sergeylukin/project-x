@@ -11,19 +11,21 @@ authorTwitter: sergey_lukin
 date: 2023-03-02T02:30:49.721Z
 ---
 
-
 By default, `<script>` tags are processed by Astro.
 
-* Any imports will be bundled, allowing you to import local files or Node modules.
-* The processed script will be injected into your page’s `<head>` with [`type="module"`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
-* TypeScript is fully supported, including importing TypeScript files.
-* If your component is used several times on a page, the script will only be included once.
-*   ```
+- Any imports will be bundled, allowing you to import local files or Node modules.
+- The processed script will be injected into your page’s `<head>` with [`type="module"`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
+- TypeScript is fully supported, including importing TypeScript files.
+- If your component is used several times on a page, the script will only be included once.
+- ```
   <script>
     // Processed! Bundled! TypeScript-supported!
     // Importing local scripts and Node modules works.
   </script>
   ```
 
-  To avoid bundling the script, you can use the `is:inline` directive.
+```
+
+To avoid bundling the script, you can use the `is:inline` directive.
 * 📚 See our [directives reference](https://docs.astro.build/en/reference/directives-reference/#script--style-directives) page for more information about the directives available on `<script>` tags.
+```

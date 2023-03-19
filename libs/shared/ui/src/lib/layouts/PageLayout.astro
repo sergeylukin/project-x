@@ -1,7 +1,7 @@
 ---
 import Layout from './BaseLayout.astro';
 import { Footer, Header, Announcement } from '@astro-nx-depla/shared/ui';
-import { app } from '@astro-nx-depla/website/app'
+import { app } from '@astro-nx-depla/website/app';
 
 import { headerData, footerData } from '~/data/navigation';
 
@@ -14,7 +14,9 @@ export interface Props {
 
 const {
   meta = {},
-  showToggleTheme = !(app.config?.defaultTheme && app.config.defaultTheme.endsWith(':only')),
+  showToggleTheme = !(
+    app.config?.defaultTheme && app.config.defaultTheme.endsWith(':only')
+  ),
 } = Astro.props;
 ---
 
@@ -23,8 +25,7 @@ const {
     <Announcement />
   </slot>
   <slot name="header">
-    <Header {...headerData} isSticky showRssFeed
-      showToggleTheme={showToggleTheme} />
+    <Header {...headerData} isSticky showRssFeed {showToggleTheme} />
   </slot>
   <main>
     <slot />

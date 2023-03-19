@@ -40,19 +40,19 @@ const {
   dontUseTitleTemplate = false,
 } = Astro.props;
 
-const image = typeof _image === 'string' ? new URL(_image, Astro.site) : null
+const image = typeof _image === 'string' ? new URL(_image, Astro.site) : null;
 ---
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <AstroSeo
-  title={title}
+  {title}
   titleTemplate={dontUseTitleTemplate ? '%s' : `%s — ${app.config.name}`}
-  description={description}
+  {description}
   canonical={String(canonical)}
-  noindex={noindex}
-  nofollow={nofollow}
+  {noindex}
+  {nofollow}
   openGraph={{
     url: String(canonical),
     title: ogTitle,
@@ -90,7 +90,10 @@ const image = typeof _image === 'string' ? new URL(_image, Astro.site) : null
 <!-- Google Analytics -->
 {
   app.config.googleAnalyticsId && (
-    <GoogleAnalytics id={String(app.config.googleAnalyticsId)} partytown={true} />
+    <GoogleAnalytics
+      id={String(app.config.googleAnalyticsId)}
+      partytown={true}
+    />
   )
 }
 
