@@ -1,14 +1,8 @@
-import { Container } from '@astro-nx-depla/shared/container';
-import { provider as environmentProvider } from './providers/environment';
-import { provider as configProvider } from './providers/config';
-import { provider as routeProvider } from './providers/route';
-import { provider as dbProvider } from './providers/db';
-import { provider as postProvider } from './providers/post';
+import { IOC } from '@astro-nx-depla/shared/IOC';
+import { provider as postProvider } from '@astro-nx-depla/website/entities/post';
+import { provider as userProvider } from '@astro-nx-depla/website/entities/user';
 
-export const app = new Container();
+export const app = IOC;
 
-environmentProvider(app);
-configProvider(app);
-routeProvider(app);
-dbProvider(app);
 postProvider(app);
+userProvider(app);

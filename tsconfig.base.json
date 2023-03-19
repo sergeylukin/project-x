@@ -17,9 +17,7 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@astro-nx-depla/nx": ["libs/nx/src/index.ts"],
-      "@astro-nx-depla/shared/container": [
-        "libs/shared/container/src/index.ts"
-      ],
+      "@astro-nx-depla/shared/IOC": ["libs/shared/IOC/src/index.ts"],
       "@astro-nx-depla/shared/types/environment": [
         "libs/shared/types/environment/src/index.ts"
       ],

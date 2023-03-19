@@ -1,2 +1,3 @@
-export * from './lib/website-entities-user';
-export * from './lib/website-entities-user-seed';
+export * from './lib/entity';
+export * from './lib/seed';
+export * from './lib/provider';
