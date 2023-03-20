@@ -4,13 +4,13 @@ import { GoogleAnalytics } from '@astrolib/analytics';
 import { getImage } from '@astrojs/image';
 
 import { app } from '@astro-nx-depla/website/app';
-import { MetaSEO } from '@astro-nx-depla/shared/types/html';
+import { IMetaSEO } from '@astro-nx-depla/shared/types/html';
 import { getCanonical } from '@astro-nx-depla/shared/util/url';
 
 import Tailwind from './styles/Tailwind.astro';
 import { SplitbeeAnalytics } from '@astro-nx-depla/shared/ui';
 
-export interface Props extends MetaSEO {
+export interface Props extends IMetaSEO {
   dontUseTitleTemplate?: boolean;
 }
 

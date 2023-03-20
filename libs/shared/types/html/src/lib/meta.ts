@@ -1,4 +1,4 @@
-export interface MetaSEO {
+export interface IMetaSEO {
   title?: string;
   description?: string;
   image?: string;

@@ -1,13 +1,13 @@
 ---
 import Layout from './PageLayout.astro';
 
-import { MetaSEO } from '@astro-nx-depla/shared/types/html';
+import { IMetaSEO } from '@astro-nx-depla/shared/types/html';
 
 export interface Props {}
 
 const { frontmatter } = Astro.props;
 
-const meta: MetaSEO = {
+const meta: IMetaSEO = {
   title: frontmatter?.title,
 };
 ---

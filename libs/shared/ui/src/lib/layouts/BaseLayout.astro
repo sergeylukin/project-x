@@ -4,10 +4,10 @@ import { MetaTags } from '@astro-nx-depla/shared/ui';
 import BasicScripts from '../js/BasicScripts.astro';
 
 import { app } from '@astro-nx-depla/website/app';
-import { MetaSEO } from '@astro-nx-depla/shared/types/html';
+import { IMetaSEO } from '@astro-nx-depla/shared/types/html';
 
 export interface Props {
-  meta?: MetaSEO;
+  meta?: IMetaSEO;
 }
 
 const { meta = {} } = Astro.props;
