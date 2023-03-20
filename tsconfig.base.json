@@ -17,6 +17,7 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@astro-nx-depla/nx": ["libs/nx/src/index.ts"],
+      "@astro-nx-depla/shared/app": ["libs/shared/app/src/index.ts"],
       "@astro-nx-depla/shared/entities/post": [
         "libs/shared/entities/post/src/index.ts"
       ],
@@ -44,7 +45,6 @@
         "libs/shared/util/time/src/index.ts"
       ],
       "@astro-nx-depla/shared/util/url": ["libs/shared/util/url/src/index.ts"],
-      "@astro-nx-depla/website/app": ["libs/website/app/src/index.ts"],
       "@astro-nx-depla/website/config": ["libs/website/config/src/index.ts"],
       "@astro-nx-depla/website/data": ["libs/website/data/src/index.ts"]
     }
