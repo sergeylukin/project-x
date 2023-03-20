@@ -1,21 +1,21 @@
 {
-  "name": "shared-IOC",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/IOC/src",
+  "name": "shared-util-IOC",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/util/IOC/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/IOC/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/util/IOC/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/shared/IOC/jest.config.ts",
+        "jestConfig": "libs/shared/util/IOC/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
