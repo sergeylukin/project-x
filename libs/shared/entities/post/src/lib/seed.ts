@@ -1,12 +1,7 @@
-import { getCollection, CollectionEntry } from 'astro:content';
 import { IPost } from './interface';
 import { cleanSlug, generatePermalink } from '@astro-nx-depla/shared/util/url';
 
-async function getNormalizedPost(
-  post: CollectionEntry<'post'>,
-  user,
-  config
-): Promise<IPost> {
+async function getNormalizedPost(post: IPost, user, config): Promise<IPost> {
   const { id, body, slug: rawSlug = '', data } = post;
   const { remarkPluginFrontmatter } = await post.render();
 
@@ -52,24 +47,24 @@ async function getNormalizedPost(
 }
 
 export async function PostSeed() {
-  const postsExist = await this.post.count();
+  const postsExist = await this.db.post.count();
   if (!postsExist) {
-    const posts = await getCollection('post');
+    const posts = await this.content.getCollection('post');
     for (const post of posts) {
-      const user = await this.user.findFirst();
-      const data = await getNormalizedPost(post, user, this.post.config);
+      const user = await this.db.user.findFirst();
+      const data = await getNormalizedPost(post, user, this.db.post.config);
       if (data.tags.length === 0) {
         data.tags.push('default');
       }
       const tags = await Promise.all(
         data.tags.map(async (tagName) => {
-          const tagInDb = await this.tag.findFirst({
+          const tagInDb = await this.db.tag.findFirst({
             where: {
               name: tagName,
             },
           });
           if (!tagInDb) {
-            const newTagInDb = await this.tag.create({
+            const newTagInDb = await this.db.tag.create({
               data: {
                 name: tagName,
               },
@@ -83,7 +78,7 @@ export async function PostSeed() {
       data.tags = {
         connect: tags,
       };
-      const result = await this.post.create({ data });
+      const result = await this.db.post.create({ data });
     }
   }
 }

@@ -5,6 +5,6 @@ export function User(app) {
   const { user: prismaUser }: { user: UserModel } = app.db;
 
   return Object.assign(prismaUser, {
-    seed: () => UserSeed.call(app.db),
+    seed: () => UserSeed.call(app),
   });
 }

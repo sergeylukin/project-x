@@ -1,6 +1,6 @@
 {
   "extends": "../../../../tsconfig.base.json",
-  "files": ["../../../../apps/website/.astro/types.d.ts"],
+  "files": [],
   "include": [],
   "references": [
     {

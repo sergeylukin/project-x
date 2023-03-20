@@ -1,4 +1,3 @@
-import { getEntryBySlug } from 'astro:content';
 import { findImage } from '@astro-nx-depla/shared/util/image';
 import {
   getCanonical,
@@ -15,7 +14,7 @@ export function Post(app) {
 
   return Object.assign(post, {
     config,
-    seed: () => PostSeed.call(app.db),
+    seed: () => PostSeed.call(app),
     /**
      * Signup the first user and create a new team of one. Return the User with
      * a full name and without a password
@@ -94,7 +93,7 @@ export function Post(app) {
       const posts = await post.findMany();
       return await Promise.all(
         posts.map(async (post) => {
-          const entry = await getEntryBySlug('post', post.slug);
+          const entry = await app.content.getEntryBySlug('post', post.slug);
           const { Content } = await entry.render();
           post.Content = Content;
           return {

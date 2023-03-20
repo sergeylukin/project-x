@@ -12,8 +12,7 @@ import react from '@astrojs/react';
 import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
 import { readingTimeRemarkPlugin } from '@astro-nx-depla/shared/util/predict-reading-time';
-import { config } from '@astro-nx-depla/website/config';
-import { env } from '@astro-nx-depla/shared/util/environment';
+import { app } from '@astro-nx-depla/shared/app';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -34,16 +33,16 @@ const loadConfig = () => {
 };
 
 const whenExternalScripts = (items = []) =>
-  config.googleAnalyticsId
+  app.config.googleAnalyticsId
     ? Array.isArray(items)
       ? items.map((item) => item())
       : [items()]
     : [];
 
 export default defineConfig({
-  site: env('WEBSITE_BASE_URL'),
-  base: config.basePathname,
-  trailingSlash: config.trailingSlash ? 'always' : 'never',
+  site: app.env('WEBSITE_BASE_URL'),
+  base: app.config.basePathname,
+  trailingSlash: app.config.trailingSlash ? 'always' : 'never',
 
   output: 'static',
 
