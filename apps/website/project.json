@@ -11,6 +11,10 @@
       "options": {},
       "dependsOn": [
         {
+          "target": "setup-dotenv-prod",
+          "projects": "self"
+        },
+        {
           "target": "setup-prisma",
           "projects": "self"
         },
@@ -19,6 +23,22 @@
           "projects": "self"
         }
       ]
+    },
+    "setup-dotenv-dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cp .env.dev .env"
+        ]
+      }
+    },
+    "setup-dotenv-prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cp .env.prod .env"
+        ]
+      }
     },
     "build-astro-config": {
       "executor": "nx:run-commands",
@@ -50,6 +70,10 @@
     "dev": {
       "executor": "@astro-nx-depla/nx:dev-astro-with-netlify-cms",
       "dependsOn": [
+        {
+          "target": "setup-dotenv-dev",
+          "projects": "self"
+        },
         {
           "target": "build-astro-config",
           "projects": "self"
