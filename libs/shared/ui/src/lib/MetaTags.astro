@@ -30,7 +30,10 @@ const {
   description = '',
   image: _image = defaultImage,
 
-  canonical = getCanonical(String(Astro.url.pathname), app.config.origin),
+  canonical = getCanonical(
+    String(Astro.url.pathname),
+    app.env('WEBSITE_BASE_URL')
+  ),
   noindex = false,
   nofollow = false,
 

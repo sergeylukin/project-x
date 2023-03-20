@@ -1,10 +1,14 @@
 ---
 import { app } from '@astro-nx-depla/website/app';
+import { getEnvVarsHashmap } from '@astro-nx-depla/shared/util/environment';
 ---
 
 <script
   is:inline
-  define:vars={{ env: app.env, defaultTheme: app.config.defaultTheme }}
+  define:vars={{
+    env: getEnvVarsHashmap(),
+    defaultTheme: app.config.defaultTheme,
+  }}
 >
   function applyTheme(theme) {
     if (theme === 'dark') {
@@ -135,7 +139,5 @@ import { app } from '@astro-nx-depla/website/app';
     document.querySelector('#header nav')?.classList.add('hidden');
   };
 
-  window.DEPLOY_DAY = {
-    env,
-  };
+  window.__ENV__ = env;
 </script>

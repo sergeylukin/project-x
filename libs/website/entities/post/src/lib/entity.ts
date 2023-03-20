@@ -1,4 +1,4 @@
-import { getCollection, getEntryBySlug } from 'astro:content';
+import { getEntryBySlug } from 'astro:content';
 import { findImage } from '@astro-nx-depla/shared/util/image';
 import {
   getCanonical,

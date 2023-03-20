@@ -13,6 +13,7 @@ import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
 import { readingTimeRemarkPlugin } from '@astro-nx-depla/shared/util/predict-reading-time';
 import { config } from '@astro-nx-depla/website/config';
+import { env } from '@astro-nx-depla/shared/util/environment';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -24,10 +25,7 @@ const whenExternalScripts = (items = []) =>
     : [];
 
 export default defineConfig({
-  site:
-    process.env.NODE_ENV === 'production'
-      ? config.productionOrigin
-      : config.origin,
+  site: env('WEBSITE_BASE_URL'),
   base: config.basePathname,
   trailingSlash: config.trailingSlash ? 'always' : 'never',
 
