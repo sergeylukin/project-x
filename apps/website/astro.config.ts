@@ -17,6 +17,22 @@ import { env } from '@astro-nx-depla/shared/util/environment';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const loadConfig = () => {
+  return {
+    name: '@depl/astrojs-load-config-plugin',
+    hooks: {
+      'astro:config:setup': async ({ updateConfig, injectScript }) => {
+        const CONFIG_LOAD_JS = `
+          import { app as APP_FOR_SEED } from '@astro-nx-depla/website/app';
+          APP_FOR_SEED.user.seed()
+          APP_FOR_SEED.post.seed()
+        `;
+        injectScript('page-ssr', CONFIG_LOAD_JS);
+      },
+    },
+  };
+};
+
 const whenExternalScripts = (items = []) =>
   config.googleAnalyticsId
     ? Array.isArray(items)
@@ -38,6 +54,7 @@ export default defineConfig({
   outDir: '../../dist/apps/website',
   integrations: [
     react(),
+    loadConfig(),
     tailwind({
       config: {
         applyBaseStyles: false,
