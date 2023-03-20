@@ -1,21 +1,21 @@
 {
-  "name": "website-entities-post",
+  "name": "shared-entities-user",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/website/entities/post/src",
+  "sourceRoot": "libs/shared/entities/user/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/website/entities/post/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/entities/user/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/website/entities/post/jest.config.ts",
+        "jestConfig": "libs/shared/entities/user/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

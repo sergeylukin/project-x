@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'website-entities-user',
+  displayName: 'shared-entities-user',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/website/entities/user',
+  coverageDirectory: '../../../../coverage/libs/shared/entities/user',
 };
