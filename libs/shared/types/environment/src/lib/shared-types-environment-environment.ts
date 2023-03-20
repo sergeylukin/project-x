@@ -1,4 +1,4 @@
 export enum IEnvironment {
-  Prod = 'PROD',
-  Dev = 'DEV',
+  PROD = 'production',
+  DEV = 'development',
 }

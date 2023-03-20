@@ -11,7 +11,7 @@ export const isServer = !!isBrowser;
 
 // List of the env variables you want to use on the client
 // Careful on what you put here!
-const whitelist = ['WEBSITE_BASE_URL'];
+const whitelist = ['WEBSITE_BASE_URL', 'NODE_ENV'];
 
 export const getEnvVarsHashmap = () => {
   const base = (isBrowser ? window.__ENV__ : process.env) || {};
@@ -25,4 +25,4 @@ export const getEnvVarsHashmap = () => {
 const _env = getEnvVarsHashmap();
 
 export const env = (key) => _env?.[key];
-export const isProd = env('NODE_ENV') === IEnvironment.Prod;
+export const isProd = env('NODE_ENV') === IEnvironment.PROD;
