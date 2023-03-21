@@ -1,21 +1,21 @@
 {
-  "name": "shared-providers-content-astro",
+  "name": "shared-util-db",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/providers/content-astro/src",
+  "sourceRoot": "libs/shared/util/db/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/providers/content-astro/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/util/db/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/shared/providers/content-astro/jest.config.ts",
+        "jestConfig": "libs/shared/util/db/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

@@ -24,9 +24,6 @@
       "@astro-nx-depla/shared/entities/user": [
         "libs/shared/entities/user/src/index.ts"
       ],
-      "@astro-nx-depla/shared/providers/content-astro": [
-        "libs/shared/providers/content-astro/src/index.ts"
-      ],
       "@astro-nx-depla/shared/types/environment": [
         "libs/shared/types/environment/src/index.ts"
       ],
@@ -38,6 +35,7 @@
       "@astro-nx-depla/shared/util/astro": [
         "libs/shared/util/astro/src/index.ts"
       ],
+      "@astro-nx-depla/shared/util/db": ["libs/shared/util/db/src/index.ts"],
       "@astro-nx-depla/shared/util/environment": [
         "libs/shared/util/environment/src/index.ts"
       ],
@@ -46,6 +44,9 @@
       ],
       "@astro-nx-depla/shared/util/predict-reading-time": [
         "libs/shared/util/astro-remark-plugin-predict-reading-time/src/index.ts"
+      ],
+      "@astro-nx-depla/shared/util/route": [
+        "libs/shared/util/route/src/index.ts"
       ],
       "@astro-nx-depla/shared/util/time": [
         "libs/shared/util/time/src/index.ts"

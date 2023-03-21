@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-providers-content-astro',
+  displayName: 'shared-util-db',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/shared/providers/content-astro',
+  coverageDirectory: '../../../../coverage/libs/shared/util/db',
 };
