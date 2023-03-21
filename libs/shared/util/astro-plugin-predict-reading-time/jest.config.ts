@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-util-astro-remark-plugin-predict-reading-time',
+  displayName: 'shared-util-astro-plugin-predict-reading-time',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -12,5 +12,5 @@ export default {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory:
-    '../../../../coverage/libs/shared/util/astro-remark-plugin-predict-reading-time',
+    '../../../../coverage/libs/shared/util/astro-plugin-predict-reading-time',
 };

@@ -12,7 +12,7 @@ import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
-import { readingTimeRemarkPlugin } from '@astro-nx-depla/shared/util/predict-reading-time';
+import { readingTimeRemarkPlugin } from '@astro-nx-depla/shared/util/astro-plugin-predict-reading-time';
 import { app } from '@astro-nx-depla/shared/app';
 import { inject } from '@astro-nx-depla/shared/util/astro-plugin-inject';
 

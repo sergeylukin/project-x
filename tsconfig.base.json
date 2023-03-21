@@ -38,15 +38,15 @@
       "@astro-nx-depla/shared/util/astro-plugin-inject": [
         "libs/shared/util/astro-plugin-inject/src/index.ts"
       ],
+      "@astro-nx-depla/shared/util/astro-plugin-predict-reading-time": [
+        "libs/shared/util/astro-plugin-predict-reading-time/src/index.ts"
+      ],
       "@astro-nx-depla/shared/util/db": ["libs/shared/util/db/src/index.ts"],
       "@astro-nx-depla/shared/util/environment": [
         "libs/shared/util/environment/src/index.ts"
       ],
       "@astro-nx-depla/shared/util/image": [
         "libs/shared/util/image/src/index.ts"
-      ],
-      "@astro-nx-depla/shared/util/predict-reading-time": [
-        "libs/shared/util/astro-remark-plugin-predict-reading-time/src/index.ts"
       ],
       "@astro-nx-depla/shared/util/route": [
         "libs/shared/util/route/src/index.ts"

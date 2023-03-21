@@ -3,7 +3,10 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/website/src",
-  "implicitDependencies": ["website-config", "shared-util-astro-remark-plugin-predict-reading-time"],
+  "implicitDependencies": [
+    "website-config",
+    "shared-util-astro-plugin-predict-reading-time"
+  ],
   "targets": {
     "build": {
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
@@ -27,33 +30,25 @@
     "setup-dotenv-dev": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "cp .env.dev .env"
-        ]
+        "commands": ["cp .env.dev .env"]
       }
     },
     "setup-dotenv-prod": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "cp .env.prod .env"
-        ]
+        "commands": ["cp .env.prod .env"]
       }
     },
     "build-astro-config": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "node build.mjs"
-        ]
+        "commands": ["node build.mjs"]
       }
     },
     "setup-prisma": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "npx prisma generate && npx prisma migrate dev"
-        ]
+        "commands": ["npx prisma generate && npx prisma migrate dev"]
       }
     },
     "serve": {
@@ -62,9 +57,7 @@
     "netlify-cms-proxy": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "npx netlify-cms-proxy-server"
-        ]
+        "commands": ["npx netlify-cms-proxy-server"]
       }
     },
     "dev": {
