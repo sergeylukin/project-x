@@ -1,11 +1,15 @@
 import alias from 'esbuild-plugin-alias';
 import * as esbuild from 'esbuild';
+import { replace } from 'esbuild-plugin-replace';
 import path from 'path';
 import fs from 'fs';
+import { fileURLToPath } from 'url';
 
 const tsBlob = fs.readFileSync('tsconfig.base.json');
 const tsConfig = JSON.parse(tsBlob);
 const aliases = tsConfig.compilerOptions.paths;
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 await esbuild.build({
   entryPoints: ['apps/website/astro.config.ts'],
@@ -19,6 +23,13 @@ await esbuild.build({
     '.png': 'binary',
   },
   plugins: [
+    // used to inject _ssr-bootstrap.ts
+    replace({
+      delimiters: [`\'`, `_`],
+      values: {
+        '@astro-nx-depla/website/app/src/lib/': '\''+path.resolve(__dirname, 'libs/website/app/src/lib')+'/_',
+      },
+    }),
     alias(
       Object.keys(aliases).reduce(
         (curr, prev) =>

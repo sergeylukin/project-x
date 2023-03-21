@@ -35,6 +35,9 @@
       "@astro-nx-depla/shared/util/astro": [
         "libs/shared/util/astro/src/index.ts"
       ],
+      "@astro-nx-depla/shared/util/astrojs-inject": [
+        "libs/shared/util/astrojs-inject/src/index.ts"
+      ],
       "@astro-nx-depla/shared/util/db": ["libs/shared/util/db/src/index.ts"],
       "@astro-nx-depla/shared/util/environment": [
         "libs/shared/util/environment/src/index.ts"
@@ -54,7 +57,8 @@
       "@astro-nx-depla/shared/util/url": ["libs/shared/util/url/src/index.ts"],
       "@astro-nx-depla/website/app": ["libs/website/app/src/index.ts"],
       "@astro-nx-depla/website/config": ["libs/website/config/src/index.ts"],
-      "@astro-nx-depla/website/data": ["libs/website/data/src/index.ts"]
+      "@astro-nx-depla/website/data": ["libs/website/data/src/index.ts"],
+      "@astro-nx-depla/website/data-folder": ["libs/website/data/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

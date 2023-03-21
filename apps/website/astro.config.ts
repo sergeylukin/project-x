@@ -1,5 +1,6 @@
 // @ts-nocheck
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 
 import { defineConfig } from 'astro/config';
@@ -13,24 +14,10 @@ import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
 import { readingTimeRemarkPlugin } from '@astro-nx-depla/shared/util/predict-reading-time';
 import { app } from '@astro-nx-depla/shared/app';
+import { inject } from '@astro-nx-depla/shared/util/astrojs-inject';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const loadConfig = () => {
-  return {
-    name: '@depl/astrojs-load-config-plugin',
-    hooks: {
-      'astro:config:setup': async ({ updateConfig, injectScript }) => {
-        const CONFIG_LOAD_JS = `
-          import { app as APP_FOR_SEED } from '@astro-nx-depla/website/app';
-          APP_FOR_SEED.user.seed()
-          APP_FOR_SEED.post.seed()
-        `;
-        injectScript('page-ssr', CONFIG_LOAD_JS);
-      },
-    },
-  };
-};
 
 const whenExternalScripts = (items = []) =>
   app.config.googleAnalyticsId
@@ -53,7 +40,9 @@ export default defineConfig({
   outDir: '../../dist/apps/website',
   integrations: [
     react(),
-    loadConfig(),
+    inject({
+      filePath: '@astro-nx-depla/website/app/src/lib/_ssr-bootstrap.ts',
+    }),
     tailwind({
       config: {
         applyBaseStyles: false,
