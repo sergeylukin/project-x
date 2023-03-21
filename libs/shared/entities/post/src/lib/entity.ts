@@ -93,7 +93,7 @@ export function Post(app) {
       const posts = await post.findMany();
       return await Promise.all(
         posts.map(async (post) => {
-          const entry = await app.content.getEntryBySlug('post', post.slug);
+          const entry = await app.collections.getEntryBySlug('post', post.slug);
           const { Content } = await entry.render();
           post.Content = Content;
           return {

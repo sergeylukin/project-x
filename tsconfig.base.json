@@ -32,8 +32,8 @@
       ],
       "@astro-nx-depla/shared/ui": ["libs/shared/ui/src/index.js"],
       "@astro-nx-depla/shared/util/IOC": ["libs/shared/util/IOC/src/index.ts"],
-      "@astro-nx-depla/shared/util/astro": [
-        "libs/shared/util/astro/src/index.ts"
+      "@astro-nx-depla/shared/util/astro-collections-facade": [
+        "libs/shared/util/astro-collections-facade/src/index.ts"
       ],
       "@astro-nx-depla/shared/util/astro-plugin-inject": [
         "libs/shared/util/astro-plugin-inject/src/index.ts"

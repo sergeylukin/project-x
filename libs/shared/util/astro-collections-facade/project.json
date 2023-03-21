@@ -1,21 +1,23 @@
 {
-  "name": "shared-util-astro",
+  "name": "shared-util-astro-collections-facade",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/util/astro/src",
+  "sourceRoot": "libs/shared/util/astro-collections-facade/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/util/astro/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/shared/util/astro-collections-facade/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/shared/util/astro/jest.config.ts",
+        "jestConfig": "libs/shared/util/astro-collections-facade/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

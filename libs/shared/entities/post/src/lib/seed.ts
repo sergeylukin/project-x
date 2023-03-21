@@ -49,7 +49,7 @@ async function getNormalizedPost(post: IPost, user, config): Promise<IPost> {
 export async function PostSeed() {
   const postsExist = await this.db.post.count();
   if (!postsExist) {
-    const posts = await this.content.getCollection('post');
+    const posts = await this.collections.getCollection('post');
     for (const post of posts) {
       const user = await this.db.user.findFirst();
       const data = await getNormalizedPost(post, user, this.db.post.config);

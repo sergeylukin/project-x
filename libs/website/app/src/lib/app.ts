@@ -1,6 +1,6 @@
 import { app } from '@astro-nx-depla/shared/app';
-import { contentProvider } from '@astro-nx-depla/shared/util/astro';
+import { collectionsProvider } from '@astro-nx-depla/shared/util/astro-collections-facade';
 
-contentProvider(app);
+collectionsProvider(app);
 
 export { app };
