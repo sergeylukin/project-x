@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'shared-util-astrojs-inject',
+  displayName: 'shared-util-astro-plugin-inject',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,6 @@ export default {
     '^.+\\.[tj]sx?$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../../coverage/libs/shared/util/astrojs-inject',
+  coverageDirectory:
+    '../../../../coverage/libs/shared/util/astro-plugin-inject',
 };

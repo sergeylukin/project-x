@@ -1,21 +1,21 @@
 {
-  "name": "shared-util-astrojs-inject",
+  "name": "shared-util-astro-plugin-inject",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/util/astrojs-inject/src",
+  "sourceRoot": "libs/shared/util/astro-plugin-inject/src",
   "projectType": "library",
   "targets": {
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/shared/util/astrojs-inject/**/*.ts"]
+        "lintFilePatterns": ["libs/shared/util/astro-plugin-inject/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/shared/util/astrojs-inject/jest.config.ts",
+        "jestConfig": "libs/shared/util/astro-plugin-inject/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {

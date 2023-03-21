@@ -1,6 +1,4 @@
-export const inject = ({
-  filePath
-}) => {
+export const inject = ({ filePath }) => {
   return {
     name: '@depl/astrojs-inject',
     hooks: {

@@ -35,8 +35,8 @@
       "@astro-nx-depla/shared/util/astro": [
         "libs/shared/util/astro/src/index.ts"
       ],
-      "@astro-nx-depla/shared/util/astrojs-inject": [
-        "libs/shared/util/astrojs-inject/src/index.ts"
+      "@astro-nx-depla/shared/util/astro-plugin-inject": [
+        "libs/shared/util/astro-plugin-inject/src/index.ts"
       ],
       "@astro-nx-depla/shared/util/db": ["libs/shared/util/db/src/index.ts"],
       "@astro-nx-depla/shared/util/environment": [

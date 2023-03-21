@@ -14,10 +14,9 @@ import partytown from '@astrojs/partytown';
 import compress from 'astro-compress';
 import { readingTimeRemarkPlugin } from '@astro-nx-depla/shared/util/predict-reading-time';
 import { app } from '@astro-nx-depla/shared/app';
-import { inject } from '@astro-nx-depla/shared/util/astrojs-inject';
+import { inject } from '@astro-nx-depla/shared/util/astro-plugin-inject';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
 
 const whenExternalScripts = (items = []) =>
   app.config.googleAnalyticsId
