@@ -1,6 +1,6 @@
 import rss from '@astrojs/rss';
 
-import { app } from '@astro-nx-depla/shared/app';
+import { app } from '@astro-nx-depla/website/app';
 
 export const get = async () => {
   if (app.post.config.disabled) {
