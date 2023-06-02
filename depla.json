@@ -1,0 +1,80 @@
+{
+  "entities": [
+    "user",
+    "tag",
+    "post",
+    "page"
+],
+  "workspaces": [{
+    "name": "sergeylukin",
+    "slices": [
+      "@depla/slice-nx-workspace@latest"
+    ],
+    "apps": [
+      {
+        "name": "website",
+        "entities": "*",
+        "slices": [
+          "@depla/stack-astro-ui@latest",
+          "@depla/slice-data@latest",
+          ["@depla/slice-config@latest", {
+            "logoText": "Sergeylukin",
+            "selectedColorPalette": "shazam"
+          }],
+          "@depla/stack-env@latest",
+          "@depla/stack-prisma@latest",
+          "@depla/stack-prisma-astro@latest",
+          {
+            "name": "@depla/slice-astro-app@latest",
+            "features": [
+              {
+                "name": "homepage",
+                "path": "/",
+                "file": "index.astro"
+              },
+              {
+                "name": "legal pages",
+                "pages": [
+                  {
+                    "path": "/terms"
+                  },
+                  {
+                    "path": "/privacy"
+                  }
+                ]
+              },
+              {
+                "name": "blog",
+                "paths": [
+                  {
+                    "entity": "post",
+                    "path": "/blog",
+                    "type": "list",
+                    "noindex": false
+                  },
+                  {
+                    "entity": "post",
+                    "type": "view",
+                    "path": "/%year%/%slug%"
+                  },
+                  {
+                    "entity": "tag",
+                    "type": "list",
+                    "path": "/blog/tags/",
+                    "itemsPerPage": 4
+                  },
+                  {
+                    "entity": "tag",
+                    "type": "view",
+                    "path": "/blog/tags/%slug%",
+                    "noindex": false
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }]
+}

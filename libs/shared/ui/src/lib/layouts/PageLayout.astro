@@ -1,0 +1,38 @@
+---
+import Layout from './BaseLayout.astro';
+import { Footer, Header, Announcement } from '@sergeylukin/shared/ui';
+import { app } from '@sergeylukin/website/app';
+
+import { headerData, footerData } from '@sergeylukin/website/data';
+
+import { IMetaSEO } from '@sergeylukin/shared/types/html';
+
+export interface Props {
+  meta?: IMetaSEO;
+  showToggleTheme?: boolean;
+}
+
+const theme = app.config.defaultTheme;
+
+const {
+  meta = {},
+  showToggleTheme = !(
+    app.config?.defaultTheme && app.config.defaultTheme.endsWith(':only')
+  ),
+} = Astro.props;
+---
+
+<Layout {...meta}>
+  <slot name="announcement">
+    <Announcement />
+  </slot>
+  <slot name="header">
+    <Header {...headerData} isSticky showRssFeed {showToggleTheme} {theme} />
+  </slot>
+  <main>
+    <slot />
+  </main>
+  <slot name="footer">
+    <Footer {...footerData} />
+  </slot>
+</Layout>

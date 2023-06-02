@@ -1,0 +1,39 @@
+{
+  "writingInjections": {
+    "sergeylukin": {
+      "website": {
+        "providers": [
+          {
+            "name": "config",
+            "module": "@sergeylukin/website/config"
+          },
+          {
+            "name": "env",
+            "module": "@depla/utils-environment"
+          },
+          {
+            "name": "db",
+            "module": "@depla/utils-db"
+          },
+          {
+            "name": "user",
+            "module": "@sergeylukin/shared/entities/user"
+          },
+          {
+            "name": "tag",
+            "module": "@sergeylukin/shared/entities/tag"
+          },
+          {
+            "name": "post",
+            "module": "@sergeylukin/shared/entities/post"
+          },
+          {
+            "name": "page",
+            "module": "@sergeylukin/shared/entities/page"
+          }
+        ]
+      }
+    }
+  },
+  "expectingInjections": {}
+}

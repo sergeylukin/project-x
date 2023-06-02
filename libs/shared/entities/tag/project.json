@@ -1,0 +1,26 @@
+{
+  "name": "shared-entities-tag",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/entities/tag/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/entities/tag",
+        "main": "libs/shared/entities/tag/src/index.ts",
+        "tsConfig": "libs/shared/entities/tag/tsconfig.lib.json",
+        "assets": ["libs/shared/entities/tag/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/entities/tag/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

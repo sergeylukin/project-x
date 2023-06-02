@@ -1,0 +1,62 @@
+// This is Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator zod {
+  provider = "zod-prisma-types"
+}
+
+datasource db {
+  provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  posts Post[]
+}
+
+model Page {
+  id    Int     @id @default(autoincrement())
+  name  String?
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  slug     String
+  title     String?
+  description     String?
+  image     String?
+  canonical     String?
+  permalink     String?
+  publishDate        DateTime @default(now())
+  draft Boolean @default(false)
+  excerpt     String?
+  category     String?
+  content           String?
+  readingTime  Int?
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+  tags    PostTags[]
+}
+
+model Tag {
+  id             Int      @id @default(autoincrement())
+  name           String? @unique
+  posts PostTags[]
+}
+
+model PostTags {
+  tag   Tag @relation(fields: [tagId], references: [id])
+  tagId Int
+
+  post   Post @relation(fields: [postId], references: [id])
+  postId Int
+
+  @@id([postId, tagId])
+}

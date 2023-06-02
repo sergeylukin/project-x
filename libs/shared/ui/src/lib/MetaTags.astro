@@ -1,0 +1,108 @@
+---
+import { AstroSeo } from '@astrolib/seo';
+import { GoogleAnalytics } from '@astrolib/analytics';
+import { getImage } from '@astrojs/image';
+
+import { app } from '@sergeylukin/website/app';
+import { IMetaSEO } from '@sergeylukin/shared/types/html';
+import { getCanonical } from '@depla/utils-url';
+
+import { SplitbeeAnalytics } from '@sergeylukin/shared/ui';
+
+export interface Props extends IMetaSEO {
+  dontUseTitleTemplate?: boolean;
+}
+
+const defaultImage = app.config.defaultImage
+  ? (
+      await getImage({
+        src: app.config.defaultImage,
+        alt: 'Default image',
+        width: 1200,
+        height: 628,
+      })
+    ).src
+  : '';
+
+const {
+  title = app.config.name,
+  description = '',
+  image: _image = defaultImage,
+
+  canonical = getCanonical(
+    String(Astro.url.pathname),
+    app.env('WEBSITE_BASE_URL')
+  ),
+  noindex = false,
+  nofollow = false,
+
+  ogTitle = title,
+  ogType = 'website',
+
+  dontUseTitleTemplate = false,
+} = Astro.props;
+
+const image = _image && typeof _image === 'string' ? new URL(_image, Astro.site) : null;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<AstroSeo
+  {title}
+  titleTemplate={dontUseTitleTemplate ? '%s' : `%s — ${app.config.name}`}
+  {description}
+  canonical={String(canonical)}
+  {noindex}
+  {nofollow}
+  openGraph={{
+    url: String(canonical),
+    title: ogTitle,
+    description: description,
+    type: ogType,
+    images: image
+      ? [
+          {
+            url: image.toString(),
+            alt: ogTitle,
+          },
+        ]
+      : undefined,
+    // site_name: 'SiteName',
+  }}
+  twitter={{
+    // handle: '@handle',
+    // site: '@site',
+    cardType: image ? 'summary_large_image' : undefined,
+  }}
+/>
+
+<!-- Google Site Verification -->
+{
+  app.config.googleSiteVerificationId && (
+    <meta
+      name="google-site-verification"
+      content={app.config.googleSiteVerificationId}
+    />
+  )
+}
+
+<!-- Google Analytics -->
+{
+  app.config.googleAnalyticsId && (
+    <GoogleAnalytics
+      id={String(app.config.googleAnalyticsId)}
+      partytown={true}
+    />
+  )
+}
+
+{
+  app.config.splitbeeAnalytics?.enabled && (
+    <SplitbeeAnalytics {...app.config.splitbeeAnalytics} />
+  )
+}
+
+<link rel="shortcut icon" href={'/favicon.ico'} />
+<link rel="icon" type="image/svg+xml" href={'/favicon.svg'} />
+<link rel="mask-icon" href={'/favicon.svg'} color="#8D46E7" />

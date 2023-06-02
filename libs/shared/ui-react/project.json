@@ -1,0 +1,26 @@
+{
+  "name": "shared-ui-react",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/ui-react/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/ui-react",
+        "main": "libs/shared/ui-react/src/index.ts",
+        "tsConfig": "libs/shared/ui-react/tsconfig.lib.json",
+        "assets": ["libs/shared/ui-react/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/ui-react/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

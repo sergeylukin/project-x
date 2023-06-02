@@ -1,0 +1,26 @@
+{
+  "name": "shared-generated-config",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/generated/config/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/generated/config",
+        "main": "libs/shared/generated/config/src/index.ts",
+        "tsConfig": "libs/shared/generated/config/tsconfig.lib.json",
+        "assets": ["libs/shared/generated/config/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/generated/config/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

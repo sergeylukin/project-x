@@ -1,0 +1,26 @@
+{
+  "name": "shared-generated-ui",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/generated/ui/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/generated/ui",
+        "main": "libs/shared/generated/ui/src/index.ts",
+        "tsConfig": "libs/shared/generated/ui/tsconfig.lib.json",
+        "assets": ["libs/shared/generated/ui/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/generated/ui/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

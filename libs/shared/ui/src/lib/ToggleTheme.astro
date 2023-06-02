@@ -1,0 +1,84 @@
+---
+import { Icon } from '@sergeylukin/shared/ui';
+
+export interface Props {
+  label?: string;
+  iconClass?: string;
+  iconName?: string;
+}
+
+const {
+  label = 'Toggle between Dark and Light mode',
+  iconClass = 'w-6 h-6',
+  iconName = 'tabler:sun',
+  theme = 'system',
+} = Astro.props;
+---
+
+<button
+  type="button"
+  class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+  aria-label={label}
+  data-aw-toggle-color-scheme
+>
+  <Icon name={iconName} class={iconClass} />
+</button>
+
+<script
+  define:vars={{
+    defaultTheme: theme,
+  }}
+>
+  function applyTheme(theme) {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }
+
+  if (
+    (defaultTheme && defaultTheme.endsWith(':only')) ||
+    (!localStorage.theme && defaultTheme !== 'system')
+  ) {
+    applyTheme(defaultTheme.replace(':only', ''));
+  } else if (
+    localStorage.theme === 'dark' ||
+    (!('theme' in localStorage) &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches)
+  ) {
+    applyTheme('dark');
+  } else {
+    applyTheme('light');
+  }
+
+  function attachEvent(selector, event, fn) {
+    const matches =
+      typeof selector === 'string'
+        ? document.querySelectorAll(selector)
+        : selector;
+    if (matches && matches.length) {
+      matches.forEach((elem) => {
+        elem.addEventListener(event, (e) => fn(e, elem), false);
+      });
+    }
+  }
+
+  window.added = false;
+  window.addEventListener('load', function () {
+    if (window.added) return;
+    let lastKnownScrollPosition = window.scrollY;
+    let ticking = true;
+
+    attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
+      if (defaultTheme.endsWith(':only')) {
+        return;
+      }
+      document.documentElement.classList.toggle('dark');
+      localStorage.theme = document.documentElement.classList.contains('dark')
+        ? 'dark'
+        : 'light';
+    });
+    window.added = true;
+  });
+</script>

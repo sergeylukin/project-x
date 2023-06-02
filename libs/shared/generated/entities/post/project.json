@@ -1,0 +1,26 @@
+{
+  "name": "shared-generated-entities-post",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/generated/entities/post/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/generated/entities/post",
+        "main": "libs/shared/generated/entities/post/src/index.ts",
+        "tsConfig": "libs/shared/generated/entities/post/tsconfig.lib.json",
+        "assets": ["libs/shared/generated/entities/post/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/generated/entities/post/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

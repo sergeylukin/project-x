@@ -14,7 +14,46 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@sergeylukin/shared/config": ["libs/shared/config/src/index.ts"],
+      "@sergeylukin/shared/entities/page": [
+        "libs/shared/entities/page/src/index.ts"
+      ],
+      "@sergeylukin/shared/entities/post": [
+        "libs/shared/entities/post/src/index.ts"
+      ],
+      "@sergeylukin/shared/entities/tag": [
+        "libs/shared/entities/tag/src/index.ts"
+      ],
+      "@sergeylukin/shared/entities/user": [
+        "libs/shared/entities/user/src/index.ts"
+      ],
+      "@sergeylukin/shared/generated/config": [
+        "libs/shared/generated/config/src/index.ts"
+      ],
+      "@sergeylukin/shared/generated/entities/page": [
+        "libs/shared/generated/entities/page/src/index.ts"
+      ],
+      "@sergeylukin/shared/generated/entities/post": [
+        "libs/shared/generated/entities/post/src/index.ts"
+      ],
+      "@sergeylukin/shared/generated/entities/tag": [
+        "libs/shared/generated/entities/tag/src/index.ts"
+      ],
+      "@sergeylukin/shared/generated/entities/user": [
+        "libs/shared/generated/entities/user/src/index.ts"
+      ],
+      "@sergeylukin/shared/generated/ui": [
+        "libs/shared/generated/ui/src/index.ts"
+      ],
+      "@sergeylukin/shared/ui": ["libs/shared/ui/src/index.ts"],
+      "@sergeylukin/shared/ui-react": ["libs/shared/ui-react/src/index.ts"],
+      "@sergeylukin/website/config": ["libs/website/config/src/index.ts"],
+      "@sergeylukin/website/data": ["libs/website/data/src/index.ts"],
+      "@sergeylukin/website/generated/config": [
+        "libs/website/generated/config/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

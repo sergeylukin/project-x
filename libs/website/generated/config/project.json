@@ -1,0 +1,26 @@
+{
+  "name": "website-generated-config",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/website/generated/config/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/website/generated/config",
+        "main": "libs/website/generated/config/src/index.ts",
+        "tsConfig": "libs/website/generated/config/tsconfig.lib.json",
+        "assets": ["libs/website/generated/config/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/website/generated/config/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

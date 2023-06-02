@@ -1,0 +1,37 @@
+---
+import { Icon } from '@sergeylukin/shared/ui';
+
+export interface Props {
+  label?: string;
+  iconClass?: string;
+  iconName?: string;
+}
+
+const {
+  label = 'Toggle Menu',
+  iconClass = 'w-6 h-6',
+  iconName = 'tabler:menu',
+} = Astro.props;
+---
+
+<button
+  type="button"
+  class="ml-1.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center transition"
+  aria-label={label}
+  data-aw-toggle-menu
+>
+  <Icon name={iconName} class={iconClass} optimize={false} />
+</button>
+
+<style>
+  :global([data-aw-toggle-menu] path) {
+    @apply transition;
+  }
+  :global([data-aw-toggle-menu].expanded g > path:first-child) {
+    @apply -rotate-45 translate-y-[15px] translate-x-[-3px];
+  }
+
+  :global([data-aw-toggle-menu].expanded g > path:last-child) {
+    @apply rotate-45 translate-y-[-8px] translate-x-[14px];
+  }
+</style>
