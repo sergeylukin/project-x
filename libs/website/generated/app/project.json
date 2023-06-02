@@ -1,0 +1,26 @@
+{
+  "name": "website-generated-app",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/website/generated/app/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/website/generated/app",
+        "main": "libs/website/generated/app/src/index.ts",
+        "tsConfig": "libs/website/generated/app/tsconfig.lib.json",
+        "assets": ["libs/website/generated/app/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/website/generated/app/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,6 @@
+astro.config.mjs
+astro-static.config.mjs
+.netlify/
+public/_astro/*
+.astro/
+!.gitkeep

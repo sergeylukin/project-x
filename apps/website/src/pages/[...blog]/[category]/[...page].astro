@@ -1,0 +1,25 @@
+---
+export const prerender = true;
+import { app } from '@sergeylukin/website/app';
+import {
+  PageLayout,
+  PostsList,
+  Headline,
+  Pagination,
+} from '@sergeylukin/shared/ui';
+
+export const getStaticPaths = app.post.getPostCategoryListStaticPaths;
+
+const { page, category } = Astro.props;
+const meta = app.post.getPostCategoryMetaByPage(page, category);
+---
+
+<PageLayout {meta}>
+  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-3xl">
+    <Headline>
+      <span class="capitalize">{category.replaceAll('-', ' ')}</span>
+    </Headline>
+    <PostsList posts={page.data} />
+    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+  </section>
+</PageLayout>

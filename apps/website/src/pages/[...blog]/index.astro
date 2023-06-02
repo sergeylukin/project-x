@@ -1,0 +1,15 @@
+---
+export const prerender = true;
+import { app } from '@sergeylukin/website/app';
+import { PageLayout, SinglePost, ToBlogLink } from '@sergeylukin/shared/ui';
+
+export const getStaticPaths = app.post.getPostViewStaticPaths;
+
+const { post } = Astro.props;
+const meta = await app.post.getMetaByPost(post);
+---
+
+<PageLayout {meta}>
+  <SinglePost post={{ ...post, url: meta.canonical, image: meta.image }} />
+  <ToBlogLink />
+</PageLayout>

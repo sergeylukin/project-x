@@ -31,9 +31,34 @@
             "name": "page",
             "module": "@sergeylukin/shared/entities/page"
           }
+        ],
+        "gitignorePatterns": [
+          ".astro",
+          "dev.db",
+          "dev.db-journal",
+          "prod.db",
+          ".env",
+          ".netlify",
+          "prisma/generated/",
+          "dist/"
         ]
       }
     }
   },
-  "expectingInjections": {}
+  "expectingInjections": {
+    "/.gitignore-gitignorePatterns": {
+      "workspaceName": "sergeylukin",
+      "appName": "website",
+      "filename": "/.gitignore",
+      "contents": "<% if (locals.injects && locals.injects.gitignorePatterns) { %><%\ninjects.gitignorePatterns.forEach(function(pattern) { %>\n<%= pattern %>\n<% }) %><% } %>\n\n# dependencies\nnode_modules\n\n# IDEs and editors\n/.idea\n.project\n.classpath\n.c9/\n*.launch\n.settings/\n*.sublime-workspace\n\n# IDE - VSCode\n.vscode/*\n!.vscode/settings.json\n!.vscode/tasks.json\n!.vscode/launch.json\n!.vscode/extensions.json\n\n# misc\n/.sass-cache\n/connect.lock\n/coverage\n/libpeerconnection.log\nnpm-debug.log\nyarn-error.log\ntestem.log\n/typings\n\n# System Files\n.DS_Store\nThumbs.db\n",
+      "injectionName": "gitignorePatterns"
+    },
+    "/libs/website/generated/app/src/lib/website-generated-app.ts-providers": {
+      "workspaceName": "sergeylukin",
+      "appName": "website",
+      "filename": "/libs/website/generated/app/src/lib/website-generated-app.ts",
+      "contents": "import { app } from '<%= workspace.scope %>/shared/app';\n\n<% if (locals.injects) { %><% injects.providers.forEach(function(provider) { %>\nimport { provider as <%= provider.name %>Provider } from '<%= provider.module %>';\n<% }) %><% } %>\n<% if (locals.injects) { %>\n<% injects.providers.forEach(function(provider) { %>\n<%= provider.name %>Provider(app);\n<% }) %>\n<% } %>\n\nexport { app };\n",
+      "injectionName": "providers"
+    }
+  }
 }

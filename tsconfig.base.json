@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@sergeylukin/shared/app": ["libs/shared/app/src/index.ts"],
       "@sergeylukin/shared/config": ["libs/shared/config/src/index.ts"],
       "@sergeylukin/shared/entities/page": [
         "libs/shared/entities/page/src/index.ts"
@@ -27,6 +28,9 @@
       ],
       "@sergeylukin/shared/entities/user": [
         "libs/shared/entities/user/src/index.ts"
+      ],
+      "@sergeylukin/shared/generated/app": [
+        "libs/shared/generated/app/src/index.ts"
       ],
       "@sergeylukin/shared/generated/config": [
         "libs/shared/generated/config/src/index.ts"
@@ -48,8 +52,12 @@
       ],
       "@sergeylukin/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@sergeylukin/shared/ui-react": ["libs/shared/ui-react/src/index.ts"],
+      "@sergeylukin/website/app": ["libs/website/app/src/index.ts"],
       "@sergeylukin/website/config": ["libs/website/config/src/index.ts"],
       "@sergeylukin/website/data": ["libs/website/data/src/index.ts"],
+      "@sergeylukin/website/generated/app": [
+        "libs/website/generated/app/src/index.ts"
+      ],
       "@sergeylukin/website/generated/config": [
         "libs/website/generated/config/src/index.ts"
       ]

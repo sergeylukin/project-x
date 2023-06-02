@@ -1,0 +1,12 @@
+[build]
+  command = "npm ci --include=dev && DATABASE_URL='file:./prod.db' npx prisma migrate dev --name init && npx prisma generate && DATABASE_URL='file:./prod.db' npx nx build website"
+  functions = "apps/website/netlify/functions"
+  publish = "dist/apps/website"
+
+[build.environment]
+  NODE_VERSION = "16.16.0"
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["apps/website/netlify/functions/*.wasm"]
+  external_node_modules = ["svgo"]

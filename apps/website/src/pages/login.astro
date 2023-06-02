@@ -1,0 +1,9 @@
+---
+export const prerender = true;
+import { BaseLayout as Layout } from '@sergeylukin/shared/ui';
+import { AuthenticationPage } from '@sergeylukin/shared/ui-react';
+---
+
+<Layout>
+  <AuthenticationPage client:load />
+</Layout>

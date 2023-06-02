@@ -1,0 +1,26 @@
+{
+  "name": "website-app",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/website/app/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/website/app",
+        "main": "libs/website/app/src/index.ts",
+        "tsConfig": "libs/website/app/tsconfig.lib.json",
+        "assets": ["libs/website/app/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/website/app/**/*.ts"]
+      }
+    }
+  },
+  "tags": []
+}

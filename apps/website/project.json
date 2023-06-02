@@ -1,0 +1,104 @@
+{
+  "name": "website",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/website/src",
+  "implicitDependencies": [
+    "website-config"
+  ],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["echo Hooray"]
+      },
+      "dependsOn": ["build-base"]
+    },
+    "build-base": {
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx astro build --root=apps/website --config=astro.config.mjs"]
+      },
+      "dependsOn": [
+        {
+          "target": "build-static",
+          "projects": "self"
+        }
+      ]
+    },
+    "build-static": {
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx astro build --root=apps/website --config=astro-static.config.mjs"]
+      },
+      "dependsOn": [
+        {
+          "target": "setup-dotenv-prod",
+          "projects": "self"
+        },
+        {
+          "target": "build-astro-config",
+          "projects": "self"
+        }
+      ]
+    },
+    "setup-dotenv-dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["cp .env.dev .env"]
+      }
+    },
+    "setup-dotenv-prod": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["cp .env.prod .env"]
+      }
+    },
+    "build-astro-config": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["node build.mjs"]
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx astro dev --root=apps/website --config=astro.config.mjs"]
+      }
+    },
+    "netlify-cms-proxy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx netlify-cms-proxy-server"]
+      }
+    },
+    "dev": {
+      "executor": "@depla/nx-astro:dev-astro-with-netlify-cms",
+      "dependsOn": [
+        {
+          "target": "setup-dotenv-dev",
+          "projects": "self"
+        },
+        {
+          "target": "build-astro-config",
+          "projects": "self"
+        }
+      ]
+    },
+    "preview": {
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ],
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["npx astro preview apps/website/astro.config.mjs"]
+      }
+    }
+  },
+  "tags": []
+}
