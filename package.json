@@ -2,7 +2,9 @@
   "name": "sergeylukin",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "npx nx serve website"
+  },
   "private": true,
   "devDependencies": {
     "@nrwl/cypress": "^15.7.2",
@@ -80,6 +82,7 @@
     "@unocss/preset-web-fonts": "^0.50.6",
     "@unocss/preset-wind": "^0.50.6",
     "@unocss/transformer-directives": "^0.50.6",
+    "@webcontainer/api": "^1.1.5",
     "astro": "^2.3.0",
     "astro-compress": "^1.1.35",
     "astro-copy": "^0.0.8",
