@@ -2,10 +2,9 @@ export const config = {
   name: 'website',
 
   title: 'website',
-  description:
-    '🚀 website',
+  description: '🚀 website',
 
-  logoText: 'Sergeylukin',
+  logoText: 'Cloud Ship',
 
   basePathname: '/',
   trailingSlash: false,
@@ -105,5 +104,5 @@ export const config = {
       ringDark: '217, 33%, 17%',
       radiusDark: '0.5rem',
     },
-  }
+  },
 };
